@@ -10,10 +10,10 @@ class MapPrototype:
     def __init__(self, h, w):
         self.heigth = h
         self.width = w
-        self._map_internal = [[[TerrainType("Test", 1)] for x in range(self.width)] for y in range(self.heigth)]
+        self._map_internal = [[TerrainType("Test", 1) for x in range(self.width)] for y in range(self.heigth)]
 
     def add_building(self, building, x, y):
-        if self._map_internal[x][y][1]:
+        if self._map_internal[x][y].building:
             raise GameplayError("There is already a building here!")
         self._map_internal[x][y].building = building
         building.price *= self._map_internal[x][y].cost_modifier
