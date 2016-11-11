@@ -1,0 +1,4 @@
+#ide stuff
+.idea/*
+#testing/prototyping
+game.py
