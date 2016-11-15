@@ -30,21 +30,24 @@ class Game:
         # self.map = [[0 for x in range(MAP_WIDTH)] for y in range(MAP_HEIGTH)]
         self.map = terrain.MapPrototype(MAP_HEIGTH,MAP_WIDTH)
 
-        #actions per turn
+        # actions per turn
         self._actions_max = 3
         self.actions = self._actions_max
 
-        #list of buildings on the map (so we don't have to iterate through the whole map to apply per-turn effects)
+        # list of buildings on the map (so we don't have to iterate through the whole map to apply per-turn effects)
         self.buildings_on_map = []
 
-        #list of buildings that the player can construct
+        # list of buildings that the player can construct
         self.buildings_deck = buildings.get_initial_buildings()
 
-        #events that must be handled before taking an action or ending a turn (with get_next_event() method)
+        # events that must be handled before taking an action or ending a turn (with get_next_event() method)
         self._event_queue = deque()
 
-        #available random events (each turn, there is a chance that one of them will be added to _event_queue)
-        self._event_deck = deque(text_events.get_basic_random_events())
+        # available random events (each turn, there is a chance that one of them will be added to _event_queue)
+        self._event_active_deck = deque(text_events.get_basic_random_events())
+
+        # random events not yet unlocked
+        self._event_inactive_deck = []
 
     def build(self, number, x, y):
         #initial requirements checks
@@ -91,18 +94,32 @@ class Game:
             raise  GameplayError("You still have unhandled events.")
         self.actions = self._actions_max
         self.turn += 1
+
         for x in self.buildings_on_map:
             #self.money -= x.upkeep_cost
             x.on_next_turn(self)
-        if self._event_deck:
+
+        # lock/unlock random events depending on conditions
+        move_between_lists(self._event_inactive_deck, self._event_active_deck, lambda a: a.should_be_activated(self))
+        move_between_lists(self._event_active_deck, self._event_inactive_deck, lambda a: a.should_be_deactivated(self))
+
+        if self._event_active_deck:
             # print("aaaaaa")
             if randint(1,10) == 10:
-                self._event_queue.append(self._event_deck.popleft())
+                self._event_queue.append(self._event_active_deck.popleft())
                 # print(self._event_queue[0])
 
     def _try_performing_action(self):
+        # common functionality for all actions
         if self._event_queue:
             raise  GameplayError("You still have unhandled events.")
         if not self.actions:
             raise GameplayError("You don't have enough actions left.")
         self.actions -= 1
+
+
+def move_between_lists(source, dest, func):
+    temp = list(filter(func, source))  # why does py3 functional programming suck so much?
+    dest.extend(temp)
+    for f in temp:
+        source.remove(f)
