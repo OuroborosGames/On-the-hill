@@ -14,5 +14,11 @@ class TextEventPrototype:
     def perform_action(self, action, state):
         return self._actions[action](state)
 
+    def should_be_activated(self, state):
+        return True
+
+    def should_be_deactivated(self, state):
+        return False
+
 def get_basic_random_events():
     return [TextEventPrototype(), TextEventPrototype(), TextEventPrototype()]
