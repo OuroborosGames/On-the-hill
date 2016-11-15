@@ -1,6 +1,7 @@
 import buildings
 import text_events
 import terrain
+from copy import copy
 from game_errors import GameplayError
 from collections import deque
 from random import randint
@@ -33,7 +34,7 @@ class Game:
         self._actions_max = 3
         self.actions = self._actions_max
 
-        #list of buildings on the map
+        #list of buildings on the map (so we don't have to iterate through the whole map to apply per-turn effects)
         self.buildings_on_map = []
 
         #list of buildings that the player can construct
@@ -45,15 +46,40 @@ class Game:
         #available random events (each turn, there is a chance that one of them will be added to _event_queue)
         self._event_deck = deque(text_events.get_basic_random_events())
 
-    def build(self, number):
-        if self._event_queue:
-            raise  GameplayError("You still have unhandled events.")
-        if not self.actions:
-            raise GameplayError("You don't have enough actions left.")
+    def build(self, number, x, y):
+        #initial requirements checks
+        self._try_performing_action()
         if self.money < self.buildings_deck[number].base_price:
+            self.actions += 1
             raise GameplayError("You don't have enough money to create this building.")
-        self.actions -= 1
-        self.money -= self.buildings_deck[number].base_price
+        if not self.buildings_deck[number].can_be_built(
+               self.map.get_field_by_coordinates(x,y),
+               self.map.get_neighbors(x,y)):
+            self.actions += 1
+            raise GameplayError("This building cannot be created here")
+
+        new_building = copy(self.buildings_deck[number])  # buildings on map must not be references to buildings in deck
+        self.map.add_building(new_building,x,y)           # so that changes to their attributes (e.g. price being
+                                                          # modified depending on terrain) don't affect other instances
+        if self.money < new_building.price:
+            self.map.remove_building(x,y)
+            self.actions += 1
+            raise GameplayError("You don't have enough money to build here")
+
+        self.buildings_on_map.append(new_building)
+        self.money -= new_building.price
+        # building-specific actions
+        new_building.on_build(self)
+
+    def demolish(self, x, y):
+        self._try_performing_action()
+        ref = self.map.get_field_by_coordinates(x,y).building
+        if not ref:
+            self.actions += 1
+            raise GameplayError("Nothing to destroy!")
+        self.map.remove_building(x,y)
+        self.buildings_on_map.remove(ref)
+        ref.on_destroy(self)
 
     def get_next_event(self):
         if not self._event_queue:
@@ -66,9 +92,17 @@ class Game:
         self.actions = self._actions_max
         self.turn += 1
         for x in self.buildings_on_map:
-            self.money -= x.upkeep_cost
+            #self.money -= x.upkeep_cost
+            x.on_next_turn(self)
         if self._event_deck:
             # print("aaaaaa")
             if randint(1,10) == 10:
                 self._event_queue.append(self._event_deck.popleft())
                 # print(self._event_queue[0])
+
+    def _try_performing_action(self):
+        if self._event_queue:
+            raise  GameplayError("You still have unhandled events.")
+        if not self.actions:
+            raise GameplayError("You don't have enough actions left.")
+        self.actions -= 1
