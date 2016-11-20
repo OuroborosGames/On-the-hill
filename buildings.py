@@ -15,10 +15,12 @@ class BuildingPrototype:
     def on_build(self, state):
         # add semi-permanent effects when building
         self._modify_state_attributes(state, self.additional_effects, lambda x, y: x + y)
+        state.counter.increment(self.name)
 
     def on_destroy(self, state):
         # remove semi-permanent effects when destroying
         self._modify_state_attributes(state, self.additional_effects, lambda x, y: x - y)
+        state.counter.decrement(self.name)
 
     def on_next_turn(self, state):
         self._modify_state_attributes(state, self.per_turn_effects, lambda x, y: x + y)

@@ -98,7 +98,7 @@ class Game:
 
     def end_turn(self):
         if self._event_queue:
-            raise  GameplayError("You still have unhandled events.")
+            raise GameplayError("You still have unhandled events.")
         self.actions = self._actions_max
         self.turn += 1
 
