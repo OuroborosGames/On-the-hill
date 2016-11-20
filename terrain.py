@@ -1,10 +1,12 @@
 from game_errors import GameplayError
 
+
 class TerrainType:
     def __init__(self, name, cost_modifier):
         self.name = name
         self.cost_modifier = cost_modifier
         self.building = None
+
 
 class MapPrototype:
     def __init__(self, h, w):

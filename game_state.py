@@ -2,15 +2,20 @@ import buildings
 import text_events
 import terrain
 from copy import copy
-from game_errors import GameplayError, InternalError
+from game_errors import GameplayError, InternalError, GameOver
 from collections import deque
 from random import randint
 from timers_and_counters import Counter
+from math import floor
+
 
 class Game:
     """Facade class used as an interface to control the game backend"""
 
     def __init__(self):
+        self.city_name = "Test City"
+        self.game_over = False
+
         #turn number
         self.turn = 1
 
@@ -63,16 +68,16 @@ class Game:
             self.actions += 1
             raise GameplayError("You don't have enough money to create this building.")
         if not self.buildings_deck[number].can_be_built(
-               self.map.get_field_by_coordinates(x,y),
-               self.map.get_neighbors(x,y)):
+               self.map.get_field_by_coordinates(x, y),
+               self.map.get_neighbors(x, y)):
             self.actions += 1
             raise GameplayError("This building cannot be created here")
 
         new_building = copy(self.buildings_deck[number])  # buildings on map must not be references to buildings in deck
-        self.map.add_building(new_building,x,y)           # so that changes to their attributes (e.g. price being
+        self.map.add_building(new_building, x, y)         # so that changes to their attributes (e.g. price being
                                                           # modified depending on terrain) don't affect other instances
         if self.money < new_building.price:
-            self.map.remove_building(x,y)
+            self.map.remove_building(x, y)
             self.actions += 1
             raise GameplayError("You don't have enough money to build here")
 
@@ -99,8 +104,12 @@ class Game:
     def end_turn(self):
         if self._event_queue:
             raise GameplayError("You still have unhandled events.")
+        if self.game_over:
+            raise GameOver()
         self.actions = self._actions_max
         self.turn += 1
+        if self.population <= 0:
+            self.game_over = True
 
         for x in self.buildings_on_map:
             #self.money -= x.upkeep_cost
@@ -122,14 +131,37 @@ class Game:
                 t.next(self)
             except InternalError:
                 self.timers.remove(t)
+        # per-turn stat modifications
+        self._modify_stats()
 
     def _try_performing_action(self):
         # common functionality for all actions
+        if self.game_over:
+            raise GameOver()
         if self._event_queue:
             raise  GameplayError("You still have unhandled events.")
         if not self.actions:
             raise GameplayError("You don't have enough actions left.")
         self.actions -= 1
+
+    def _modify_stats(self):
+        self.food -= self.population               # 1 food/person*turn
+        if self.food < 0:
+            self.population += floor(self.food/2)  # starvation
+            self.food = 0
+        modifier = 2                               # base birthrate
+        modifier += self.prestige                  # people come if our city is prestigious and leave if it isn't
+        if self.safety < 0:
+            modifier += self.safety                # violence
+        if self.health < 0:
+            if self.technology < 5:
+                modifier += self.health            # disease
+            elif self.technology < 7:
+                modifier += self.health/2          # better technology = diseases less deadly
+            else:
+                modifier += self.health/3
+
+        self.population += floor(self.population*(modifier/100))
 
 
 def move_between_lists(source, dest, func):
@@ -137,4 +169,3 @@ def move_between_lists(source, dest, func):
     dest.extend(temp)
     for f in temp:
         source.remove(f)
-        
