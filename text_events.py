@@ -4,6 +4,8 @@ class TextEventPrototype:
         self.title = "Test event"
         self.description = "Something happens"
         self._actions = {'OK': lambda state: None}
+        self.should_be_activated   = lambda state: True
+        self.should_be_deactivated = lambda state: False
 
     def get_actions(self):
         ret = []
@@ -14,11 +16,6 @@ class TextEventPrototype:
     def perform_action(self, action, state):
         return self._actions[action](state)
 
-    def should_be_activated(self, state):
-        return True
-
-    def should_be_deactivated(self, state):
-        return False
 
 def get_basic_random_events():
     return [TextEventPrototype(), TextEventPrototype(), TextEventPrototype()]

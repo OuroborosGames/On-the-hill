@@ -1,6 +1,8 @@
 from game_errors import InternalError
 
+
 class BasicTimer:
+    """Basic timer: executes a function after a set number of turns"""
     def __init__(self, turns_to_wait, end):
         self.turns_to_wait = turns_to_wait
         self.end = end
@@ -18,6 +20,7 @@ class BasicTimer:
 
 
 class BasicEventTimer(BasicTimer):
+    """Spawns event after a set number of turns"""
     def __init__(self, turns_to_wait, event_to_spawn):
         self.turns_to_wait = turns_to_wait
         self.event_to_spawn = event_to_spawn
