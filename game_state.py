@@ -2,9 +2,10 @@ import buildings
 import text_events
 import terrain
 from copy import copy
-from game_errors import GameplayError
+from game_errors import GameplayError, InternalError
 from collections import deque
 from random import randint
+from timers_and_counters import Counter
 
 class Game:
     """Facade class used as an interface to control the game backend"""
@@ -48,6 +49,12 @@ class Game:
 
         # random events not yet unlocked
         self._event_inactive_deck = []
+
+        # list of timers
+        self.timers = []
+
+        # count in-game objects
+        self.counter = Counter()
 
     def build(self, number, x, y):
         #initial requirements checks
@@ -108,6 +115,13 @@ class Game:
             if randint(1,10) == 10:
                 self._event_queue.append(self._event_active_deck.popleft())
                 # print(self._event_queue[0])
+
+        #if self.timers:
+        for t in self.timers:
+            try:
+                t.next(self)
+            except InternalError:
+                self.timers.remove(t)
 
     def _try_performing_action(self):
         # common functionality for all actions
