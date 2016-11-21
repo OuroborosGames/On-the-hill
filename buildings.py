@@ -5,7 +5,7 @@ class BuildingPrototype:
         self.name = 'Test building'
         self.base_price = 100
         self.price = self.base_price
-        #self.upkeep_cost = 10
+        # self.upkeep_cost = 10
         self.additional_effects = {'health' : 0, 'technology': 0, 'prestige': 0, 'food': 0, 'safety': 0}
         self.per_turn_effects   = {'money': - 10}  # upkeep cost moved to per_turn_effects
 

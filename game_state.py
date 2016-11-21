@@ -16,21 +16,21 @@ class Game:
         self.city_name = "Test City"
         self.game_over = False
 
-        #turn number
+        # turn number
         self.turn = 1
 
-        #set main stats
+        # set main stats
         self.money = 1000
         self.population = 100
 
-        #set additional stats
+        # set additional stats
         self.prestige = 0
         self.safety = 0
         self.technology = 0
         self.food = 0
         self.health = 0
 
-        #make map
+        # make map
         MAP_WIDTH = 100
         MAP_HEIGTH = 100
         # self.map = [[0 for x in range(MAP_WIDTH)] for y in range(MAP_HEIGTH)]
@@ -62,7 +62,7 @@ class Game:
         self.counter = Counter()
 
     def build(self, number, x, y):
-        #initial requirements checks
+        # initial requirements checks
         self._try_performing_action()
         if self.money < self.buildings_deck[number].base_price:
             self.actions += 1
@@ -88,11 +88,11 @@ class Game:
 
     def demolish(self, x, y):
         self._try_performing_action()
-        ref = self.map.get_field_by_coordinates(x,y).building
+        ref = self.map.get_field_by_coordinates(x, y).building
         if not ref:
             self.actions += 1
             raise GameplayError("Nothing to destroy!")
-        self.map.remove_building(x,y)
+        self.map.remove_building(x, y)
         self.buildings_on_map.remove(ref)
         ref.on_destroy(self)
 
@@ -112,7 +112,7 @@ class Game:
             self.game_over = True
 
         for x in self.buildings_on_map:
-            #self.money -= x.upkeep_cost
+            # self.money -= x.upkeep_cost
             x.on_next_turn(self)
 
         # lock/unlock random events depending on conditions
@@ -121,11 +121,11 @@ class Game:
 
         if self._event_active_deck:
             # print("aaaaaa")
-            if randint(1,10) == 10:
+            if randint(1, 10) == 10:
                 self._event_queue.append(self._event_active_deck.popleft())
                 # print(self._event_queue[0])
 
-        #if self.timers:
+        # if self.timers:
         for t in self.timers:
             try:
                 t.next(self)
@@ -139,7 +139,7 @@ class Game:
         if self.game_over:
             raise GameOver()
         if self._event_queue:
-            raise  GameplayError("You still have unhandled events.")
+            raise GameplayError("You still have unhandled events.")
         if not self.actions:
             raise GameplayError("You don't have enough actions left.")
         self.actions -= 1
@@ -166,10 +166,6 @@ class Game:
 
 def move_between_lists(source, dest, func):
     temp = filter(func, source)
-    try:
-        while True:
-            t = next(temp)
-            soure.remove(t)
-            dest.append(t)
-    except StopIteration:
-        return
+    for t in temp:
+        source.remove(t)
+        dest.append(t)
