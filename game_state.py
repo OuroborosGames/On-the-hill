@@ -165,7 +165,11 @@ class Game:
 
 
 def move_between_lists(source, dest, func):
-    temp = list(filter(func, source))  # why does py3 functional programming suck so much?
-    dest.extend(temp)
-    for f in temp:
-        source.remove(f)
+    temp = filter(func, source)
+    try:
+        while True:
+            t = next(temp)
+            soure.remove(t)
+            dest.append(t)
+    except StopIteration:
+        return
