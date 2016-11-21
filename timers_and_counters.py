@@ -35,11 +35,16 @@ class Counter:
     def __init__(self):
         self._counter = {}
 
+    def get_count(self, key):
+        if key not in self._counter:
+            return 0
+        return self._counter[key]
+
     def increment(self, key):
-        if key in self._counter:
-            self._counter[key] += 1
-        else:
+        if key not in self._counter:
             self._counter.update({key: 1})
+            return
+        self._counter[key] += 1
 
     def decrement(self, key):
         if key not in self._counter:
@@ -47,8 +52,3 @@ class Counter:
         if self._counter[key] <= 0:
             return
         self._counter[key] -= 1
-        
-    def get_count(self, key):
-        if key not in self._counter:
-            return 0
-        return self._counter[key]
