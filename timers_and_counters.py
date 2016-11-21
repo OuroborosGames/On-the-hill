@@ -50,3 +50,8 @@ class Counter:
         if self._counter[key] <= 0:
             return
         self._counter[key] -=1
+        
+    def get_count(self, key)
+        if key not in self._counter:
+            return 0
+        return self._counter[key]
