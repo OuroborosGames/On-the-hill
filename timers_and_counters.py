@@ -13,10 +13,7 @@ class BasicTimer:
         elif self.turns_to_wait < 0:
             raise InternalError()
         else:
-            self._end(state)
-
-    def _end(self, state):
-        self.end(state)
+            self.end(state)
 
 
 class BasicEventTimer(BasicTimer):
@@ -49,7 +46,7 @@ class Counter:
             return
         if self._counter[key] <= 0:
             return
-        self._counter[key] -=1
+        self._counter[key] -= 1
         
     def get_count(self, key):
         if key not in self._counter:
