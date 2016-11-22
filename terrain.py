@@ -1,4 +1,5 @@
 from game_errors import GameplayError
+from perlin import SimplexNoise
 
 
 class TerrainType:
@@ -12,7 +13,7 @@ class MapPrototype:
     def __init__(self, h, w):
         self.heigth = h
         self.width = w
-        self._map_internal = [[TerrainType("Test", 1) for x in range(self.width)] for y in range(self.heigth)]
+        self._map_internal = self._generate_map(h,w)
 
     def add_building(self, building, x, y):
         if self._map_internal[x][y].building:
@@ -33,3 +34,21 @@ class MapPrototype:
                 if x+i >= 0 and y+j >= 0:
                     ret.append(self.get_field_by_coordinates(x+i,y+j))
         return ret
+
+    @staticmethod
+    def _generate_map(h, w):
+        return [[TerrainType("Test", 1) for x in range(w)] for y in range(h)]
+
+
+class SimplexNoiseMap(MapPrototype):
+    @staticmethod
+    def _generate_map(h, w):
+        noise = SimplexNoise()
+        return [[get_terrain_from_noise(noise.noise2(x ,y)) for x in range(w)] for y in range(h)]
+
+
+def get_terrain_from_noise(value):
+    #TODO: more terrain types
+    if value < 0:
+        return TerrainType("Water", 1)
+    return TerrainType("Grass", 1)
