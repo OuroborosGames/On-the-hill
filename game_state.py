@@ -34,7 +34,8 @@ class Game:
         MAP_WIDTH = 100
         MAP_HEIGTH = 100
         # self.map = [[0 for x in range(MAP_WIDTH)] for y in range(MAP_HEIGTH)]
-        self.map = terrain.MapPrototype(MAP_HEIGTH,MAP_WIDTH)
+        # self.map = terrain.MapPrototype(MAP_HEIGTH,MAP_WIDTH)
+        self.map = terrain.SimplexNoiseMap(MAP_HEIGTH,MAP_WIDTH)
 
         # actions per turn
         self._actions_max = 3

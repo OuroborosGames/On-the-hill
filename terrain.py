@@ -48,7 +48,12 @@ class SimplexNoiseMap(MapPrototype):
 
 
 def get_terrain_from_noise(value):
-    #TODO: more terrain types
-    if value < 0:
+    if value < -0.5:
         return TerrainType("Water", 1)
-    return TerrainType("Grass", 1)
+    elif value < 0:
+        return TerrainType("Grass", 1)
+    elif value < 0.2:
+        return TerrainType("Forest", 1.5)
+    elif value < 0.5:
+        return TerrainType("Hills", 1.2)
+    return TerrainType("Mountains", 2)
