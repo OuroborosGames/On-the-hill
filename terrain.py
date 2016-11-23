@@ -35,25 +35,44 @@ class MapPrototype:
                     ret.append(self.get_field_by_coordinates(x+i,y+j))
         return ret
 
-    @staticmethod
-    def _generate_map(h, w):
+    @classmethod
+    def _generate_map(cls, h, w):
         return [[TerrainType("Test", 1) for x in range(w)] for y in range(h)]
 
 
 class SimplexNoiseMap(MapPrototype):
-    @staticmethod
-    def _generate_map(h, w):
+    # class variables so we don't create new objects all the time
+    water     = TerrainType("Water",     1)
+    grass     = TerrainType("Grass",     1)
+    forest    = TerrainType("Forest",    1.5)
+    hills     = TerrainType("Hills",     1.2)
+    mountains = TerrainType("Mountains", 2)
+    
+    @classmethod
+    def _generate_map(cls, h, w):
         noise = SimplexNoise()
-        return [[get_terrain_from_noise(noise.noise2(x ,y)) for x in range(w)] for y in range(h)]
-
-
-def get_terrain_from_noise(value):
+        return [[cls.get_terrain_from_noise(noise.noise2(x ,y)) for x in range(w)] for y in range(h)]
+    
+    @classmethod
+    def get_terrain_from_noise(value):
     if value < -0.5:
-        return TerrainType("Water", 1)
+        return water
     elif value < 0:
-        return TerrainType("Grass", 1)
+        return grass
     elif value < 0.2:
-        return TerrainType("Forest", 1.5)
+        return forest
     elif value < 0.5:
-        return TerrainType("Hills", 1.2)
-    return TerrainType("Mountains", 2)
+        return hills
+    return mountains
+
+
+# def get_terrain_from_noise(value):
+#     if value < -0.5:
+#         return TerrainType("Water", 1)
+#     elif value < 0:
+#         return TerrainType("Grass", 1)
+#     elif value < 0.2:
+#         return TerrainType("Forest", 1.5)
+#     elif value < 0.5:
+#         return TerrainType("Hills", 1.2)
+#     return TerrainType("Mountains", 2)
