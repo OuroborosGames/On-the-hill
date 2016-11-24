@@ -72,3 +72,8 @@ def spawn_next_season(state, event, season):  # winter = 0, spring = 1, summer =
     to_season_start = (season_start - current_month % 12) + 1
     # return (to_season_start + randint(0, 2)) % 12
     spawn_after_n_turns(state, event, (to_season_start + randint(0, 2)) % 12)
+
+
+def modify_state(state, attributes):
+    for attr in attributes:
+        setattr(state, attr, getattr(state, attr) + attributes[attr])
