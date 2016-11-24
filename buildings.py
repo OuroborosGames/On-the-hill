@@ -9,7 +9,8 @@ class BuildingPrototype:
         self.additional_effects = {'health' : 0, 'technology': 0, 'prestige': 0, 'food': 0, 'safety': 0}
         self.per_turn_effects   = {'money': - 10}  # upkeep cost moved to per_turn_effects
 
-    def can_be_built(self, map_tile, neighbors):
+    @staticmethod
+    def can_be_built(map_tile, neighbors):
         return True
 
     def on_build(self, state):
@@ -25,12 +26,59 @@ class BuildingPrototype:
     def on_next_turn(self, state):
         self._modify_state_attributes(state, self.per_turn_effects, lambda x, y: x + y)
 
-    def _modify_state_attributes(self, state, effects, func):
+    @staticmethod
+    def _modify_state_attributes(state, effects, func):
         # lambdas and reflection, fuck yeah
         for effect in effects:
             setattr(state, effect, func(getattr(state, effect), effects[effect]))
 
 
+class BasicBuilding(BuildingPrototype):
+    def __init__(self, name, base_price, additional_effects, per_turn_effects):
+        super(BasicBuilding, self).__init__()
+        self.name = name
+        self.base_price = base_price
+        self.additional_effects = additional_effects
+        self.per_turn_effects = per_turn_effects
+
+    @staticmethod
+    def can_be_built(map_tile, neighbors):
+        return has_neighboring_buildings(neighbors) and not is_on_water_tile(map_tile)
+
+
+class TerrainRestrictedBuilding(BasicBuilding):
+    def __init__(self, name, base_price, additional_effects, per_turn_effects, required_neighbor):
+        super(TerrainRestrictedBuilding, self).__init__(name, base_price, additional_effects, per_turn_effects)
+        self.required_tile = required_neighbor
+
+    def can_be_built(self, map_tile, neighbors):
+        if not super(TerrainRestrictedBuilding, self).can_be_built(map_tile, neighbors):
+            return False
+        for n in neighbors:
+            if n.name == self.required_tile:
+                return True
+        return False
+
+
+class CustomBuilding(BasicBuilding):
+    def __init__(self, name, base_price, additional_effects, per_turn_effects, build_predicate):
+        super(CustomBuilding, self).__init__(name, base_price, additional_effects, per_turn_effects)
+        self.can_be_built = build_predicate
+
+
 def get_initial_buildings():
     #TODO: make basic buildings and return a list of them
     return [BuildingPrototype()]
+
+
+def has_neighboring_buildings(neighbors):
+    for n in neighbors:
+        if n.building:
+            return True
+    return False
+
+
+def is_on_water_tile(tile):
+    if tile.name == "Water":
+        return True
+    return False
