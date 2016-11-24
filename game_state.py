@@ -11,10 +11,11 @@ from math import floor
 
 
 class Game:
-    """Facade class used as an interface to control the game backend"""
+    """This used to be a facade but now it's game's global state"""
+    # TODO: make an actual facade class
 
-    def __init__(self):
-        self.city_name = "Test City"
+    def __init__(self, city_name, map_h, map_w):
+        self.city_name = city_name
         self.game_over = False
 
         # turn number
@@ -32,11 +33,11 @@ class Game:
         self.health = 0
 
         # make map
-        MAP_WIDTH = 100
-        MAP_HEIGTH = 100
+        # MAP_WIDTH = 100
+        # MAP_HEIGTH = 100
         # self.map = [[0 for x in range(MAP_WIDTH)] for y in range(MAP_HEIGTH)]
         # self.map = terrain.MapPrototype(MAP_HEIGTH,MAP_WIDTH)
-        self.map = terrain.SimplexNoiseMap(MAP_HEIGTH,MAP_WIDTH)
+        self.map = terrain.SimplexNoiseMap(map_h, map_w)
 
         # actions per turn
         self._actions_max = 3
