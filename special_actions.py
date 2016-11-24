@@ -19,7 +19,7 @@ class LimitedSpecialAction(SpecialAction):
         super(LimitedSpecialAction, self).__init__(name, description, event_to_spawn)
         self.limit = limit
 
-    def perform_action(self, state):
+    def perform_action(self):
         if self.should_be_removed():
             raise InternalError
         self.limit -= 1
