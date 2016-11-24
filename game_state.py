@@ -1,6 +1,7 @@
 import buildings
 import text_events
 import terrain
+import special_actions
 from copy import copy
 from game_errors import GameplayError, InternalError, GameOver
 from collections import deque
@@ -56,11 +57,25 @@ class Game:
         # random events not yet unlocked
         self._event_inactive_deck = []
 
+        # special actions that the player can perform
+        self.special_actions = special_actions.get_basic_actions()
+
         # list of timers
         self.timers = []
 
         # count in-game objects
         self.counter = Counter()
+
+    def perform_special_action(self, number):
+        self._try_performing_action()
+        # spawn an event provided by a special action, remove the action if it can't be performed
+        action = self.special_actions[number]
+        try:
+            self._event_queue.append(action.perform_action())
+            if action.should_be_removed():
+                raise InternalError
+        except InternalError:
+            self.special_actions.remove(action)
 
     def build(self, number, x, y):
         # initial requirements checks
@@ -161,6 +176,12 @@ class Game:
                 modifier += self.health/2          # better technology = diseases less deadly
             else:
                 modifier += self.health/3
+        if self.technology < 5:                    # better technology = more actions can be performed per-turn
+            self._actions_max = 3
+        elif self.technology < 10:
+            self.technology = 4
+        else:
+            self.technology = 5
 
         self.population += floor(self.population*(modifier/100))
 
