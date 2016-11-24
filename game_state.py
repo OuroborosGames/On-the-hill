@@ -5,7 +5,7 @@ import special_actions
 from copy import copy
 from game_errors import GameplayError, InternalError, GameOver
 from collections import deque
-from random import randint
+from random import randint, shuffle
 from timers_and_counters import Counter
 from math import floor
 
@@ -138,6 +138,7 @@ class Game:
         if self._event_active_deck:
             # print("aaaaaa")
             if randint(1, 10) == 10:
+                shuffle(self._event_active_deck)
                 self._event_queue.append(self._event_active_deck.popleft())
                 # print(self._event_queue[0])
 
