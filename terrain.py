@@ -1,5 +1,6 @@
 from game_errors import GameplayError
 from perlin import SimplexNoise
+from random import randint
 
 
 class TerrainType:
@@ -50,7 +51,7 @@ class SimplexNoiseMap(MapPrototype):
     
     @classmethod
     def _generate_map(cls, h, w):
-        noise = SimplexNoise()
+        noise = SimplexNoise(randint_function=randint)
         return [[cls.get_terrain_from_noise(noise.noise2(x, y)) for x in range(w)] for y in range(h)]
     
     @classmethod
