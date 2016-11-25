@@ -48,7 +48,7 @@ def get_basic_random_events():
 
 # a bunch of horrible functions (should have been lambdas) that will be useful for data-driven object creation
 
-#horrible mutators
+#horrible mutators (use for actions)
 def spawn_immediately(state, event):
     state._event_queue.append(event)
 
@@ -81,7 +81,7 @@ def modify_state(state, attributes):
         setattr(state, attr, getattr(state, attr) + attributes[attr])
 
 
-#horrible predicates
+#horrible predicates (use for lock/unlock conditions)
 def counter_equal(state, counter_key, value):
     return _counter_predicate(state, counter_key, value, lambda x, y: x == y)
 
