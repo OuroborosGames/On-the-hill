@@ -39,6 +39,11 @@ class Counter:
         if key not in self._counter:
             return 0
         return self._counter[key]
+    
+    def reset(self, key):
+        if key not in self._counter:
+            return
+        del self._counter[key]
 
     def increment(self, key):
         if key not in self._counter:
