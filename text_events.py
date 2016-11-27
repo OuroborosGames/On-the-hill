@@ -81,6 +81,10 @@ def modify_state(state, attributes):
         setattr(state, attr, getattr(state, attr) + attributes[attr])
 
 
+def unlock_building(state, building):
+    state.buildings_deck.append(building)
+
+
 #horrible predicates (use for lock/unlock conditions)
 def counter_equal(state, counter_key, value):
     return _counter_predicate(state, counter_key, value, lambda x, y: x == y)
