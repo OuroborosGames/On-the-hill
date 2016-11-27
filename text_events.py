@@ -58,7 +58,7 @@ def add_active_event(state, event):
 
 
 def add_inactive_event(state, event):
-    state._event_inacrive_deck.append(event)
+    state._event_inactive_deck.append(event)
 
 
 def spawn_after_n_turns(state, event, n):
