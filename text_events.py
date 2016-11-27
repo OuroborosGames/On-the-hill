@@ -42,11 +42,13 @@ class ConditionalEvent(BasicEvent):
         self.should_be_activated = condition
         self.should_be_deactivated = lambda state: not condition(state)
 
-
 def get_basic_random_events():
     return [TextEventPrototype(), TextEventPrototype(), TextEventPrototype()]
 
 
+# a bunch of horrible functions (should have been lambdas) that will be useful for data-driven object creation
+
+#horrible mutators (use for actions)
 def spawn_immediately(state, event):
     state._event_queue.append(event)
 
@@ -77,3 +79,40 @@ def spawn_next_season(state, event, season):  # winter = 0, spring = 1, summer =
 def modify_state(state, attributes):
     for attr in attributes:
         setattr(state, attr, getattr(state, attr) + attributes[attr])
+
+
+#horrible predicates (use for lock/unlock conditions)
+def counter_equal(state, counter_key, value):
+    return _counter_predicate(state, counter_key, value, lambda x, y: x == y)
+
+
+def counter_greater(state, counter_key, value):
+    return _counter_predicate(state, counter_key, value, lambda x, y: x > y)
+
+
+def counter_lower(state, counter_key, value):
+    return _counter_predicate(state, counter_key, value, lambda x, y: x < y)
+
+
+def attr_equal(state, attr, value):
+    return _attribute_predicate(state, attr, value, lambda x, y: x == y)
+
+
+def attr_greater(state, attr, value):
+    return _attribute_predicate(state, attr, value, lambda x, y: x > y)
+
+
+def counter_lower(state, atr, value):
+    return _attribute_predicate(state, attr, value, lambda x, y: x < y)
+
+
+def _counter_predicate(state, counter_key, value, func):
+    if func(state.counter.get_count(counter_key), value):
+        return True
+    return False
+
+
+def _attribute_predicate(state, attr, value, func)
+    if func(getattr(state, attr), value):
+        return True
+    return False
