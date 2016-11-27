@@ -3,6 +3,7 @@ class BuildingPrototype:
     def __init__(self):
         #TODO: better constructor
         self.name = 'Test building'
+        self.description = ''
         self.base_price = 100
         self.price = self.base_price
         # self.upkeep_cost = 10
@@ -34,9 +35,10 @@ class BuildingPrototype:
 
 
 class BasicBuilding(BuildingPrototype):
-    def __init__(self, name, base_price, additional_effects, per_turn_effects):
+    def __init__(self, name, description, base_price, additional_effects, per_turn_effects):
         super(BasicBuilding, self).__init__()
         self.name = name
+        self.description = description
         self.base_price = base_price
         self.additional_effects = additional_effects
         self.per_turn_effects = per_turn_effects
@@ -47,8 +49,9 @@ class BasicBuilding(BuildingPrototype):
 
 
 class TerrainRestrictedBuilding(BasicBuilding):
-    def __init__(self, name, base_price, additional_effects, per_turn_effects, required_neighbor):
-        super(TerrainRestrictedBuilding, self).__init__(name, base_price, additional_effects, per_turn_effects)
+    def __init__(self, name, description, base_price, additional_effects, per_turn_effects, required_neighbor):
+        super(TerrainRestrictedBuilding, self).__init__(
+            name, description, base_price, additional_effects, per_turn_effects)
         self.required_tile = required_neighbor
 
     def can_be_built(self, map_tile, neighbors):
@@ -61,8 +64,8 @@ class TerrainRestrictedBuilding(BasicBuilding):
 
 
 class CustomBuilding(BasicBuilding):
-    def __init__(self, name, base_price, additional_effects, per_turn_effects, build_predicate):
-        super(CustomBuilding, self).__init__(name, base_price, additional_effects, per_turn_effects)
+    def __init__(self, name, description, base_price, additional_effects, per_turn_effects, build_predicate):
+        super(CustomBuilding, self).__init__(name, description, base_price, additional_effects, per_turn_effects)
         self.can_be_built = build_predicate
 
 
