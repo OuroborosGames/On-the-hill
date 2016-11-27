@@ -84,6 +84,9 @@ def modify_state(state, attributes):
 def unlock_building(state, building):
     state.buildings_deck.append(building)
 
+def unlock_action(state, action):
+    state.special_actions.append(action)
+
 
 #horrible predicates (use for lock/unlock conditions)
 def counter_equal(state, counter_key, value):
