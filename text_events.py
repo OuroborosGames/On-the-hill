@@ -102,7 +102,7 @@ def attr_greater(state, attr, value):
     return _attribute_predicate(state, attr, value, lambda x, y: x > y)
 
 
-def counter_lower(state, atr, value):
+def counter_lower(state, attr, value):
     return _attribute_predicate(state, attr, value, lambda x, y: x < y)
 
 
@@ -112,7 +112,7 @@ def _counter_predicate(state, counter_key, value, func):
     return False
 
 
-def _attribute_predicate(state, attr, value, func)
+def _attribute_predicate(state, attr, value, func):
     if func(getattr(state, attr), value):
         return True
     return False
