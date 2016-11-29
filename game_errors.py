@@ -11,3 +11,7 @@ class GameOver(Exception):
 class InternalError(Exception):
     """Errors handled internally by the game engine"""
     pass
+
+
+class ParserError(Exception):
+    """Errors in game data"""
