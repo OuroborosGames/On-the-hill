@@ -2,6 +2,7 @@ import buildings
 import text_events
 import terrain
 import special_actions
+import load_data
 from copy import copy
 from game_errors import GameplayError, InternalError, GameOver
 from collections import deque
