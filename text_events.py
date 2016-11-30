@@ -89,28 +89,28 @@ def unlock_action(state, action):
 
 
 #horrible predicates (use for lock/unlock conditions)
-def counter_equal(state, counter_key, value):
-    return _counter_predicate(state, counter_key, value, lambda x, y: x == y)
+def counter_equal(state, key, value):
+    return _counter_predicate(state, key, value, lambda x, y: x == y)
 
 
-def counter_greater(state, counter_key, value):
-    return _counter_predicate(state, counter_key, value, lambda x, y: x > y)
+def counter_greater(state, key, value):
+    return _counter_predicate(state, key, value, lambda x, y: x > y)
 
 
-def counter_lower(state, counter_key, value):
-    return _counter_predicate(state, counter_key, value, lambda x, y: x < y)
+def counter_lower(state, key, value):
+    return _counter_predicate(state, key, value, lambda x, y: x < y)
 
 
-def attr_equal(state, attr, value):
-    return _attribute_predicate(state, attr, value, lambda x, y: x == y)
+def attr_equal(state, key, value):
+    return _attribute_predicate(state, key, value, lambda x, y: x == y)
 
 
-def attr_greater(state, attr, value):
-    return _attribute_predicate(state, attr, value, lambda x, y: x > y)
+def attr_greater(state, key, value):
+    return _attribute_predicate(state, key, value, lambda x, y: x > y)
 
 
-def attr_lower(state, attr, value):
-    return _attribute_predicate(state, attr, value, lambda x, y: x < y)
+def attr_lower(state, key, value):
+    return _attribute_predicate(state, key, value, lambda x, y: x < y)
 
 
 def _counter_predicate(state, counter_key, value, func):
