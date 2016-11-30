@@ -9,7 +9,7 @@ class TextEventPrototype:
         self.title = "Test event"
         self.description = "Something happens"
         self._actions = {'OK': lambda state: None}
-        self.should_be_activated   = lambda state: True
+        self.should_be_activated = lambda state: True
         self.should_be_deactivated = lambda state: False
 
     def get_actions(self):
@@ -42,13 +42,14 @@ class ConditionalEvent(BasicEvent):
         self.should_be_activated = condition
         self.should_be_deactivated = lambda state: not condition(state)
 
+
 def get_basic_random_events():
     return [TextEventPrototype(), TextEventPrototype(), TextEventPrototype()]
 
 
 # a bunch of horrible functions (should have been lambdas) that will be useful for data-driven object creation
 
-#horrible mutators (use for actions)
+# horrible mutators (use for actions)
 def spawn_immediately(state, event):
     state._event_queue.append(event)
 
@@ -70,7 +71,7 @@ def spawn_next_season(state, event, season):  # winter = 0, spring = 1, summer =
     if season == 0:
         season_start = 12
     else:
-        season_start = season*3
+        season_start = season * 3
     to_season_start = (season_start - current_month % 12) + 1
     # return (to_season_start + randint(0, 2)) % 12
     spawn_after_n_turns(state, event, (to_season_start + randint(0, 2)) % 12)
@@ -84,11 +85,12 @@ def modify_state(state, attributes):
 def unlock_building(state, building):
     state.buildings_deck.append(building)
 
+
 def unlock_action(state, action):
     state.special_actions.append(action)
 
 
-#horrible predicates (use for lock/unlock conditions)
+# horrible predicates (use for lock/unlock conditions)
 def counter_equal(state, key, value):
     return _counter_predicate(state, key, value, lambda x, y: x == y)
 

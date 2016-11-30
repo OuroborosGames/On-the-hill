@@ -1,14 +1,13 @@
-
 class BuildingPrototype:
     def __init__(self):
-        #TODO: better constructor
+        # TODO: better constructor
         self.name = 'Test building'
         self.description = ''
         self.base_price = 100
         self.price = self.base_price
         # self.upkeep_cost = 10
-        self.additional_effects = {'health' : 0, 'technology': 0, 'prestige': 0, 'food': 0, 'safety': 0}
-        self.per_turn_effects   = {'money': - 10}  # upkeep cost moved to per_turn_effects
+        self.additional_effects = {'health': 0, 'technology': 0, 'prestige': 0, 'food': 0, 'safety': 0}
+        self.per_turn_effects = {'money': - 10}  # upkeep cost moved to per_turn_effects
 
     @staticmethod
     def can_be_built(map_tile, neighbors):
@@ -70,7 +69,7 @@ class CustomBuilding(BasicBuilding):
 
 
 def get_initial_buildings():
-    #TODO: make basic buildings and return a list of them
+    # TODO: make basic buildings and return a list of them
     return [BuildingPrototype()]
 
 
