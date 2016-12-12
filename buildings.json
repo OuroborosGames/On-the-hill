@@ -1,0 +1,109 @@
+{
+  "contents": [
+    {
+      "building_name": "Farm",
+      "description": "It's a small farm. It can provide food and shelter for those who work there. It can also provide food for everyone else, although not for free.",
+      "base_price": 100,
+      "additional_effects": {
+        "technology": 0,
+        "food": 0,
+        "health": 0,
+        "money": 0,
+        "prestige": 0,
+        "population_max": 10
+      },
+      "per_turn_effects": {
+        "technology": 0,
+        "food": 15,
+        "health": 0,
+        "money": -10,
+        "prestige": 0,
+        "safety": 0
+      }
+    },
+    {
+      "building_name": "Tenement",
+      "description": "The rooms are small and cramped, half of the windows have been broken for as long as everyone remembers and most of the residents are thieves or drunkards. All in all, not the best place to live - but it's better than sleeping on the street.",
+      "base_price": 200,
+      "additional_effects": {
+        "technology": 0,
+        "food": 0,
+        "health": 0,
+        "prestige": -1,
+        "safety": -1,
+        "population_max": 50
+      },
+      "per_turn_effects": {
+        "technology": 0,
+        "food": 0,
+        "health": 0,
+        "money": -50,
+        "prestige": 0,
+        "safety": 0
+      }
+    },
+    {
+      "building_name": "Workshop",
+      "description": "People who work there know how to fix your chair, your pocket watch and your bicycle. If not for people like them, this world would have fallen apart years ago.",
+      "base_price": 100,
+      "additional_effects": {
+        "technology": 2,
+        "food": 0,
+        "health": 0,
+        "money": 0,
+        "prestige": 0,
+        "safety": 0
+      },
+      "per_turn_effects": {
+        "technology": 0,
+        "food": 0,
+        "health": 0,
+        "money": -50,
+        "prestige": 0,
+        "safety": 0
+      }
+    },
+    {
+      "building_name": "Police station",
+      "description": "In a better world, we would be able to avoid conflicts and nobody would want or need to harm other people. Unfortunately, we're not living in that world.",
+      "base_price": 200,
+      "additional_effects": {
+        "technology": 0,
+        "food": 0,
+        "health": 0,
+        "money": 0,
+        "prestige": 0,
+        "safety": 1
+      },
+      "per_turn_effects": {
+        "technology": 0,
+        "food": 0,
+        "health": 0,
+        "money": -50,
+        "prestige": 0,
+        "safety": 0
+      }
+    },
+    {
+      "building_name": "Marketplace",
+      "description": "In its crowded alleys, customers will find what they're looking for, merchants will make profits and pickpockets will find a way to take advantage of everyone else. Money changes hands often, but some of it eventually becomes tax revenue.",
+      "base_price": 500,
+      "additional_effects": {
+        "technology": 0,
+        "food": 0,
+        "health": 0,
+        "money": 0,
+        "prestige": 0,
+        "safety": -1
+      },
+      "per_turn_effects": {
+        "technology": 0,
+        "food": 100,
+        "health": 0,
+        "money": 0,
+        "prestige": 0,
+        "safety": 0
+      }
+    }
+  ]
+}
