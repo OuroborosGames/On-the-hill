@@ -6,6 +6,13 @@ from collections import OrderedDict
 from game_errors import ParserError
 from functools import partial
 
+"""This module gives us the most important parts of the game: events and buildings. Simpler objects are loaded from
+JSON files because it made it possible to create a lot of them quickly. The more complex ones are hardcoded in some of
+the internal functions because I didn't really want to implement a JSON-based DSL when I already have Python.
+
+WARNING: prolonged exposure to _parse_recursively() function may cause cancer, insanity and death. Don't say I didn't
+warn you."""
+
 
 # those functions are used by the game to initialize its state
 def get_initial_buildings():

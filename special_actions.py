@@ -1,6 +1,13 @@
 from game_errors import InternalError
 
 
+"""Special actions are events that can be triggered directly by the player, as opposed to being spawned randomly
+or semi-randomly. Internally, they work by having an 'event' slot, which finally ends up in game state's event queue.
+For this reason, it should preferably contain an instance of BasicEvent, although obviously it can be anything that
+has the same interface (minus the should_be_activated() and should_be_deactivated() function as the event never ends
+up in the active or inactive deck."""
+
+
 class SpecialAction:
     def __init__(self, name, description, event_to_spawn):
         self.name = name
@@ -15,6 +22,8 @@ class SpecialAction:
 
 
 class LimitedSpecialAction(SpecialAction):
+    """LimitedSpecialAction can be used a predetermined number of times"""
+
     def __init__(self, name, description, event_to_spawn, limit):
         super(LimitedSpecialAction, self).__init__(name, description, event_to_spawn)
         self.limit = limit

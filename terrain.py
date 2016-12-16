@@ -11,6 +11,12 @@ class TerrainType:
 
 
 class MapPrototype:
+    """Map of the game area. Contains methods for adding (as long as the field is unoccupied) and removing buildings
+    as well as getters for specific fields.
+
+    WARNING: This class should only be used for testing purposes as it doesn't have any actual terrain or procedural
+    generation."""
+
     def __init__(self, h, w):
         self.heigth = h
         self.width = w
@@ -42,6 +48,8 @@ class MapPrototype:
 
 
 class SimplexNoiseMap(MapPrototype):
+    """Procedurally generated map based on simplex noise algorithm"""
+
     # class variables so we don't create new objects all the time
     water     = TerrainType("Water",     1)
     grass     = TerrainType("Grass",     1)

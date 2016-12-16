@@ -1,4 +1,16 @@
+"""This module contains classes for the in-game buildings. A building interface consists of:
+        name, description - pretty self-explanatory
+        price - amount of money required to build it; affected by terrain and potentially random events
+        on_build(state), on_destroy(state), on_next_turn(state) - effects the building has on game's state
+        can_be_built(map_tile, neighbors) - a predicate used for restricting the possibility of creating buildings
+                                            in certain locations"""
+
+
 class BuildingPrototype:
+    """Building with on_build, on_destroy and on_next_turn methods tweaked with key-value stores additional_effects
+    and per_turn_effects (keys are state's attributes, values are integers that will be added to - or, in case of
+    on_destroy, substracted from - them)"""
+
     def __init__(self):
         # TODO: better constructor
         self.name = 'Test building'
@@ -34,6 +46,8 @@ class BuildingPrototype:
 
 
 class BasicBuilding(BuildingPrototype):
+    """A building that can be built if it has neighboring buildings and is not placed on a water tile. Most of the
+    buildings should be of this type."""
     def __init__(self, name, description, base_price, additional_effects, per_turn_effects):
         super(BasicBuilding, self).__init__()
         self.name = name
@@ -48,6 +62,8 @@ class BasicBuilding(BuildingPrototype):
 
 
 class TerrainRestrictedBuilding(BasicBuilding):
+    """This works just like a BasicBuilding, with the only difference being that it must also be built near a specified
+    tile (e.g. a port that has to be near a water tile)"""
     def __init__(self, name, description, base_price, additional_effects, per_turn_effects, required_neighbor):
         super(TerrainRestrictedBuilding, self).__init__(
             name, description, base_price, additional_effects, per_turn_effects)
@@ -63,6 +79,7 @@ class TerrainRestrictedBuilding(BasicBuilding):
 
 
 class CustomBuilding(BasicBuilding):
+    """Fuck it, just write your own damn predicate"""
     def __init__(self, name, description, base_price, additional_effects, per_turn_effects, build_predicate):
         super(CustomBuilding, self).__init__(name, description, base_price, additional_effects, per_turn_effects)
         self.can_be_built = build_predicate

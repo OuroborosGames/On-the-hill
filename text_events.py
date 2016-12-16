@@ -1,7 +1,19 @@
 import timers_and_counters
 from random import randint
 
-"""Module for text-based/CYOA events"""
+"""Module for text-based/CYOA events."""
+
+"""Text event interface consists of:
+        title, description - I don't have to explain those, do I?
+        get_actions() - returns a list of possible player choices
+        perform_action(action, state) - perform an action identified by the first parameter (must be one of the elements
+                                        returned by get_actions()) on the game state passed as the second one
+        should_be_activated(state) - a predicate; if it returns true, the event will become active (which means it can
+                                     be spawned if it's a random event and that it will be spawned immediately if it's
+                                     a non-random one; no effect on events spawned immediately by other events or
+                                     special actions) #TODO: non-random events in game state
+        should_be_deactivated(state) - if it returns true, the event will become inactive; this means that a random
+                                       event cannot be spawned and it has no effect on any other events"""
 
 
 class TextEventPrototype:

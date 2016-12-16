@@ -32,6 +32,10 @@ class BasicEventTimer(BasicTimer):
 
 
 class Counter:
+    """A simple counter implementation, mostly meant for counting how many buildings of certain type have been built by
+    the player. Text events 'know' how to communicate with the counter so it can also be used to indicate progress
+    in event chains or just as a lock/unlock condition."""
+
     def __init__(self):
         self._counter = {}
 
