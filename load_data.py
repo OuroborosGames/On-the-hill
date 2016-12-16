@@ -27,6 +27,10 @@ def get_basic_special_actions():
     return _parse_json_data('actions.json') + _get_hardcoded_actions()
 
 
+def get_nonrandom_events():
+    return _parse_json_data('nonrandom.json') + _get_hardcoded_nonrandom_events()
+
+
 # those internal functions handle data files
 def _parse_json_data(filename):
     # return _dict_to_game_objects(json.load(filename, object_hook=OrderedDict))
@@ -126,3 +130,7 @@ def _get_hardcoded_events():
 
 def _get_hardcoded_actions():
     return []
+
+
+def _get_hardcoded_nonrandom_events():
+    pass

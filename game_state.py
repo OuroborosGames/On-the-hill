@@ -63,6 +63,9 @@ class Game:
         # special actions that the player can perform
         self.special_actions = special_actions.get_basic_actions()
 
+        # events that will be triggered deterministically when a condition is met
+        self.nonrandom_events = load_data.get_nonrandom_events()
+
         # list of timers
         self.timers = []
 
@@ -130,14 +133,23 @@ class Game:
         if self.population <= 0:
             self.game_over = True
 
+        # per-turn stat modifications
+        self._modify_stats()
+
+        # upkeep/per-turn building effects
         for x in self.buildings_on_map:
             # self.money -= x.upkeep_cost
             x.on_next_turn(self)
+
+        # perform non-random events if the condition is met
+        for event in filter(lambda e: e.should_be_activated(self), self.nonrandom_events):
+            self._event_queue.append(event)
 
         # lock/unlock random events depending on conditions
         move_between_lists(self._event_inactive_deck, self._event_active_deck, lambda a: a.should_be_activated(self))
         move_between_lists(self._event_active_deck, self._event_inactive_deck, lambda a: a.should_be_deactivated(self))
 
+        # randomly take events from active deck
         if self._event_active_deck:
             # print("aaaaaa")
             if randint(1, 10) == 10:
@@ -145,14 +157,13 @@ class Game:
                 self._event_queue.append(self._event_active_deck.popleft())
                 # print(self._event_queue[0])
 
-        # if self.timers:
+        # countdown
         for t in self.timers:
             try:
                 t.next(self)
             except InternalError:
                 self.timers.remove(t)
-        # per-turn stat modifications
-        self._modify_stats()
+
 
     def _try_performing_action(self):
         # common functionality for all actions
