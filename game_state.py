@@ -49,7 +49,7 @@ class Game:
         self.buildings_on_map = []
 
         # list of buildings that the player can construct
-        self.buildings_deck = buildings.get_initial_buildings()
+        self.buildings_deck = load_data.get_initial_buildings()
 
         # events that must be handled before taking an action or ending a turn (with get_next_event() method)
         self._event_queue = deque()
