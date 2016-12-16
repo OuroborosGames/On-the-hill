@@ -12,7 +12,6 @@ class BuildingPrototype:
     on_destroy, substracted from - them)"""
 
     def __init__(self):
-        # TODO: better constructor
         self.name = 'Test building'
         self.description = ''
         self.base_price = 100
@@ -83,11 +82,6 @@ class CustomBuilding(BasicBuilding):
     def __init__(self, name, description, base_price, additional_effects, per_turn_effects, build_predicate):
         super(CustomBuilding, self).__init__(name, description, base_price, additional_effects, per_turn_effects)
         self.can_be_built = build_predicate
-
-
-def get_initial_buildings():
-    # TODO: make basic buildings and return a list of them
-    return [BuildingPrototype()]
 
 
 def has_neighboring_buildings(neighbors):

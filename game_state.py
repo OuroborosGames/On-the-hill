@@ -64,13 +64,17 @@ class Game:
         self.special_actions = special_actions.get_basic_actions()
 
         # events that will be triggered deterministically when a condition is met
-        self.nonrandom_events = load_data.get_nonrandom_events()
+        # self.nonrandom_events = load_data.get_nonrandom_events() #TODO: nonrandom.json
+        self.nonrandom_events = []
 
         # list of timers
         self.timers = []
 
         # count in-game objects
         self.counter = Counter()
+
+        # current branch in the main storyline
+        self.branch = "The Founding of " + self.city_name
 
     def perform_special_action(self, number):
         self._try_performing_action()
