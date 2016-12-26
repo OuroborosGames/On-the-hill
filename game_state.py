@@ -198,9 +198,9 @@ class Game:
         if self.technology < 5:                    # better technology = more actions can be performed per-turn
             self._actions_max = 3
         elif self.technology < 10:
-            self.technology = 4
+            self._actions_max = 4
         else:
-            self.technology = 5
+            self.actions_max = 5
 
         self.population += floor(self.population*(modifier/100))
 
