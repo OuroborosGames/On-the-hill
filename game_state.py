@@ -90,9 +90,7 @@ class Game:
     def build(self, number, x, y):
         # initial requirements checks
         self._try_performing_action()
-        if self.money < self.buildings_deck[number].base_price:
-            self.actions += 1
-            raise GameplayError("You don't have enough money to create this building.")
+
         if not self.buildings_deck[number].can_be_built(
                self.map.get_field_by_coordinates(x, y),
                self.map.get_neighbors(x, y)):
@@ -203,6 +201,25 @@ class Game:
             self.technology = 5
 
         self.population += floor(self.population*(modifier/100))
+
+
+class MaplessGame(Game):
+    """Game mode without map (experimental)"""
+    def build(self, number):
+        self._try_performing_action()
+        if self.money < self.buildings_deck[number].price:
+            self.actions += 1
+            raise GameplayError("You don't have enough money to create this building.")
+        new_building = copy(self.buildings_deck[number])
+        self.buildings_on_map.append(new_building)
+        self.money -= new_building.price
+        new_building.on_build(self)
+
+    def demolish(self, number):
+        self._try_performing_action()
+        ref = self.buildings_on_map[number]
+        self.buildings_on_map.remove(ref)
+        ref.on_destroy()
 
 
 def move_between_lists(source, dest, func):
