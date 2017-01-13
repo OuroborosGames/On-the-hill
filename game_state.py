@@ -205,7 +205,10 @@ class Game:
 
 class MaplessGame(Game):
     """Game mode without map (experimental)"""
-    def build(self, number):
+    def build(self, number, x, y):
+        self._build(number)
+
+    def _build(self, number):
         self._try_performing_action()
         if self.money < self.buildings_deck[number].price:
             self.actions += 1
@@ -215,7 +218,10 @@ class MaplessGame(Game):
         self.money -= new_building.price
         new_building.on_build(self)
 
-    def demolish(self, number):
+    def demolish(self, x, y):
+        raise GameplayError("You can't demolish by coordinates in mapless mode!")
+
+    def demolish_by_index(self, number):
         self._try_performing_action()
         ref = self.buildings_on_map[number]
         self.buildings_on_map.remove(ref)
