@@ -209,7 +209,7 @@ class MaplessGame(Game):
         super(MaplessGame, self).__init__(city_name, 0, 0)
         self.map = None
 
-    def build(self, number, x, y):
+    def build(self, number, x=0, y=0):
         self._build(number)
 
     def _build(self, number):
