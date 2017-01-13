@@ -205,6 +205,10 @@ class Game:
 
 class MaplessGame(Game):
     """Game mode without map (experimental)"""
+    def __init__(self, city_name):
+        super(MaplessGame, self).__init__(city_name, 0, 0)
+        self.map = None
+
     def build(self, number, x, y):
         self._build(number)
 
