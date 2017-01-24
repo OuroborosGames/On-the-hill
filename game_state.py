@@ -76,6 +76,20 @@ class Game:
         # current branch in the main storyline
         self.branch = "The Founding of " + self.city_name
 
+        # you must build town square in standard game mode
+        self.founded = False
+
+    def found(self, x, y):
+        if self.founded:
+            raise InternalError("Already founded")
+        town_square = buildings.CustomBuilding("Town square", "Central part from which the rest of the city grows.",
+                                               0, {}, {}, lambda tile: not buildings.is_on_water_tile(tile))
+        if not town_square.can_be_built(self.map.get_field_by_coordinates(x, y)):
+            raise GameplayError("Town square can't be built on water")
+        self.map.add_building(town_square, x, y)
+        self.buildings_on_map.append(town_square)
+        self.founded = True
+
     def perform_special_action(self, number):
         self._try_performing_action()
         # spawn an event provided by a special action, remove the action if it can't be performed
@@ -126,6 +140,8 @@ class Game:
         return self._event_queue.popleft()
 
     def end_turn(self):
+        if not self.founded:
+            raise InternalError("You must build a town square before doing that.")
         if self._event_queue:
             raise GameplayError("You still have unhandled events.")
         if self.game_over:
@@ -166,11 +182,12 @@ class Game:
             except InternalError:
                 self.timers.remove(t)
 
-
     def _try_performing_action(self):
         # common functionality for all actions
         if self.game_over:
             raise GameOver()
+        if not self.founded:
+            raise InternalError("You must build a town square before doing that.")
         if self._event_queue:
             raise GameplayError("You still have unhandled events.")
         if not self.actions:
@@ -208,6 +225,7 @@ class MaplessGame(Game):
     def __init__(self, city_name):
         super(MaplessGame, self).__init__(city_name, 0, 0)
         self.map = None
+        self.founded = True
 
     def build(self, number, x=0, y=0):
         self._build(number)
@@ -230,6 +248,9 @@ class MaplessGame(Game):
         ref = self.buildings_on_map[number]
         self.buildings_on_map.remove(ref)
         ref.on_destroy()
+
+    def found(self, x, y):
+        raise InternalError("This feature is absent from mapless mode")
 
 
 def move_between_lists(source, dest, func):
