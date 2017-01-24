@@ -11,9 +11,18 @@ from timers_and_counters import Counter
 from math import floor
 
 
+class GameFacade:
+    """Facade class through which the GUI interfaces with the backend"""
+    # TODO: create the interface
+    def __init__(self, city_name, map_h=0, map_w=0):
+        if map_h != 0 and map_w != 0:
+            self._game = Game(city_name, map_h, map_w)
+        else:
+            self._game = MaplessGame(city_name)
+
+
 class Game:
     """This used to be a facade but now it's game's global state"""
-    # TODO: make an actual facade class
 
     def __init__(self, city_name, map_h, map_w):
         self.city_name = city_name
@@ -241,7 +250,7 @@ class MaplessGame(Game):
         new_building.on_build(self)
 
     def demolish(self, x, y):
-        raise GameplayError("You can't demolish by coordinates in mapless mode!")
+        raise InternalError("You can't demolish by coordinates in mapless mode!")
 
     def demolish_by_index(self, number):
         self._try_performing_action()
