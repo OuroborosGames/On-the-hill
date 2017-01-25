@@ -13,12 +13,31 @@ from math import floor
 
 class GameFacade:
     """Facade class through which the GUI interfaces with the backend"""
-    # TODO: create the interface
-    def __init__(self, city_name, map_h=0, map_w=0):
-        if map_h != 0 and map_w != 0:
-            self._game = Game(city_name, map_h, map_w)
-        else:
-            self._game = MaplessGame(city_name)
+    def __init__(self):
+        self._game = None
+
+    # utility methods go here
+    def new_game(self, city_name, map_h, map_w):
+        self._game = Game(city_name, map_h, map_w)
+
+    def new_mapless_game(self, city_name):
+        self._game = MaplessGame(city_name)
+
+    # TODO: saving and loading
+    def load_game(self, filename):
+        raise InternalError("Not implemented")
+
+    def save_game(self, filename):
+        self._only_if_game_started()
+        raise InternalError("Not implemented")
+
+    # internal methods go here
+    def _only_if_game_started(self):
+        if not self._game: raise InternalError("You must first start/load a game")
+
+    def __getattr__(self, item):
+        self._only_if_game_started()
+        return  getattr(self._game, item)
 
 
 class Game:
