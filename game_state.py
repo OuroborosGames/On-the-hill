@@ -37,7 +37,9 @@ class GameFacade:
 
     def __getattr__(self, item):
         self._only_if_game_started()
-        return  getattr(self._game, item)
+        if item.startswith('_'):
+            raise InternalError(item + " is not a part of public interface")
+        return getattr(self._game, item)
 
 
 class Game:
@@ -70,8 +72,8 @@ class Game:
         self.map = terrain.SimplexNoiseMap(map_h, map_w)
 
         # actions per turn
-        self._actions_max = 3
-        self.actions = self._actions_max
+        self.actions_max = 3
+        self.actions = self.actions_max
 
         # list of buildings on the map (so we don't have to iterate through the whole map to apply per-turn effects)
         self.buildings_on_map = []
@@ -174,7 +176,7 @@ class Game:
             raise GameplayError("You still have unhandled events.")
         if self.game_over:
             raise GameOver()
-        self.actions = self._actions_max
+        self.actions = self.actions_max
         self.turn += 1
         if self.population <= 0:
             self.game_over = True
@@ -239,9 +241,9 @@ class Game:
             else:
                 modifier += self.health/3
         if self.technology < 5:                    # better technology = more actions can be performed per-turn
-            self._actions_max = 3
+            self.actions_max = 3
         elif self.technology < 10:
-            self._actions_max = 4
+            self.actions_max = 4
         else:
             self.actions_max = 5
 
