@@ -10,8 +10,8 @@ familiarized with the public interface exposed by the backend. It should
 also help the developer understand how the player is supposed to
 interact with the game, which is crucial to creating a good GUI.
 
-2. Starting the game
---------------------
+2. Starting and stopping the game
+---------------------------------
 
 Before we do anything, we must first create an object to hold the game's
 backend. You can do it this way:

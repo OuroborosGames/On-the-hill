@@ -19,13 +19,19 @@ class GameFacade:
 
     # utility methods go here
     def new_game(self, city_name, map_h, map_w):
+        self._only_if_not_started()
         self._game = Game(city_name, map_h, map_w)
 
     def new_mapless_game(self, city_name):
+        self._only_if_not_started()
         self._game = MaplessGame(city_name)
+
+    def close_game(self):
+        self._game = None
 
     # TODO: saving and loading
     def load_game(self, filename):
+        self._only_if_not_started()
         raise InternalError("Not implemented")
 
     def save_game(self, filename):
@@ -35,6 +41,9 @@ class GameFacade:
     # internal methods go here
     def _only_if_game_started(self):
         if not self._game: raise InternalError("You must first start/load a game")
+
+    def _only_if_not_started(self):
+        if self._game: raise InternalError("There is already a game in progress")
 
     def __getattr__(self, item):
         self._only_if_game_started()
