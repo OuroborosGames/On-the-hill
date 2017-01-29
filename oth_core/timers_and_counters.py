@@ -1,4 +1,4 @@
-from game_errors import InternalError
+from oth_core.game_errors import InternalError
 
 
 class BasicTimer:

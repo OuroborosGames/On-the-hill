@@ -1,14 +1,15 @@
-import buildings
-import text_events
-import terrain
-import special_actions
-import load_data
-from copy import copy
-from game_errors import GameplayError, InternalError, GameOver
 from collections import deque
-from random import randint, shuffle
-from timers_and_counters import Counter
+from copy import copy
 from math import floor
+from random import randint, shuffle
+
+from . import buildings
+from . import load_data
+from . import special_actions
+from . import terrain
+from . import text_events
+from oth_core.game_errors import GameplayError, InternalError, GameOver
+from oth_core.timers_and_counters import Counter
 
 
 class GameFacade:

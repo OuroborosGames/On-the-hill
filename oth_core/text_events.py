@@ -1,5 +1,6 @@
-import timers_and_counters
 from random import randint
+
+from . import timers_and_counters
 
 """Module for text-based/CYOA events."""
 

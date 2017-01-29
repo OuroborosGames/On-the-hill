@@ -1,4 +1,4 @@
-from game_errors import InternalError
+from oth_core.game_errors import InternalError
 
 
 """Special actions are events that can be triggered directly by the player, as opposed to being spawned randomly

@@ -1,6 +1,7 @@
-from game_errors import GameplayError
-from perlin import SimplexNoise
 from random import randint
+
+from oth_core.game_errors import GameplayError
+from oth_core.perlin import SimplexNoise
 
 
 class TerrainType:

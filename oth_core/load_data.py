@@ -1,10 +1,11 @@
 import json
-import text_events
-import buildings
-import special_actions
 from collections import OrderedDict
-from game_errors import ParserError
 from functools import partial
+
+from . import buildings
+from . import special_actions
+from . import text_events
+from oth_core.game_errors import ParserError
 
 """This module gives us the most important parts of the game: events and buildings. Simpler objects are loaded from
 JSON files because it made it possible to create a lot of them quickly. The more complex ones are hardcoded in some of
@@ -16,19 +17,19 @@ warn you."""
 
 # those functions are used by the game to initialize its state
 def get_initial_buildings():
-    return _parse_json_data('buildings.json') + _get_hardcoded_buildings()
+    return _parse_json_data('oth_core/buildings.json') + _get_hardcoded_buildings()
 
 
 def get_basic_random_events():
-    return _parse_json_data('events.json') + _get_hardcoded_events()
+    return _parse_json_data('oth_core/events.json') + _get_hardcoded_events()
 
 
 def get_basic_special_actions():
-    return _parse_json_data('actions.json') + _get_hardcoded_actions()
+    return _parse_json_data('oth_core/actions.json') + _get_hardcoded_actions()
 
 
 def get_nonrandom_events():
-    return _parse_json_data('nonrandom.json') + _get_hardcoded_nonrandom_events()
+    return _parse_json_data('oth_core/nonrandom.json') + _get_hardcoded_nonrandom_events()
 
 
 # those internal functions handle data files
