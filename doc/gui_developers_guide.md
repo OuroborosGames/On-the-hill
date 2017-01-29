@@ -10,7 +10,7 @@ familiarized with the public interface exposed by the backend. It should
 also help the developer understand how the player is supposed to
 interact with the game, which is crucial to creating a good GUI.
 
-2. Starting and stopping the game
+2. Starting the game
 ---------------------------------
 
 Before we do anything, we must first create an object to hold the game's
@@ -54,4 +54,21 @@ game is run on a server and the user can upload his own savefiles**.
 Keep that in mind if you want to make a web frontend (but I don't know
 why you would do that given that so far it's a single-player game).
 
-//todo: everything els
+3. Stopping the game
+--------------------
+
+The backend will not allow you to create a game when there is one
+already in progress. This is because game-creating methods are
+destructive: they overwrite the game already in progress. If you want
+to accommodate the situation in which users want to abandon their
+current game or load a previous savegame (e.g. a quicksave/quickload
+feature or a pause menu), you must first call this method:
+
+```python
+# close current game; the player SHOULD be asked if he wants to save
+# current progress before calling this method, unless it's executed
+# through a quickload button
+backend.close_game()
+```
+
+//todo: everything else
