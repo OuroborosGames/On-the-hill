@@ -179,6 +179,10 @@ class Game:
             return
         return self._event_queue.popleft()
 
+    # map to be displayed in the GUI
+    def display_map(self):
+        return [self.map.get_terrain_layer(), self.map.get_buildings_layer()]
+
     def end_turn(self):
         if not self.founded:
             raise InternalError("You must build a town square before doing that.")
@@ -291,6 +295,10 @@ class MaplessGame(Game):
 
     def found(self, x, y):
         raise InternalError("This feature is absent from mapless mode")
+
+    # instead of map, we return a list of buildings that will be shown to the user
+    def display_map(self):
+        return self.buildings_on_map
 
 
 def move_between_lists(source, dest, func):

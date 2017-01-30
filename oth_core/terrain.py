@@ -43,6 +43,13 @@ class MapPrototype:
                     ret.append(self.get_field_by_coordinates(x+i, y+j))
         return ret
 
+    def get_terrain_layer(self):
+        return [[field.name for field in row] for row in self._map_internal]
+
+    def get_buildings_layer(self):
+        return [[field.building.name if field.building is not None else None for field in row]
+                for row in self._map_internal]
+
     @classmethod
     def _generate_map(cls, h, w):
         return [[TerrainType("Test", 1) for x in range(w)] for y in range(h)]
