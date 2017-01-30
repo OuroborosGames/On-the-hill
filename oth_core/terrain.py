@@ -2,6 +2,7 @@ from random import randint
 
 from oth_core.game_errors import GameplayError
 from oth_core.perlin import SimplexNoise
+from functools import partial
 
 
 class TerrainType:
@@ -58,12 +59,11 @@ class MapPrototype:
 class SimplexNoiseMap(MapPrototype):
     """Procedurally generated map based on simplex noise algorithm"""
 
-    # class variables so we don't create new objects all the time
-    water     = TerrainType("Water",     1)
-    grass     = TerrainType("Grass",     1)
-    forest    = TerrainType("Forest",    1.5)
-    hills     = TerrainType("Hills",     1.2)
-    mountains = TerrainType("Mountains", 2)
+    water     = partial(TerrainType, "Water",     1)
+    grass     = partial(TerrainType, "Grass",     1)
+    forest    = partial(TerrainType, "Forest",    1.5)
+    hills     = partial(TerrainType, "Hills",     1.2)
+    mountains = partial(TerrainType, "Mountains", 2)
     
     @classmethod
     def _generate_map(cls, h, w):
@@ -73,14 +73,14 @@ class SimplexNoiseMap(MapPrototype):
     @classmethod
     def get_terrain_from_noise(cls, value):
         if value < -0.5:
-            return cls.water
+            return cls.water()
         elif value < 0:
-            return cls.grass
+            return cls.grass()
         elif value < 0.2:
-            return cls.forest
+            return cls.forest()
         elif value < 0.5:
-            return cls.hills
-        return cls.mountains
+            return cls.hills()
+        return cls.mountains()
 
 
 # def get_terrain_from_noise(value):
