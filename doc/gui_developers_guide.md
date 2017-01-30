@@ -74,6 +74,8 @@ backend.close_game()
 4. Displaying data to the player
 --------------------------------
 
+### 4.1. Stats
+
 During the gameplay, player MUST be able to see basic stats necessary
 to make strategic choices:
 
@@ -83,6 +85,8 @@ backend.money
 backend.population
 backend.population_max
 backend.food
+backend.actions
+backend.actions_max
 
 # those stats MAY be displayed in other way (e.g. graphical indicators
 # or textual descriptions)
@@ -94,11 +98,16 @@ backend.health
 
 Additional information that SHOULD be shown to the player:
 ```python
-backend.city_name # display value of this string
+# display value of these strings
+backend.city_name
+backend.branch # this represents current active plotline
 
-backend.turn      # either show the turn number or convert it to some
-                  # other format (1 turn = 1 month)
+# either show the turn number or convert it to some other format
+# (1 turn = 1 month)
+backend.turn
 ```
+
+### 4.2. View of the city
 
 Whenever possible, player SHOULD be able to see the city:
 ```python
@@ -113,6 +122,8 @@ my_map_rendering_function(city[1]) # draw the buildings
 # is returned
 my_background.draw_buildings(city)
 ```
+
+### 4.3. Interaction cards
 
 The player MAY be shown the following items during the gameplay or they
 MAY be hidden in a sub-menu:
@@ -197,17 +208,17 @@ drawing a button for each key and returning which one was pressed).
 ### 5.3. Building and demolishing
 
 Selecting the building from a list of buildings that can be constructed
-(see point 3.) MUST allow the player to initiate building procedure,
+(see point 4.3.) MUST allow the player to initiate building procedure,
 while selecting one from the output of display_map() MUST allow the same
 for demolition. The procedures depend on game mode.
 
 #### 5.3.1. Normal mode
 
 When the building is picked from buildings_deck, the player SHOULD be
-able to see where it can be built (see point 4. for how to check
+able to see where it can be built (see point 4.3. for how to check
 and point 5.1. for implementation suggestions). He SHOULD also be able
 to see the price adjusted for terrain's cost_modifier (also see point
-4.). When player picks a field on the map, call the following function
+4.3.). When player picks a field on the map, call the following function
 to perform the action:
 
 ```python
