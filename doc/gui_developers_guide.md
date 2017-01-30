@@ -147,7 +147,24 @@ player.
 5. Gameplay proper
 ------------------
 
-### 5.1. Text-based events
+### 5.1. Founding the city (normal mode only)
+
+Almost all of the buildings in On The Hill must be built next to other
+buildings. For that reason, right after starting the game in normal mode
+the player should be given the choice of where to found the city. Any
+non-water tile can be chosen, after which you must pass the tile's
+coordinates to the found() method:
+
+```python
+backend.found(input_x, input_y)
+```
+
+When waiting for the player input, either the tiles on which the city
+can be founded SHOULD be highlighted (e.g. by applying a green tint to
+them) or the ones on which it can't SHOULD be 'hidden' (e.g. by graying
+them out).
+
+### 5.2. Text-based events
 
 Text-based events take precedence over everything else and if they're
 not handled before the player tries to execute any other action,
@@ -177,4 +194,57 @@ a valid key from ev.actions. For that reason, in your input-handling
 function you should restrict user choice to those values (e.g. by
 drawing a button for each key and returning which one was pressed).
 
-//todo: everything else
+### 5.3. Building and demolishing
+
+Selecting the building from a list of buildings that can be constructed
+(see point 3.) MUST allow the player to initiate building procedure,
+while selecting one from the output of display_map() MUST allow the same
+for demolition. The procedures depend on game mode.
+
+#### 5.3.1. Normal mode
+
+When the building is picked from buildings_deck, the player SHOULD be
+able to see where it can be built (see point 3. for how to check
+and point 5.1. for implementation suggestions). He SHOULD also be able
+to see the price adjusted for terrain's cost_modifier (also see point
+3.). When player picks a field on the map, call the following function
+to perform the action:
+
+```python
+# pass building's index in buildings_deck and user-specified coordinates
+backend.build(index, input_x, input_y)
+```
+
+When the building is picked from the output of display_map(), the player
+should be given an option (e.g. by showing a button) to demolish it.
+When a choice is made, call the following function:
+
+```python
+# to demolish a building, pass its coordinates to this function:
+backend.demolish(input_x, input_y)
+```
+
+#### 5.3.2. Mapless mode
+
+In mapless mode, there's no need (and no way) to show where the building
+can be built or calculate new price. For this reason, it is enough to
+give the player an option the same way it's done when demolishing in
+normal mode:
+
+```python
+# there's no map so you don't need to pass coordinates, just index
+# if you pass them, they'll be ignoted
+backend.build(index)
+```
+
+Demolition works by selecting the building from the output of
+display_map(), but the method you need to call is different and it takes
+selection's index instead of coordinates:
+
+```python
+backend.demolish_by_index(index)
+```
+
+### 5.4. Special actions
+
+//todo
