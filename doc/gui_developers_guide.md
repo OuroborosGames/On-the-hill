@@ -71,4 +71,77 @@ feature or a pause menu), you must first call this method:
 backend.close_game()
 ```
 
+4. Displaying data to the player
+--------------------------------
+
+During the gameplay, player MUST be able to see basic stats necessary
+to make strategic choices:
+
+```python
+# numerical values of following stats MUST be displayed
+backend.money
+backend.population
+backend.population_max
+backend.food
+
+# those stats MAY be displayed in other way (e.g. graphical indicators
+# or textual descriptions)
+backend.prestige
+backend.safety
+backend.technology
+backend.health
+```
+
+Additional information that SHOULD be shown to the player:
+```python
+backend.city_name # display value of this string
+
+backend.turn      # either show the turn number or convert it to some
+                  # other format (1 turn = 1 month)
+```
+
+Whenever possible, player SHOULD be able to see the city:
+```python
+city = backend.display_map()
+
+# in normal mode, the returned map will have two layers: one for terrain
+# and one for buildings
+my_map_rendering_function(city[0]) # draw the terrain
+my_map_rendering_function(city[1]) # draw the buildings
+
+# in mapless mode, only the list of buildings constructed by the player
+# is returned
+my_background.draw_buildings(city)
+```
+
+The player MAY be shown the following items during the gameplay or they
+MAY be hidden in a sub-menu:
+```python
+# list of buildings that the player can construct
+backend.buildings_deck
+## details about those buildings
+building = backend.buildings_deck[i]
+building.name               # string
+building.description        # string
+building.price              # int
+building.additional_effects # dict
+building.per_turn _effects  # dict
+## more advanced features (normal mode only):
+### boolean: can I put this building on that tile?
+building.can_be_built(backend.map.get_field_by_coordinatea(x,y),
+                      backend.map.get_neighbors(x,y))
+### int: cost of building on a specific tile
+building.price * backend.map.get_field_by_coordinates(x,y).cost_modifier
+
+# list of special actions which can be executed by the user:
+backend.special_actions
+## details about those actions
+action = backend.special_actions[i]
+action.name
+action.description
+```
+
+Everything else is internal data and SHOULD NOT be displayed to the
+player.
+
 //todo: everything else

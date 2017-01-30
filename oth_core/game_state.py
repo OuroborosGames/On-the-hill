@@ -65,14 +65,14 @@ class Game:
         # set main stats
         self.money = 1000
         self.population = 20
+        self.population_max = 0
+        self.food = 100
 
         # set additional stats
         self.prestige = 0
         self.safety = 0
         self.technology = 0
-        self.food = 100
         self.health = 0
-        self.population_max = 0
 
         # make map
         # MAP_WIDTH = 100
