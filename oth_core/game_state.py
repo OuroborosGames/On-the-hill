@@ -174,6 +174,9 @@ class Game:
         self.buildings_on_map.remove(ref)
         ref.on_destroy(self)
 
+    def has_next_event(self):
+        return len(self._event_queue) > 0
+
     def get_next_event(self):
         if not self._event_queue:
             return
