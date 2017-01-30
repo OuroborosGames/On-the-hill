@@ -204,10 +204,10 @@ for demolition. The procedures depend on game mode.
 #### 5.3.1. Normal mode
 
 When the building is picked from buildings_deck, the player SHOULD be
-able to see where it can be built (see point 3. for how to check
+able to see where it can be built (see point 4. for how to check
 and point 5.1. for implementation suggestions). He SHOULD also be able
 to see the price adjusted for terrain's cost_modifier (also see point
-3.). When player picks a field on the map, call the following function
+4.). When player picks a field on the map, call the following function
 to perform the action:
 
 ```python
