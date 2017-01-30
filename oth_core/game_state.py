@@ -182,6 +182,9 @@ class Game:
             return
         return self._event_queue.popleft()
 
+    def event_choice(self, ev, action):
+        return ev.perform_action(action, self)
+
     # map to be displayed in the GUI
     def display_map(self):
         return [self.map.get_terrain_layer(), self.map.get_buildings_layer()]

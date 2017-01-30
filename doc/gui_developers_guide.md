@@ -163,13 +163,13 @@ while backend.has_next_event():
     ev = backend.get_next_event()
     # (...)
     # display this to the player:
-    ev.title                 # string
-    ev.description           # string
-    keys = ev.actions.keys() # list of strings
+    ev.title                   # string
+    ev.description             # string
+    ev.get_actions()           # list of strings
     
     # now handle player choice:
     input = my_get_input_from_player(keys)
-    ev.actions[input]()
+    backend.event_choice(ev, input)
 ```
 
 Keep in mind that the result of my_get_input_from_player() must be
