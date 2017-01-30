@@ -235,8 +235,8 @@ class Game:
             raise GameOver()
         if not self.founded:
             raise InternalError("You must build a town square before doing that.")
-        if self._event_queue:
-            raise GameplayError("You still have unhandled events.")
+        if self.has_next_event():
+            raise InternalError("You still have unhandled events.")
         if not self.actions:
             raise GameplayError("You don't have enough actions left.")
         self.actions -= 1

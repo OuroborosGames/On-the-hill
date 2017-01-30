@@ -124,8 +124,8 @@ building = backend.buildings_deck[i]
 building.name               # string
 building.description        # string
 building.price              # int
-building.additional_effects # dict
-building.per_turn _effects  # dict
+building.additional_effects # dict (string:int)
+building.per_turn _effects  # dict (string:int)
 ## more advanced features (normal mode only):
 ### boolean: can I put this building on that tile?
 building.can_be_built(backend.map.get_field_by_coordinatea(x,y),
@@ -143,5 +143,38 @@ action.description
 
 Everything else is internal data and SHOULD NOT be displayed to the
 player.
+
+5. Gameplay proper
+------------------
+
+### 5.1. Text-based events
+
+Text-based events take precedence over everything else and if they're
+not handled before the player tries to execute any other action,
+an InternalError will be raised.
+
+Handling of text-based events is best done in a while loop (foreach
+might have been more elegant but while seems to be a safer choice when
+size of the list is mutable; I might be wrong about that though so feel
+free to correct me):
+
+```python
+while backend.has_next_event():
+    ev = backend.get_next_event()
+    # (...)
+    # display this to the player:
+    ev.title                 # string
+    ev.description           # string
+    keys = ev.actions.keys() # list of strings
+    
+    # now handle player choice:
+    input = my_get_input_from_player(keys)
+    ev.actions[input]()
+```
+
+Keep in mind that the result of my_get_input_from_player() must be
+a valid key from ev.actions. For that reason, in your input-handling
+function you should restrict user choice to those values (e.g. by
+drawing a button for each key and returning which one was pressed).
 
 //todo: everything else
