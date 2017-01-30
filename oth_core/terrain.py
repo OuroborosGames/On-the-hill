@@ -48,7 +48,7 @@ class MapPrototype:
         return [[field.name for field in row] for row in self._map_internal]
 
     def get_buildings_layer(self):
-        return [[field.building.name if field.building is not None else None for field in row]
+        return [[field.building for field in row]
                 for row in self._map_internal]
 
     @classmethod
