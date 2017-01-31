@@ -10,6 +10,22 @@ familiarized with the public interface exposed by the backend. It should
 also help the developer understand how the player is supposed to
 interact with the game, which is crucial to creating a good GUI.
 
+### 1.1. Definitions and naming conventions
+
+The words 'MUST', 'SHOULD' and 'MAY' mean exactly what you think they mean:
+'required', 'reccommended' and 'optional'.
+
+Some of the in-game objects (events, special actions, buildings) are sometimes
+described through tabletop metaphors ('cards', 'decks' etc.). This is
+a convention we adopted at a design stage and it doesn't necessarily need to be
+reflected in your GUI.
+
+Code examples shown in the following guide contain calls to placeholder
+functions and methods in placeholder classes, identified by the prefix 'my\_'
+(e.g.'my_map_rendering_function()'). Their purpose is purely illustrative
+and you're supposed to replace them with whatever is appropriate for your
+GUI.
+
 2. Starting the game
 ---------------------------------
 
@@ -139,7 +155,7 @@ building.additional_effects # dict (string:int)
 building.per_turn _effects  # dict (string:int)
 ## more advanced features (normal mode only):
 ### boolean: can I put this building on that tile?
-building.can_be_built(backend.map.get_field_by_coordinatea(x,y),
+building.can_be_built(backend.map.get_field_by_coordinates(x,y),
                       backend.map.get_neighbors(x,y))
 ### int: cost of building on a specific tile
 building.price * backend.map.get_field_by_coordinates(x,y).cost_modifier
