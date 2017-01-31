@@ -38,6 +38,15 @@ class GameFacade:
         self._only_if_game_started()
         raise InternalError("Not implemented")
 
+    # check game mode - useful for loading savefile if GUI supports multiple modes
+    def get_game_mode(self):
+        self._only_if_game_started()
+        if type(self._game) == Game:        # checking type equality instead of isinstance()
+            return "Normal mode"            # is intentional: we care about exact types,
+        if type(self._game) == MaplessGame: # not OOP hierarchy
+            return "Mapless mode"
+        raise InternalError("Unknown game mode: {}".format(type(self._game).__name__))
+
     # internal methods go here
     def _only_if_game_started(self):
         if not self._game: raise InternalError("You must first start/load a game")
