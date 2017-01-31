@@ -299,8 +299,8 @@ backend.end_turn()
 6. Exceptions
 -------------
 
-Backend raises 4 kinds of exceptions: GameplayError, GameOver,
-InternalError and ParserError.
+Backend raises 4 kinds of exceptions: oth_core.GameplayError,
+oth_core.GameOver, oth_core.InternalError and oth_core.ParserError.
 
 **GameplayError** represents an illegal action done by the player (e.g.
 attempting to create a building while not having enough money. Those
