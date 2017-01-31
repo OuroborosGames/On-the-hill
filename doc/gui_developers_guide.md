@@ -70,6 +70,22 @@ game is run on a server and the user can upload his own savefiles**.
 Keep that in mind if you want to make a web frontend (but I don't know
 why you would do that given that so far it's a single-player game).
 
+Because loading the game works the same way regardless of mode, it might
+be useful to check which one you've loaded if your GUI supports both
+normal and mapless modes. This can be done by calling get_game_mode()
+method:
+
+```python
+if(backend.get_game_mode() == 'Mapless mode'):
+    my_draw_mapless_gui()
+else if(backend.get_game_mode() == 'Normal mode'):
+    my_draw_normal_gui()
+```
+
+Right now, only normal and mapless modes are available and if the game
+isn't one of those, an error is raised. In the future, other modes might
+be added.
+
 3. Stopping the game
 --------------------
 
