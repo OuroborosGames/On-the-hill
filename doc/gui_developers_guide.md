@@ -296,4 +296,34 @@ When the player decides to end a turn, call this function:
 backend.end_turn()
 ```
 
-//todo
+6. Exceptions
+-------------
+
+Backend raises 4 kinds of exceptions: GameplayError, GameOver,
+InternalError and ParserError.
+
+**GameplayError** represents an illegal action done by the player (e.g.
+attempting to create a building while not having enough money. Those
+errors SHOULD be shown to the player in a way you deem appropriate (e.g.
+displaying a message box, playing a sound) but they MUST not be left
+unhandled - the game has to continue.
+
+**GameOver** is self-explanatory: it happens when the player tries to
+perform an action when the game has been concluded (the player lost
+or reached an ending). The player MUST be informed about the game being
+over and you MAY exit to menu, but you MAY also leave the game in a sort
+of inactive state in which player might observe the city at the time of
+the game's conclusion but has no way of interacting with it.
+
+**InternalError** probably won't happen if you interact with the backend
+the way I described in this document, unless there is a bug somewhere.
+That said, if you really like the pythonic 'it's easier to ask for
+forgiveness than it is to get permission', you (probably) MAY organize
+your control flow around try something/except InternalError.
+
+**ParserError** probably won't happen either, unless a .json file got
+corrupted (relatively unlikely but easy to fix by pulling one from
+git) or I screwed up the parser code (relatively likely, and the thought
+of fixing it is not a pleasant one). Your handling of those errors
+SHOULD be limited to informing the player about corrupted files and
+aborting the action that caused it.
