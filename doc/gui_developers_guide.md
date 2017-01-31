@@ -12,19 +12,19 @@ interact with the game, which is crucial to creating a good GUI.
 
 ### 1.1. Definitions and naming conventions
 
-The words 'MUST', 'SHOULD' and 'MAY' mean exactly what you think they mean:
-'required', 'reccommended' and 'optional'.
+The words 'MUST', 'SHOULD' and 'MAY' mean exactly what you think 
+mean: 'required', 'reccommended' and 'optional'.
 
-Some of the in-game objects (events, special actions, buildings) are sometimes
-described through tabletop metaphors ('cards', 'decks' etc.). This is
-a convention we adopted at a design stage and it doesn't necessarily need to be
-reflected in your GUI.
+Some of the in-game objects (events, special actions, buildings) are
+sometimes described through tabletop metaphors ('cards', 'decks' etc.).
+This is a convention we adopted at a design stage and it doesn't
+necessarily need to be reflected in your GUI.
 
 Code examples shown in the following guide contain calls to placeholder
-functions and methods in placeholder classes, identified by the prefix 'my\_'
-(e.g.'my_map_rendering_function()'). Their purpose is purely illustrative
-and you're supposed to replace them with whatever is appropriate for your
-GUI.
+functions and methods in placeholder classes, identified by the prefix
+'my\_' (e.g.'my_map_rendering_function()'). Their purpose is purely
+illustrative and you're supposed to replace them with whatever
+is appropriate for your GUI.
 
 2. Starting the game
 ---------------------------------
@@ -273,5 +273,27 @@ backend.demolish_by_index(index)
 ```
 
 ### 5.4. Special actions
+
+The way you deal with special actions should be obvious by now: user
+picks a card from a list and decides to use it, you pass an index to
+a function and that's all. Special actions work by spawning an event,
+so by the time you're writing this code you should already have the
+most important mechanics implemented.
+
+```python
+backend.perform_special_action(index)
+```
+
+### 5.5. Ending turns
+
+Unless currently handling a text-based events, player MUST always be
+allowed to end turn, regardless if there are any actions left. The game
+SHOULD not end a turn by itself when the player runs out of actions but
+it MAY give a warning about unused actions.
+
+When the player decides to end a turn, call this function:
+```python
+backend.end_turn()
+```
 
 //todo
