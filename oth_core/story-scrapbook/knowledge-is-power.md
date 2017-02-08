@@ -66,4 +66,38 @@ workshops and factories from time to time, but we can live with that.
 *(unlocks building: **Trade school** - costs money per turn (less than
 in previous option), slightly increases prestige and decreases tech)*
 
+Event 2
+-------
+
+*(to trigger: spring after Event 1)*
+
+The winter is over, the days are getting longer and the town looks
+unusually pretty. You're taking a walk through its streets and trying
+not to think about politics and taxes and food supply and the guilds.
+Unfortunately, this moment of peace and quiet doesn't last for very long
+because even when you forget about all the problems, the problems don't
+forget about you. A messenger runs up to you and starts talking about
+CHARACTER2 *(doctor; also advisor?)* needing to see you in his office.
+Reluctantly, you stop admiring nature and go perform your duties.
+
+When you arrive, CHARACTER2 is examining a girl, maybe old enough to
+start going to school. Apparently, there's something unusual about
+her. She's pale and weak and dehydrated but that's not what's important,
+that's just minor food poisoning. The really interesting thing is that
+unlike everyone else born in the last couple of decades she's never been
+ill before - as if she didn't inherit the white plague *(maybe
+change the disease name?)*. This would be the first time someone like
+that was born here.
+
+CHARACTER2 admits that he took the liberty of sending a messenger to
+the University. The road there is long and their bureaucratic procedures
+are slow (everything there requires so many written documents, as if
+talking to people was not enough for them; how can they even get
+anything done?) but in a few months they'll probably send someone to
+look at the girl. This can bring us a substantial amount of moeny,
+provided we let her go to the University and the parent's don't protest
+too strongly.
+
+*(no choices here)*
+
 //todo everything
