@@ -34,14 +34,15 @@ into something more advantageous.
 
 *(choices:)*
 
-### 1. Go with CHARACTER1's scheme:
+### 1. Go with CHARACTER1's scheme.
 
 This may not be the most sophisticated fraud out there but it can work.
 As time goes on, you're starting to appreciate its elegant simplicity:
 selling bad knowledge to people who aren't knowledgeable enough to tell
 the difference. It's as if we introduced a tax on stupidity.
 
-*(unlocks building: **Knowledge Merchant** - gives money per turn)*
+*(unlocks building: **Knowledge Merchant** - gives money per turn,
+slightly lowers prestige)*
 
 ### 2. Why build false schools when we can build real ones?
 
@@ -65,6 +66,16 @@ workshops and factories from time to time, but we can live with that.
 
 *(unlocks building: **Trade school** - costs money per turn (less than
 in previous option), slightly increases prestige and decreases tech)*
+
+### 4. Ignore CHARACTER1's proposal
+
+A city making money from false schools? This has to be one of the worst
+ideas you've ever heard. It's too stupid too work, it's immoral and it
+just isn't how cities make money. If CHARACTER1 was the one in charge,
+our police would be participating in burglaries and robberies instead
+of stopping them.
+
+*(slightly increases safety)*
 
 Event 2
 -------
@@ -94,10 +105,62 @@ the University. The road there is long and their bureaucratic procedures
 are slow (everything there requires so many written documents, as if
 talking to people was not enough for them; how can they even get
 anything done?) but in a few months they'll probably send someone to
-look at the girl. This can bring us a substantial amount of moeny,
+look at the girl. This can bring us a substantial amount of money,
 provided we let her go to the University and the parent's don't protest
 too strongly.
 
 *(no choices here)*
+
+Event 3
+-------
+
+*(to trigger: ~1-2 years after Event 2)*
+
+Just when everyone was starting to forget about the whole thing,
+a thin, balding man carrying a large book arrives in town and starts
+asking about 'CHARACTER3, a child immune to the plague'. University
+might be slow but it's always reliable.
+
+After a lengthy medical examination, University man wants to have a word
+with you and the girl's parents. Beyond any doubt, CHARACTER3 is healthy
+and like every healthy child, she should leave for University as soon
+as possible. He promises a substantial reward for letting him take her.
+The parents protest - she's their only child, her place is with
+the family.
+
+*(choices:)*
+
+### 1. Send CHARACTER3 to University, share money with the parents.
+
+They raised the child, fed her, bought her clothes, spent what little
+money the had on her well-being. Their efforts will be rewarded as now
+they'll give CHARACTER3 something that few other children can dream of:
+a future. They'll also receive half of the University donation because
+while virtue might be its own reward, sometimes people need a more
+concrete incentive to do the right thing.
+
+*(gives money)*
+
+### 2. Send CHARACTER3 to University, threaten the parents.
+
+Their daughter can become a part of the country's most respected
+institution, their city can solve its financial problems and yet they
+can only think about themselves? This is not what a good citizen does.
+This is theft, plain and simple: stealing the child's future
+and stealing the town's prosperity! They'd better stop this behavior
+before you lock them up with all the other thieves!
+
+*(gives 2 x money from option 1.)*
+
+### 3. Allow the girl to stay in town
+
+What CHARACTER3 needs is a family, and her family is here. A bunch of
+pretentious academics will never be able to replace that. The child will
+stay here and you'll give her the best education you can. It won't
+be as good as what the University teaches (not even close) - but it
+will make both her and her parents happy. And the University will
+probably find some other healthy child anyway.
+
+*(CHARACTER3 loyalty +1)*
 
 //todo everything
