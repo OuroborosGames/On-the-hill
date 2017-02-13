@@ -171,6 +171,8 @@ Branch 1
 Event 4
 -------
 
+*(random)*
+
 A small group of factory workers comes to your office with a business
 proposal: if you give them a sufficiently large building and donate
 some old mechanical devices you have no need for, they'll make a museum
@@ -191,7 +193,71 @@ their fiction.
 *(unlocks building: **Museum of Technology** - gives money, slightly
 decreases tech)*
 
-//todo branch 1
+Event 5 Prologue
+----------------
+
+*(~2 years after Event 3)*
+
+You promised CHARACTER3's parents to give her the best education you
+can. It is time to make good on that promise.
+
+Event 5A
+--------
+*(immediately after Prologue, if at least 1 trade school built)*
+
+You think about your options. The guilds are very selective about who
+becomes their apprentice but you can use your political power to make
+them accept her. On the other hand, she can attend a public trade school
+- she won't learn as much as she would with the craftsmen but at least
+they won't try to indoctrinate them with their politics.
+
+### 1. Convince the guilds to take CHARACTER3 as an apprentice.
+
+You decide to put politics aside and ask the guilds for help. CHARACTER3
+will become an apprentice, learning everything she can about operating
+the machines and repairing them - and if she's good, maybe they'll even
+tell her how and why those machines work. You have your doubts about
+the last part though - you're not sure if even they know that much about
+what keeps their factories going.
+
+*(decreases CHARACTER3 loyalty)*
+
+### 2. Send CHARACTER3 to a trade school.
+
+CHARACTER3 will be allowed to attend one of the trade schools for free.
+She'll be given the same knowledge that everyone else receives but
+maybe her immunity to the white plague will make learning easier
+for her.
+
+Members of the guilds will be angry when they hear about it, but it's
+not like they can do anything about it. They might spread rumors about
+you and your city but this is yet another proof of how powerless they
+really are.
+
+*(increases CHARACTER3 loyalty)*
+
+Event 5B
+--------
+
+*(after Prologue if not 5A)*
+
+You don't really have much choice - the only people in the city
+qualified to teach the girl are craftsmen and factory workers. You spend
+two days going door to door and asking each and every one of them to
+take her as an apprentice and they keep refusing.
+
+Obviously, it's not that they don't actually want to teach her - a child
+who doesn't suffer from the white plague is a dream come true for them.
+But they know you have no other choice and they are ready to use that
+knowledge to their advantage.
+
+After many more days of frustration, you reach an agreement: CHARACTER3
+will learn from the best workers in each profession, but only after
+the city donates a generous amount of money to the guilds.
+
+*(decreases CHARACTER3 loyalty, costs a lot of money)*
+
+//todo more branch 1
 
 Branch 2
 ========
