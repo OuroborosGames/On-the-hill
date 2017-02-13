@@ -239,7 +239,7 @@ really are.
 Event 5B
 --------
 
-*(after Prologue if not 5A)*
+*(immediately after Prologue if not 5A)*
 
 You don't really have much choice - the only people in the city
 qualified to teach the girl are craftsmen and factory workers. You spend
