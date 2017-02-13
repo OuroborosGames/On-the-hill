@@ -1,4 +1,4 @@
-Prerequisites: very low technology stat
+Prerequisites: very high technology stat
 
 Intro (show when entering this plot branch)
 -------------------------------------------
