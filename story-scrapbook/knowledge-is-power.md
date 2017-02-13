@@ -163,4 +163,39 @@ probably find some other healthy child anyway.
 
 *(CHARACTER3 loyalty +1)*
 
-//todo everything
+Branch 1
+========
+
+*This is what happens when CHARACTER3 stays in your city.*
+
+Event 4
+-------
+
+A small group of factory workers comes to your office with a business
+proposal: if you give them a sufficiently large building and donate
+some old mechanical devices you have no need for, they'll make a museum
+of technology and engineering to talk to the citizens about how
+wonderful and amazing all those machines are.
+
+To be completely honest, you don't see how anyone could learn anything
+from such a museum. Those workers don't seem too bright or
+knowledgeable, although they're definitely passionate (maybe event too
+passionate - in a way, they remind you of religious zealots). After
+you question them a bit, they admit that they weren't really good at
+their jobs so their guild came up with the idea of a museum to let them
+earn money elsewhere, without getting in the way of the actual work.
+Still, they do seem to be pretty good speakers so maybe they will manage
+to captivate the audience the same way some of the storytellers do with
+their fiction.
+
+*(unlocks building: **Museum of Technology** - gives money, slightly
+decreases tech)*
+
+//todo branch 1
+
+Branch 2
+========
+
+*This is what happens when CHARACTER3 leaves for University.*
+
+//todo branch 2
