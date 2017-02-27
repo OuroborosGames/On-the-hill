@@ -278,6 +278,59 @@ member)* about the issue. Predictably, she doesn't say much. The only
 concrete information you can get is that it has something to do with
 'the CHARACTER3 affair', but it's not like it clarifies anything.
 
+*(slightly decreases prestige)*
+
+Event 7
+-------
+
+*(random)*
+
+Today, you have spent the whole day in your office. Ordinary citizens,
+laborers, merchants, guild members, police officers, doctors - everyone
+had something important to discuss with you. It is evening now and
+you're ready to go home and finally get some sleep when once again
+someone knocks on your door. With a resigned sigh, you tell the citizen
+to enter.
+
+Things soon go from bad to worse - it's not just someone with a strong
+opinion about noise or alcohol or taxes, it' CHARACTER2. You prepare
+yourself for a long debate on the plague, the gods and the unknown. For
+a few minutes, this is exactly what happens but to your surprise,
+instead of going on for a few hours he steers conversation in
+a different direction. Apparently, he thinks that the plague, the gods
+and the unknown are what CHARACTER3 needs to learn about if she's to
+fully realize her potential, and he's the best person to teach her about
+those things.
+
+### 1. Let CHARACTER2 educate the girl
+
+For all his eccentricities, CHARACTER2 knows a lot about medicine -
+maybe as much as some of the professors at the University. And sure, his
+ideas are not conventional - but it seems that the whole world is now
+different from what we thought it is, so maybe those ideas have some
+truth to them.
+
+You let the old doctor educate the girl. He's delighted to find someone
+who actually wants to listen to him - maybe because she's too young and
+inexperienced to recognize his insanity or maybe because she was born
+and raised after the white plague and therefore doesn't think in terms
+of the old world's rules. Unfortunately, he becomes so absorbed by his
+responsibilities as a teacher that he seems to forget that he's supposed
+to care for the ill and take part in council meetings.
+
+*(increases CHARACTER3 loyalty, decreases health)*
+
+### 2. Refuse
+
+You try to think of a convincing excuse and end up arguing that right
+now CHARACTER3 must focus on understanding the intricacies of mechanical
+engineering and learn how to repair trains. This, of course, isn't true,
+but if it was possible to reason with him then he'd stop trying to
+uncover the hidden truth (or whatever it is he's looking for) when it
+became apparent that he's confusing knowledge with the legends he heard
+on some remote desert. And what CHARACTER3 needs is real knowledge,
+not legends and fairy tales.
+
 Branch 2
 ========
 
