@@ -259,6 +259,25 @@ the city donates a generous amount of money to the guilds.
 
 //todo more branch 1
 
+Event 6
+-------
+
+*(~1 year after Event 5)*
+
+The rich citizens are complaining that the guilds are taking in less
+apprentices than they used to, and that the quality of education they
+receive has gone down significantly (it seems that they now spend less
+time teaching practical skills, instead focusing on attempts to turn
+factory work into some kind of philosophy). You try to explain that you
+don't really have much power over the guilds and their recruitment
+process but despite your best efforts you also don't have much power
+over the emotions of your citizens. In other words, they get angry.
+
+During the next council meeting, you ask CHARACTER4 *(advisor, guild
+member)* about the issue. Predictably, she doesn't say much. The only
+concrete information you can get is that it has something to do with
+'the CHARACTER3 affair', but it's not like it clarifies anything.
+
 Branch 2
 ========
 
