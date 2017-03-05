@@ -331,6 +331,47 @@ became apparent that he's confusing knowledge with the legends he heard
 on some remote desert. And what CHARACTER3 needs is real knowledge,
 not legends and fairy tales.
 
+Event 8
+-------
+
+*(random; prerequisite: at least one Museum of Technology)*
+
+A group of well-dressed men arrives in your office. You do not recognize
+them until they start talking: they may not look like themselves without
+the factory worker's protective clothing but when they talk about
+the machines the way religious people talk about their gods, you realize
+that they're the workers who wanted to build the museum.
+
+Apparently, Museum of Technology is a great success. People are always
+coming to see the machines and hear about their greatness, and they're
+always willing to pay. They claim that it's not just about the money
+though: they want people to know the truth. Of course, the one who needs
+it the most is CHARACTER3 - and they're willing to let her learn for
+free.
+
+### 1. Agree
+
+You send CHARACTER3 to Museum of Technology. After one visit, she keeps
+going there a few times a month. Unfortunately, she doesn't seem to
+learn anything about the machines there - the only thing she talks about
+after going there is some strange, rambling philosophy. After a while,
+you decide that it's just a waste of her time and forbid her from
+visiting the museum, hoping to replace it with something more
+educational. Unfortunately, it seems that the hours she spent listening
+to those lunatics have affected her - she seems to believe that
+the machines are alive, powerful and terrifying.
+
+*(decreases CHARACTER3 loyalty)*
+
+### 2. Disagree
+
+If they want to preach their insane philosophy and pretend they're
+teaching something useful, they're free to do that - but CHARACTER3
+needs something better than this. You tell them that if the guilds want
+her to learn, they'd better offer her some real knowledge instead of
+cheap tricks designed to fool people into thinking that they're wiser
+than they really are.
+
 Branch 2
 ========
 
