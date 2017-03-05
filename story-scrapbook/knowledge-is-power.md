@@ -372,6 +372,26 @@ her to learn, they'd better offer her some real knowledge instead of
 cheap tricks designed to fool people into thinking that they're wiser
 than they really are.
 
+Event 9
+-------
+
+*(random; prerequisite: at least one library)*
+
+When analyzing the city's expenses, you notice that you're spending
+quite a bit more money on a building that is of use to absolutely
+nobody: the library. Just what the hell where you thinking when you
+decided to build this thing?
+
+You're about to order some workers to demolish it until you realize
+that maybe it isn't so useless after all. Maybe CHARACTER3 can dig
+through the books that gather dust there, maybe she can understand
+the words on their pages and maybe, just maybe, among the piles
+of boring diaries, useless government records from previous centuries
+and the works of barely talented storytellers, she will find something
+that she needs.
+
+*(increases CHARACTER3 loyalty)*
+
 Branch 2
 ========
 
