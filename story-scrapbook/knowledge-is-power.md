@@ -392,6 +392,60 @@ that she needs.
 
 *(increases CHARACTER3 loyalty)*
 
+Event 10
+--------
+
+*(random; prerequisite: at least one factory)*
+
+In the last few weeks, CHARACTER4 hasn't been coming to the council
+meetings. You find it strange - she never misses the meetings.
+CHARACTER1? Sure, he's often too busy with his schemes of dubious
+profitability and dubious legality. CHARACTER2? Of course, he tends to
+get lost in his research. Everyone has a personal life, a day job
+or just a personal project they're passionate about - some even have
+all three. That is, everyone but CHARACTER4 - her entire life revolves
+around giving the guilds a voice in the city's bureaucracy. Her absence
+seems suspicious.
+
+*(decreases CHARACTER3 loyalty regardless of choice)*
+
+### 1. Investigate
+
+With the help of a few trusted policemen, you manage to find out that
+CHARACTER4 is now spending a lot of time at the factory. This is weird
+as she never even worked there - before her involvement in city politics
+and guild scheming she was a watchmaker with a small workshop.
+On the other hand, it's not something that could warrant official police
+involvement, especially if you don't want to anger some powerful people.
+
+You decide to solve the issue outside of the official channels: you'll
+just take a casual morning stroll down the streets near the factory
+and 'accidentally' meet her on the way there. Surprisingly, this works.
+Even more surprisingly, she's not alone when you meet her. She's with
+CHARACTER3.
+
+Before you even ask the question, she starts to explain how extremely
+sorry she is not to be able to attend the meetings. She then angrily
+describes how inadequate CHARACTER3's education is and how she needed
+to take matters into her own hands until all the incompetent people
+around her manage to absolutely and irreversibly ruin the child's
+potential. After what feels like an hour of complaints about you,
+the teachers and the guilds she runs off with the girl while talking
+about practical, real-world knowledge.
+
+### 2. Ignore
+
+Who are you to intrude on other people's lives? Maybe she went back
+to watchmaking, maybe she's busy with the internal politics of
+the guilds, maybe she even fell in love - that is, with a person, not
+with trying to get you to give money for new factories or lower taxes
+on gears and springs. Besides, it's not like you really miss her.
+The council could do with less guild influence right now.
+
+For some time, you can work in relative peace. Unfortunately, this
+doesn't last very long as in a few weeks she's back at the council
+meetings - and she has a lot to say about taxes and subsidies.
+
 Branch 2
 ========
 
