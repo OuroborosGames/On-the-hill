@@ -502,6 +502,20 @@ without killing any patients.
 
 *(decreases CHARACTER3 loyalty, increases prestige)*
 
+Event 12
+--------
+
+*(random)*
+
+When taking a walk through the streets of your city, you decide
+to take CHARACTER3 with you. You tell her all that you know about
+architecture and history of each building you pass on your way. The girl
+seems interested in the topic, asking many difficult questions which
+make you doubt your urban planning skills. Maybe it's CHARACTER3 who
+would do better as the mayor?
+
+*(increases CHARACTER3 loyalty)*
+
 Branch 2
 ========
 
