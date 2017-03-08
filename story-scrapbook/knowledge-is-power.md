@@ -446,6 +446,62 @@ For some time, you can work in relative peace. Unfortunately, this
 doesn't last very long as in a few weeks she's back at the council
 meetings - and she has a lot to say about taxes and subsidies.
 
+Event 11
+--------
+
+*(random)*
+
+When things go wrong, they never have the decency to go wrong one at
+a time. A few days ago, there's been a big food poisoning so CHARACTER2
+was forced to temporarily forget about the less important matters like
+his council duties, his occult research or sleep. Yesterday, some
+merchants got angry at CHARACTER1 because he allegedly didn't fulfill
+his contractual obligations and now he has to run around the market,
+selling all his valuables to be able to pay them back. A few hours ago,
+CHARACTER5 *(advisor, policeman)* has left the council meeting in
+a hurry because the angry merchants were trying to take out their
+frustration on doctors who tried to prevent people from dying of food
+poisoning. Somewhere along the way, CHARACTER3's current teacher became
+temporarily unable to work (this may or may not be related to food
+poisoning, violence or both) while you're trying to control
+the situation.
+
+### 1. Teach the girl yourself
+
+You decide to give the girl a lesson in local politics and dealing with
+emergency situations. Unfortunately, your multitasking skills are not
+good enough to prevent the city from descending into chaos while at
+the same time teaching someone about the complexity of preventing
+the city from descending into chaos. Obviously, this causes the city
+to descend into chaos as the sight of angry merchants assaulting
+police officers manages to draw random small-time criminals into
+the fight (it doesn't matter why there's a fight as long as you can
+punch the man who caught you stealing) and the doctors' attempts at
+dealing with the poisoning are interrupted by the need to deal with
+their own wounds. Still, CHARACTER3 will probably learn a lot from this
+situation.
+
+*(increases CHARACTER3 loyalty, decreases health and safety)*
+
+### 2. Focus on preventing the disaster
+
+You decide to let someone else take care of the girl while you prevent
+the city from descending into chaos. Because everyone else is also
+preoccupied with preventing the city from descending into chaos,
+the only person who has time to be a teacher right now is CHARACTER4
+(she doesn't seem to care that much about rioting and disease as long
+as workshops and factories are not suffering), always eager to impart
+carefully selected, guild-approved knowledge upon CHARACTER3.
+
+This division of responsibilities seems to work well: CHARACTER4 stops
+complaining about your policies for a while, CHARACTER3 gets to learn
+something and you manage to use all your diplomatic skills to a great
+effect - in the end, the merchants are happy, CHARACTER1 is only
+slightly more broke than he usually is and the doctors do their job
+without killing any patients.
+
+*(decreases CHARACTER3 loyalty, increases prestige)*
+
 Branch 2
 ========
 
