@@ -516,6 +516,174 @@ would do better as the mayor?
 
 *(increases CHARACTER3 loyalty)*
 
+Event 13
+--------
+
+*(random; prerequisite: at least one trade school)*
+
+During an otherwise boring day in the city hall, the peace gets suddenly
+interrupted by a loud argument between CHARACTER2 and CHARACTER4.
+When you try to find out what's happening, they insist that it's just
+a philosophical debate about the importance of different areas
+of knowledge.
+
+Before you manage to get away, the council members demand that you
+solve the conflict. According to CHARACTER2, we should learn about life
+(human or otherwise), death, everything in between and the processes
+behind them. CHARACTER4, on the other hand, prefers to focus on
+the energies which push both living beings and inanimate objects forward
+- she thinks there's nothing special about this 'life' and that to push
+forward, we need to think in more general terms instead of limiting
+ourselves to our own point of view.
+
+### 1. Life is more important
+
+You say that we're living creatures and our inner workings are
+the source of our problems - but understanding them is the solution.
+Knowing about the lives of plants and animals will help us grow the food
+we need to continue our own lives, and knowing how we ourselves work
+can save us from deadly diseases.
+
+Hearing this, CHARACTER4 becomes angry. It appears that the whole debate
+was a wager - she wanted to use CHARACTER2's old gambling habit against
+him but she bet on the wrong horse. Interestingly, the loser has to give
+away not the money but the influence over what's taught in the city's
+trade schools. From now on, they're going to be more medical than
+technical.
+
+*(increases health and CHARACTER1 loyalty, decreases technology)*
+
+### 2. Only the energies matter
+
+You say that CHARACTER2's spiritual beliefs are wrong - life is nothing
+more than a consequence of how the natural energies work. If we focus
+on it, we miss the bigger picture - but if we look at what's common
+to everything in the world, we can learn more not only about plants
+and animals but also about mountains and rivers and stars and machines.
+
+After you finish, CHARACTER4 smiles. It appears that the whole debate
+was a wager - she wanted to use CHARACTER2's old gambling habit against
+him, and she succeeded. Interestingly, the loser has to give
+away not the money but the influence over what's taught in the city's
+trade schools. From now on, they're going to be more medical than
+technical.
+
+*(decreases health and CHARACTER1 loyalty, increases technology)*
+
+### 3. Art and history matter more than life and energies
+
+Clearly, they're both wrong. The most important things are not the ones
+that were given to us but those we create. We must learn from both
+good and bad examples set by the previous generations, and we must
+make the world more interesting and more beautiful. It's a good thing
+that we want to know and understand, but we also shouldn't forget to
+create and experience.
+
+Neither the doctor nor the watchmaker are impressed by your speech.
+In retrospect, it might have been better suited for a cafe full
+of artists than an office full of bureaucrats.
+
+*(increases prestige)*
+
+Event 14 Part 1
+---------------
+
+*(~12 years after event 5)*
+
+You find yourself inside a large factory hall. Everything seems wrong:
+through the windows, you see that it's night - but there are people
+here. Despite the noise from the machines, everyone behaves as if it was
+a high-class party - they're dressed in their best clothes, they drink
+expensive alcohol and they're talking about things so meaningless
+that even the most boring, self-absorbed socialite would not be able
+to stand them for too long.
+
+Seemingly out of nowhere, CHARACTER4 comes up to you. She tells you
+that you should be proud - you've been invited to the guilds' secret
+ball, and that you're the first person from outside of the guilds to be
+there. When you try to find out how did you actually get there, she
+only says that you shouldn't worry about it and try to make powerful
+friends.
+
+### 1. Try to find business opportunities
+
+The whole situation seems completely absurd to you. Why organize a ball
+inside of a factory? Why make it secret? Why are you here and how did
+it happen? This doesn't matter though: the important thing is that
+there are high-ranking guild members out there, and that means there's
+money to be made.
+
+You make your way towards people who are loud but don't have anything
+interesting to say and those who put on as much expensive jewelry
+as possible without thinking of how good or bad it looks: those who
+have money but lack common sense. You drink, but not too much.
+
+In the end, you make some great deals - that is, they're great for you
+and the city but not necessarily for the other side of the contracts.
+You try to justify such unfair outcome with the guilds' countless
+schemes against you.
+
+*(gives a lot of money)*
+
+### 2. Try to have fun
+
+People tend to think that diplomacy is boring when in reality it's
+anything but. Lengthy formal meetings aren't very interesting, sure,
+but they're mostly a facade you put up in front of both your superiors
+and the general public. Real diplomacy often happens during dinners,
+parties and balls which start off not unlike those meetings but get less
+formal as time goes on.
+
+You drink. You talk. You dance. You drink some more. You learn a few
+secrets, some more damaging than others. You drink even more, which
+makes your memories of the night a bit unreliable. You're sure you've
+been trying to seduce somebody, and you think you were in a fight or two
+- but you don't remember the results.
+
+In the end, you gain a few friends, some enemies and a terrible
+hangover. You get introduced to the emerging elite, which you will soon
+introduce to the old elite. The city's social life just became much
+more interesting.
+
+*(gives a lot of prestige)*
+
+### 3. Observe
+
+There's so much noise in here - not just when it comes to sounds
+(although there's plenty of that too, due to both the machines and all
+the discussions about nothing), it seems that all your senses are
+bombarded with meaningless distractions. You try to filter all those
+out and focus on what's important.
+
+You know it's not the machines, not the alcohol, not
+the workers-turned-socialites. What is it then? In a corner, you notice
+a man surrounded by a small group of workers. They talk about something,
+and it somehow seems more serious than the deafening smalltalk around
+you. They're focused and sober, they don't try to impress anyone with
+displays of wealth - it seems they just have something more important
+to do.
+
+*(go to event 14 part 2)*
+
+### 4. Leave
+
+You don't know how you got here but you know how you're going to get
+out. You ignore the party and start walking towards the door. When
+someone offers you a drink, you take it without stopping. After
+what feels like eternity, you make your way through the crowd and leave
+the building.
+
+It's quite outside, despite the fact that a few guild members who had
+too much to drink are desperately fighting an uneven battle against
+the gravity. You walk home and when you're there, you fall asleep
+quickly.
+
+In the morning, you're not sure whether anything really happened - it
+might as well have been a strange dream. There's only one thing you're
+certain about - if the guilds are so busy organizing lavish parties
+and keeping them secret, they're going to go bankrupt before they
+become a real threat to you.
+
 Branch 2
 ========
 
