@@ -876,6 +876,155 @@ and the city council while praising the guilds, claiming they saved
 her from the ignorance and darkness. But the dark days will be over
 soon as she'll bring back the light and make the city see the truth.
 
+Event 16
+--------
+
+*(~2 years after event 15)*
+
+A strange, new religion appears in the city. Its adherents believe that
+the gods do not exist yet and that they need to be created by men,
+and that the creation of gods is opposed by demons who try to prevent it
+by spreading the white plague. Designing, assembling and maintaining
+complex mechanical devices is seen as the divine duty, although only
+the select few are allowed to do so - the unworthy will always introduce
+flaws into the design, delaying the gods' arrival.
+
+A central figure in the cult's mythology is The Enlightener who is
+supposed to build the first generation of gods in the form of light
+sources which, when looked at, allow people to see the designs
+of greater gods. All faithful must protect The Enlightener as the demons
+will be constantly attempting to kill him and if he dies, it won't
+be possible to build gods until the next Enlightener is born after
+a hundred years.
+
+*(slightly reduces prestige)*
+
+ENDING 1
+--------
+
+*(5 years after 15 A)*
+
+In the coming years, the city's political landscape changes. The machine
+worshippers become a significant religion, at one point gaining more
+followers than any of the more traditional churches. Most of
+the faithful have a guild background, with most of the higher offices
+taken by high-ranking guild members. The high priest, CHARACTER6,
+encourages workers to build shrines inside workshops and factories
+as he thinks that work and worship are deeply connected.
+
+The cult's success doesn't last long. As the guilds gradually turn
+into religious organizations, the output of the factories slows down
+and rich citizens start enrolling their children into trade schools
+instead of begging for apprenticeship. CHARACTER3 distinguishes herself
+as the teacher, with the alumni of those schools seeing her as an almost
+legendary figure: a woman who cheated the white plague, acquired
+knowledge without the help of the University and in the end used it not
+for her personal gain but to help fellow citizens.
+
+Your career as the mayor doesn't last much longer. After the influence
+and wealth of the guilds fade, the popular view of them becomes much
+more negative: they're seen as an evil secret society for the rich,
+always scheming to gain more power and secretly worshipping unknown
+gods. In this light, your choice of council members suddenly becomes
+suspect: CHARACTER4's membership in the watchmakers' guild results in
+multiple conspiracy theories and CHARACTER2's occult interests (despite
+how different they are from the machine worship) also don't make him
+too popular.
+
+As the situation starts getting out of hand, you resign from your
+position. CHARACTER3 takes your place and to avoid bloodshed, decides
+to exile everyone with connections to guilds, machine worship or
+the council. Everyone, that is, except of you. As a gesture of
+gratitude, you stay in the city and even become one of her advisors.
+
+Under CHARACTER3's rule, the city becomes renowned for its education
+system. As the trade schools expand, she decides to build a higher
+education institution known as the Polytechnic. While it never becomes
+as renowned as the University, its acceptance of those affected by
+the white plague turn it into the country's primary source of skilled
+workers. The city prospers.
+
+ENDING 2
+--------
+
+*(5 years after 15 B)*
+
+In the coming years, the city's political landscape changes. The machine
+worshippers become a significant religion, at one point gaining more
+followers than any of the more traditional churches. Most of
+the faithful have a guild background, with most of the higher offices
+taken by high-ranking guild members. The high priest, CHARACTER6,
+encourages workers to build shrines inside workshops and factories
+as he thinks that work and worship are deeply connected.
+
+Despite her protests, the machine cult starts worshipping CHARACTER3
+as The Enlightener. This causes a small sect to break off from the group
+under CHARACTER4's leadership. After a mysterious explosion in one of
+the factories kills CHARACTER2, the cult is blamed for her death.
+The cult's orthodox branch reacts violently, with CHARACTER4 being
+the only survivor as she managed to run away from the city before
+the purge. Some say this was all planned beforehand, and that
+the inner conflict was only an excuse to start riots.
+
+You never find out the truth. After the sect is dealt with, the rioting
+cultists start looking for another scapegoat and unfortunately, that
+scapegoat happens to be you. As the rioters storm the city hall, you
+find yourself in an uncomfortable proximity of their knives. You don't
+survive.
+
+Your death prevents you from seeing the city turned into a technological
+theocracy. CHARACTER6 takes the position of the mayor, although he's
+never referred to as such - after all, he's a priest, not a politician.
+After the riots end, the guilds once again start taking in new
+apprentices and new factories are getting built. In a few years,
+the city itself becomes a big factory. Travellers and merchants avoid
+it but the national government sees its value and decides to tolerate
+the religious symbols on the machine parts it produces as long as they
+work. Like the machine from before the plague, the factory city becomes
+something that everyone relies on yet no-one understands.
+
+
+ENDING 3
+--------
+
+*(5 years after 15 C)*
+
+In the coming years, the city's political landscape changes. The machine
+worshippers become a significant religion, at one point gaining more
+followers than any of the more traditional churches. Most of
+the faithful have a guild background, with most of the higher offices
+taken by high-ranking guild members. The high priestess, CHARACTER3,
+is worshipped as The Enlightener and she encourages members of the cult
+to spread their faith across the world.
+
+As time goes on, the cult becomes more and more violent. At first, it's
+an internal conflict as The Enlightener accuses CHARACTER6, the former
+high priest, of lack of faith. He is soon found dead, crushed between
+the gears of an enormous machine. Similar fate happens to priests of
+other, more traditional religions, which leads to an investigation by
+the police. This does not end well for the police force which is soon
+wiped out by the cultists.
+
+Without the police to keep peace, the cult takes over the city. Their
+reign is a violent one, with dissidents executed publicly by
+the terrifying Punishment Machine which now stands on the main square.
+This almost happens to you, although you're saved by the intervention
+of The Enlightener's most trusted advisor: CHARACTER4 who first
+introduced her to the guilds. Your punishment is changed from death
+to exile, which also becomes the fate of your saviour as The Enlightener
+cannot surround herself with people who question her decisions.
+
+You spend the rest of your life as a storyteller specializing in factual
+accounts of your city's history. The tale of how you lost power to
+a strange cult becomes more famous as the city declines (it seems that
+the more people get executed or exiled, the less people there are to
+work on all those 'divine' mechanisms) and the University pays to tell
+it to its students. The professors emphasize that you decided against
+sending CHARACTER3 to the University and use it as a cautionary tale:
+knowledge is power, the powerful will abuse their power if they don't
+receive proper guidance and nobody is as good at giving that guidance
+as the University.
+
 Branch 2
 ========
 
