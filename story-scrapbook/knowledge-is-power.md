@@ -673,7 +673,7 @@ someone offers you a drink, you take it without stopping. After
 what feels like eternity, you make your way through the crowd and leave
 the building.
 
-It's quite outside, despite the fact that a few guild members who had
+It's quiet outside, despite the fact that a few guild members who had
 too much to drink are desperately fighting an uneven battle against
 the gravity. You walk home and when you're there, you fall asleep
 quickly.
@@ -683,6 +683,198 @@ might as well have been a strange dream. There's only one thing you're
 certain about - if the guilds are so busy organizing lavish parties
 and keeping them secret, they're going to go bankrupt before they
 become a real threat to you.
+
+Event 14 Part 2
+---------------
+
+*(immediately after part 1; only if chose 'observe')*
+
+As you approach the small gathering of guild members, it begins
+to disperse slowly until only the man in the center of it all remains.
+He smiles and introduces himself as CHARACTER5 *(should NOT appear 
+in any other stories unless maybe in a very minor role)*. After a bit of
+smalltalk that was so brief it could as well be nonexistent, he steers
+the discussion towards politics.
+
+Unlike CHARACTER6, he seems mostly uninterested in taxes and subsidies.
+His interests are long-term: he talks about the white plague and how it
+makes the organization of skilled workers into communities essential
+to prevent the society from reverting to a more primitive state. He
+praises the relationship between master and apprentice and criticizes
+the school system as something that can't succeed in the new world.
+Surprisingly, he also has a lot to say about religion: at first he seems
+to repeat the ideas popular among the revolutionaries (the concept of
+myths being used by those in power to promote social order which is
+beneficial to them, the similarities between hierarchies of church
+and state) but then he starts talking like a conservative, arguing that
+there needs to be order, even if it's artificial. In the end, he
+distances himself from that point of view as well by claiming that all
+the contemporary religions are dying as their holy books are slowly
+but surely becoming forgotten - and without them, the gods are too
+distant to strike fear into people's hearts.
+
+After a long discussion, he recites an old saying about the one-eyed
+in the kingdom of the blind. He then follows it up by asking what should
+the one-eyed king do when he sees someone with two eyes. He disappears
+before you can answer.
+
+### 1. Try to find him
+
+Once again, you try to filter out all the noise and look for what's
+important. Unfortunately, it seems that nothing is. You walk around
+the factory hall, trying to find the strange man with a lot to say about
+politics and religion but it looks like he simply vanished. After
+an hour, you get visibly frustrated. After two, your behavior starts
+bothering the guild members and you get asked to leave.
+
+*(decreases prestige slightly)*
+
+### 2. Try to forget about the encounter
+
+You're not sure why but you find the whole situation unsettling. It's
+clear that the man has his own agenda, and as is always the case with
+the guilds, his agenda is different from your own. Suddenly, the whole
+factory appears more hostile than it used to be and the unclear
+circumstances under which you ended up here are making it much worse.
+You decide that the only cure for this is alcohol.
+
+In the morning, you wake up with a terrible hangover. The memories are
+hazy but you're pretty sure you were talked into agreeing to some
+horrible business proposal by an owner of one of the factories.
+
+*(takes away some money)*
+
+### 3. Leave
+
+You're not sure why but you find the whole situation unsettling. It's
+clear that the man has his own agenda, and as is always the case with
+the guilds, his agenda is different from your own. Suddenly, the whole
+factory appears more hostile than it used to be and the unclear
+circumstances under which you ended up here are making it much worse.
+You decide it's better to just leave this place.
+
+
+Event 14 Epilogue
+-----------------
+
+*(1 turn after part 2, regardless of choice)*
+
+You keep thinking about the guilds' secret ball and your discussion
+with CHARACTER6. It's obvious that he's planning something, and that
+it will not end well for you.
+
+You try to remember the details of the conversation. He liked
+the idea of religious institutions but he was not a believer and he was
+critical of the church. He didn't like trade schools. He was interested
+in the white plague. What should you do about it - and isn't it too
+late?
+
+### 1. Give money to the churches
+
+A man who doesn't believe in a god and doesn't like any existing church
+but thinks that some form of religion is necessary has to be an aspiring
+cult leader - and the thing about cults is that they prey on
+the weakness of bigger churches. You have to fight fire with fire: if
+the churches become more important in people's lives, there will be no
+interest in strange cults. The guilds are rich, and money is how they
+will influence the public - therefore, churches must become even richer.
+
+*(takes away a lot of money, increases prestige slightly)*
+
+### 2. Invest in education
+
+CHARACTER5 thinks that the best way to teach people is by making them
+apprentices, but the guilds haven't been taking in new apprentices for
+years. Obviously, they're trying to control who and when gets educated.
+The solution is simple - the city must hire teachers, and those teachers
+must teach everyone. The young and the old, the rich and the poor,
+everyone has to become knowledgeable enough for the guilds to be unable
+to control the knowledge.
+
+*(takes away a lot of money, increases tech slightly)*
+
+### 3. Isolate CHARACTER3 from the guilds
+
+Whatever CHARACTER6's plan is, it relies on people having the white
+plague. There's one person in the city who doesn't suffer from it, and
+she must be protected at all costs. Maybe they'll try to kill her, maybe
+they'll try to make her one of them - it doesn't matter, they won't be
+able to do that. At least not until she becomes an adult in the eyes
+of the law (which is unfortunately very soon).
+
+*(increases CHARACTER3's loyalty)*
+
+### 4. Strike against the guilds directly
+
+You don't need to know the details of the plan to stop it. The guilds
+are powerful because they have money and they have money because of
+workshops and factories. From now on, those will become much less
+profitable as you go against CHARACTER4's every wish by raising taxes
+on all the mechanisms and by withdrawing all the subsidies you gave
+to the industry.
+
+*(gives some money, decreases tech a lot)*
+
+### 5. Do nothing
+
+CHARACTER6 is playing games with you. He wants you to waste time and
+money figuring out his plan and trying to stop it - but he wouldn't do
+that if the plan hasn't been already put in motion. It is too late to
+change the outcome - you will win if you prepared yourself, you will
+lose if you didn't.
+
+Event 15 A
+----------
+
+*(1 year after event 14 part 1; prerequisite: at least 1 trade school,
+CHARACTER3 loyalty at 3 or more)*
+
+A small crowd has gathered in the city hall. It is CHARACTER3's
+graduation ceremony, and it might not look like what they have at
+the University but it sure feels this way to everyone in the room.
+The young woman's parents make a big speech, thanking everyone who ever
+taught the girl. CHARACTER3 also makes a speech, praising the city's
+efforts to educate her without separating her from her family. She ends
+the monologue by announcing that she wants to share her knowledge with
+everyone else and that she's going to become a teacher in one of
+the city's trade schools.
+
+Event 15 B
+----------
+
+*(1 year after event 14 part 1; prerequisite: no trade schools,
+CHARACTER3 loyalty at 3 or more)*
+
+A small crowd has gathered in the city hall. It is CHARACTER3's
+graduation ceremony, and it might not look like what they have at
+the University but it sure feels this way to everyone in the room.
+The young woman's parents make a big speech, thanking everyone who ever
+taught the girl. CHARACTER3 also makes a speech, praising the city's
+efforts to educate her without separating her from her family. She ends
+the monologue by announcing that she is going to join the engineers'
+guild to work on the machines that will improve our lives.
+
+Event 15 C
+----------
+
+*(1 year after event 14 part 1; prerequisite: CHARACTER3 loyalty at less
+than 3)*
+
+Once again, you find yourself inside a large factory hall. It is
+different this time: the crowd of well-dressed guild members is not
+having a party, they're listening to someone giving a speech. You move
+to the front and notice that the speaker is CHARACTER3. She's standing
+on a raised platform and she's dressed in what at first appears to be
+factory workers' protective clothing but is in fact purely decorative:
+the fabric is too light to protect her from anything and she has a lot
+of jewelry that is against every safety code you've ever heard of.
+You realize that this is a ceremonial costume.
+
+CHARACTER3 speaks loudly, almost shouting - maybe for dramatic effect,
+maybe to be heard over the noise of the machines. She criticizes you
+and the city council while praising the guilds, claiming they saved
+her from the ignorance and darkness. But the dark days will be over
+soon as she'll bring back the light and make the city see the truth.
 
 Branch 2
 ========
