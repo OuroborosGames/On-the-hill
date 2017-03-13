@@ -1030,4 +1030,37 @@ Branch 2
 
 *This is what happens when CHARACTER3 leaves for University.*
 
+Event 17
+--------
+
+*(~3 months after event 3)*
+
+Recently, the atmosphere during the city council meetings has grown
+hostile. CHARACTER1 keeps arguing that the money received from
+the University needs to be 'invested' in one of his schemes. CHARACTER5
+thinks that we should increase police funding instead - apparently, this
+is necessary to successfully investigate fraudulent investment
+opportunities which used to prey on naive citizens but are now
+threatening to steal money from the city. CHARACTER2 opposes the idea,
+claiming that even now our hospitals have trouble dealing with sick
+and wounded and they won't be able to deal with even more criminals
+beaten up by the policemen or vice versa.
+
+Curiously, while everyone seems to have a strong opinion one way or
+the other, CHARACTER4 is mostly silent. You'd expect her to be the first
+to participate, painting a bleak picture of the future that will come if
+you don't subsidize new workshops and factories but no, instead of
+trying to scare you with the vision of a next generation living in caves
+and failing to understand fire she's just sitting in a chair and doing
+nothing.
+
+When you ask her about her opinion, she says it doesn't matter.
+The guilds are not happy with your decision to send CHARACTER3 to
+the University and the production is suffering as a result. You ask
+how exactly does a little girl leaving the town affect the output of
+the factories. She mutters something about lost opportunities and goes
+back to staring out of the window.
+
+*(slightly decreases tech)*
+
 //todo branch 2
