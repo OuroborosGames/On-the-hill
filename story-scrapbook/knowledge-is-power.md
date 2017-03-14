@@ -257,8 +257,6 @@ the city donates a generous amount of money to the guilds.
 
 *(decreases CHARACTER3 loyalty, costs a lot of money)*
 
-//todo more branch 1
-
 Event 6
 -------
 
@@ -1063,4 +1061,26 @@ back to staring out of the window.
 
 *(slightly decreases tech)*
 
-//todo branch 2
+Event 18
+--------
+
+*(~2 years after event 17)*
+
+It appears that after throwing a completely pointless fit for two whole
+years, the leaders of the guilds have finally started to stop acting
+like children and actually do something for the good of the city.
+Unexpectedly, they have started taking in more apprentices and they even
+made the whole system more friendly towards the poorer citizens -
+the teacher now has to share profits with the apprentice instead of
+'paying' by allowing him the access to workshop and tools.
+
+While CHARACTER4 claims it's all done for the greater good, you have
+a feeling that there's something shady about the whole affair. Guilds
+are not charities - they want money and power for themselves, and if
+they're pretending to be altruist, it has to be because their plans
+require them to look good in the eyes of ordinary citizens. It's all
+politics, plain and simple.
+
+*(increases tech and prestige)*
+
+//todo more branch 2
