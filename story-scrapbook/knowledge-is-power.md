@@ -1083,4 +1083,51 @@ politics, plain and simple.
 
 *(increases tech and prestige)*
 
+
+Event 19
+--------
+
+*(random)*
+
+A small group of factory workers comes to your office with a business
+proposal: if you give them a sufficiently large building, they'll make
+a museum of technology and engineering to explain the inner workings of
+all those complex machines to the common man.
+
+The whole thing seems almost to good to be true: the guilds will supply
+the museum with machines and skilled, experience workers will volunteer
+to run it. When you try to find out where's the catch, they admit that
+they also want you to volunteer to spend some of the city's budget
+to maintain it. You see, this is not supposed to be a business, there's
+no direct monetary gain to be had. The real purpose is to educate
+the citizens, not to put money in someone's pocket.
+
+### 1. Agree
+
+Since the white plague, the education has been a huge problem but
+because of its skilled workers, your city managed not to slip into
+the dark age of superstition and ignorance. You always thought that
+the guilds are trying to be a thread by which everything hangs over that
+abyss, sharing the knowledge with the select few and keeping everyone
+else in the dark to stay relevant and powerful. Maybe you were wrong
+though - maybe they genuinely want to use their skills and knowledge
+to benefit everyone else. Lending them a hand wouldn't hurt.
+
+*(unlocks building: **Museum of Technology** - costs money per turn,
+slightly increases tech and prestige)*
+
+### 2. Refuse
+
+When it comes to the guilds, you know there's always a catch - and
+they know that you know it. That's why they invented a fake catch in
+the form of minor upkeep costs while the real catch remains a secret.
+You don't know what the real catch is but you'd rather not find out.
+
+You make up some vague diplomatic excuse about budget. The workers
+express their regrets and leave, saying that they hope that maybe next
+year you'll find funds for such an important project. You know that you
+won;t, and you suspect that they know that you know it.
+
+You stop thinking about who knows what. You're getting a headache.
+
 //todo more branch 2
