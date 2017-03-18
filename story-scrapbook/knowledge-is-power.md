@@ -1130,4 +1130,62 @@ won;t, and you suspect that they know that you know it.
 
 You stop thinking about who knows what. You're getting a headache.
 
+Event 20
+--------
+
+*(random; requires at least 1 Knowledge Merchant)*
+
+Meetings of the city council usually fall into one of the two
+categories: the soul-crushingly boring ones and the ones with a lot of
+pointless arguments that devolve into accusations and name-calling.
+A few hours ago you were sure that today it's going to be the former
+but now you're forced to listen to CHARACTER4's angry monologue about
+CHARACTER1's 'Knowledge Merchants'.
+
+According to the CHARACTER4, the so-called knowledge people buy from
+them is useless at best and dangerously misleading at worst. She also
+claims that CHARACTER1's place is in prison, not in the city hall.
+CHARACTER1 responds by saying that business is business and if she
+thinks that he's selling a low-quality product then she can feel free
+to sell them something better.
+
+Surprisingly, CHARACTER4 agrees. If the city is willing to help with
+the funding, she'll oversee the creation of public trade school system
+and enlist members of the watchmakers' guild, engineers' guild
+and mechanics' guild to teach.
+
+### 1. Fund the schools
+
+You start to think that Knowledge Merchants were a mistake. Instead of
+using the false promise of education to take people's money, we should
+invest our money to provide people with real education. This may even
+be more profitable than CHARACTER1's scheme: after all, educated
+citizens are productive citizens.
+
+*(unlocks building: **Trade school** - stats like in event1 option 3)*
+
+### 2. Fund the schools, refuse the guilds' help
+
+Giving the citizens proper education is the noble goal but you're not
+sure if you trust CHARACTER4. Each day the guilds are getting more
+powerful and if you don't do something, the city will fall in their
+hands. You must be one step ahead of them, even if you don't really
+know what exactly is their plan. They aren't a charity, they are
+workers who became businessmen and are now trying to become politicians.
+The best course of action now will be to organize the trade school
+system without their help.
+
+*(unlocks building: **Trade school** - stats like in event1 option 2)*
+
+### 3. Defend Knowledge Merchants
+
+You don't really see the problem with Knowledge Merchants. Sure, they do
+not offer real education  - but that's just how the world is now, you
+can't even be sure if you're teaching people the right thing if you
+aren't the University. Knowledge Merchants make people think that not
+all is lost, and while it's not as good as actually teaching them, it's
+better than having them think about humanity's inevitable return to
+painting simple shapes on the cave walls. Also, they make money which
+is always great.
+
 //todo more branch 2
