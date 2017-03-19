@@ -1188,4 +1188,51 @@ better than having them think about humanity's inevitable return to
 painting simple shapes on the cave walls. Also, they make money which
 is always great.
 
+Event 21
+--------
+
+Just when you're about to go to sleep, you hear someone knocking loudly
+on your door. Annoyed at the uninvited guest, you open the door and get
+ready to say something rude. When you see your visitor, you get even
+more annoyed - it's CHARACTER1, probably with another 'great' idea
+to fix the budget while also getting rich at the same time.
+
+Surprisingly, the purpose of his visit is slightly different. He claims
+that someone tried to break in to his home. Apparently, there have also
+been people following him in the streets. He thinks that somebody is
+about to beat him up. You agree - probably someone who lost a bit too
+much money while doing business with him.
+
+CHARACTER1 asks you to assign a few police officers to him so that
+nobody will be able to harm him. This, of course, will result in those
+officers not being available to help other, more honest citizens.
+
+### 1. Members of the city council must be kept safe
+
+While you wouldn't personally object to someone teaching CHARACTER1
+a hard, painful lesson in business ethics, you're also aware that he's
+a member of the city council. If you can't keep your own advisors safe,
+nobody will trust you to protect ordinary citizens. Reluctantly, you
+ask CHARACTER5 for help. He agrees, although he also admits that one day
+his men will lock CHARACTER1 up instead of saving him from justifiable
+revenge.
+
+*(slightly decreases safety)*
+
+### 2. Police is not CHARACTER1's personal guard
+
+You refuse - CHARACTER1 is a citizen like any other, he deserves no
+special treatment. Maybe next time he should try not conning other
+people out of their money - that would be a decent way to have less
+people angry with him.
+
+After a few days, CHARACTER1 is still not in the hospital. You get the
+feeling that he's just getting paranoid (a clear sign of a dirty
+conscience). Still, this doesn't stop him from telling all his merchant
+friends that the city doesn't care if an honest businessman and council
+member is nearly getting murdered in broad daylight. Your reputation
+suffers a bit.
+
+*(slightly decreases prestige)*
+
 //todo more branch 2
