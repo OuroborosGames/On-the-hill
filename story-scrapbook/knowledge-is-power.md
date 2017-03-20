@@ -1191,6 +1191,8 @@ is always great.
 Event 21
 --------
 
+*(random)*
+
 Just when you're about to go to sleep, you hear someone knocking loudly
 on your door. Annoyed at the uninvited guest, you open the door and get
 ready to say something rude. When you see your visitor, you get even
@@ -1234,5 +1236,66 @@ member is nearly getting murdered in broad daylight. Your reputation
 suffers a bit.
 
 *(slightly decreases prestige)*
+
+Event 22
+--------
+
+ *(random)*
+
+When going over the city's budget, you notice that in the last few
+weeks, there's been a significant drop in the output of the factories.
+You decide to bring the problem up during the council meeting and ask
+CHARACTER4 for explanation. She tells you that a group of workers
+quit their jobs to do something else.
+
+This seems very unusual: experienced factory workers possess skills and
+knowledge unavailable to common citizens which also means they can earn
+a lot of money in the factories - after all, this is why the guilds got
+so powerful in the first place. As always, you find it impossible to
+extract any more information from the council's resident guild member
+though - when asked for details, she only responds with a shrug.
+
+### 1. Invest in new factory workers
+
+You decide to spend money to train new workers to replace the ones that
+left their jobs. In an uncharacteristic display of generosity,
+the guilds agree to quickly accept them as apprentices and share some of
+the training costs. While the new workers still lack the experience of
+the old ones, in a few weeks the output of your factories is more or
+less back to normal.
+
+*(costs money)*
+
+### 2. Investigate the issue
+
+There must be something more to this. You spend the next few evenings
+finding out as much as you can about the factory workers. When you know
+their names and addresses, you pay each and every one of them a visit,
+expressing your concerns about the shortage of factory workers.
+
+Unfortunately, none of the workers want to go back to their old jobs.
+Some say they're afraid of workplace accidents, others claim they got
+bored of the tedious, repetitive work they keep doing, a few say that
+they managed to save enough money to be able to pursue the jobs they
+wanted, not the ones that give them the biggest payout.
+
+You find it strange that all of them quit at more or less the same time.
+Even stranger is the fact that while some became merchants or decided
+to volunteer at the hospital, most of them are eager to become a part
+of the city's police force, claiming that there's a problem with crime
+and corruption that needs to be solved.
+
+*(decreases tech)*
+
+### 3. Ignore it
+
+Some of the factory workers got sick of all the noise and dirt of
+the factories? You can understand that. Maybe they don't want to have
+their arms crushed in the gears of a malfunctioning machine, maybe
+they just find the whole thing excruciatingly boring or maybe they want
+to do something more interesting or meaningful. You decide to let them
+do whatever they want - after all, they're free to choose. Plus, less
+people in the factories means less people under the influence of
+the guilds, which is always a good thing.
 
 //todo more branch 2
