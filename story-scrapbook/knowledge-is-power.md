@@ -1301,7 +1301,7 @@ the guilds, which is always a good thing.
 Event 23 Part 1
 ---------------
 
-*(~12 years after event 5)*
+*(~10 years after event 5)*
 
 You find yourself inside a large factory hall. Everything seems wrong:
 through the windows, you see that it's night - but there are people
