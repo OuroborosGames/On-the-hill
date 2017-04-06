@@ -689,12 +689,12 @@ Event 14 Part 2
 
 As you approach the small gathering of guild members, it begins
 to disperse slowly until only the man in the center of it all remains.
-He smiles and introduces himself as CHARACTER5 *(should NOT appear 
+He smiles and introduces himself as CHARACTER6 *(should NOT appear 
 in any other stories unless maybe in a very minor role)*. After a bit of
 smalltalk that was so brief it could as well be nonexistent, he steers
 the discussion towards politics.
 
-Unlike CHARACTER6, he seems mostly uninterested in taxes and subsidies.
+Unlike CHARACTER4, he seems mostly uninterested in taxes and subsidies.
 His interests are long-term: he talks about the white plague and how it
 makes the organization of skilled workers into communities essential
 to prevent the society from reverting to a more primitive state. He
@@ -781,7 +781,7 @@ will influence the public - therefore, churches must become even richer.
 
 ### 2. Invest in education
 
-CHARACTER5 thinks that the best way to teach people is by making them
+CHARACTER6 thinks that the best way to teach people is by making them
 apprentices, but the guilds haven't been taking in new apprentices for
 years. Obviously, they're trying to control who and when gets educated.
 The solution is simple - the city must hire teachers, and those teachers
@@ -1297,5 +1297,232 @@ to do something more interesting or meaningful. You decide to let them
 do whatever they want - after all, they're free to choose. Plus, less
 people in the factories means less people under the influence of
 the guilds, which is always a good thing.
+
+Event 23 Part 1
+---------------
+
+*(~12 years after event 5)*
+
+You find yourself inside a large factory hall. Everything seems wrong:
+through the windows, you see that it's night - but there are people
+here. Despite the noise from the machines, everyone behaves as if it was
+a high-class party - they're dressed in their best clothes, they drink
+expensive alcohol and they're talking about things so meaningless
+that even the most boring, self-absorbed socialite would not be able
+to stand them for too long.
+
+Seemingly out of nowhere, CHARACTER4 comes up to you. She tells you
+that you should be proud - you've been invited to the guilds' secret
+ball, and that you're the first person from outside of the guilds to be
+there. When you try to find out how did you actually get there, she
+only says that you shouldn't worry about it and try to make powerful
+friends.
+
+### 1. Try to find business opportunities
+
+The whole situation seems completely absurd to you. Why organize a ball
+inside of a factory? Why make it secret? Why are you here and how did
+it happen? This doesn't matter though: the important thing is that
+there are high-ranking guild members out there, and that means there's
+money to be made.
+
+You make your way towards people who are loud but don't have anything
+interesting to say and those who put on as much expensive jewelry
+as possible without thinking of how good or bad it looks: those who
+have money but lack common sense. You drink, but not too much.
+
+In the end, you make some great deals - that is, they're great for you
+and the city but not necessarily for the other side of the contracts.
+You try to justify such unfair outcome with the guilds' countless
+schemes against you.
+
+*(gives a lot of money)*
+
+### 2. Try to have fun
+
+People tend to think that diplomacy is boring when in reality it's
+anything but. Lengthy formal meetings aren't very interesting, sure,
+but they're mostly a facade you put up in front of both your superiors
+and the general public. Real diplomacy often happens during dinners,
+parties and balls which start off not unlike those meetings but get less
+formal as time goes on.
+
+You drink. You talk. You dance. You drink some more. You learn a few
+secrets, some more damaging than others. You drink even more, which
+makes your memories of the night a bit unreliable. You're sure you've
+been trying to seduce somebody, and you think you were in a fight or two
+- but you don't remember the results.
+
+In the end, you gain a few friends, some enemies and a terrible
+hangover. You get introduced to the emerging elite, which you will soon
+introduce to the old elite. The city's social life just became much
+more interesting.
+
+*(gives a lot of prestige)*
+
+### 3. Observe
+
+There's so much noise in here - not just when it comes to sounds
+(although there's plenty of that too, due to both the machines and all
+the discussions about nothing), it seems that all your senses are
+bombarded with meaningless distractions. You try to filter all those
+out and focus on what's important.
+
+You know it's not the machines, not the alcohol, not
+the workers-turned-socialites. What is it then? In a corner, you notice
+a man surrounded by a small group of workers. They talk about something,
+and it somehow seems more serious than the deafening smalltalk around
+you. They're focused and sober, they don't try to impress anyone with
+displays of wealth - it seems they just have something more important
+to do.
+
+*(go to event 14 part 2)*
+
+### 4. Leave
+
+You don't know how you got here but you know how you're going to get
+out. You ignore the party and start walking towards the door. When
+someone offers you a drink, you take it without stopping. After
+what feels like eternity, you make your way through the crowd and leave
+the building.
+
+It's quiet outside, despite the fact that a few guild members who had
+too much to drink are desperately fighting an uneven battle against
+the gravity. You walk home and when you're there, you fall asleep
+quickly.
+
+In the morning, you're not sure whether anything really happened - it
+might as well have been a strange dream. There's only one thing you're
+certain about - if the guilds are so busy organizing lavish parties
+and keeping them secret, they're going to go bankrupt before they
+become a real threat to you.
+
+Event 23 Part 2
+---------------
+
+*(immediately after part 1; only if chose 'observe')*
+
+As you approach the small gathering of guild members, it begins
+to disperse slowly until only the man in the center of it all remains.
+He smiles and introduces himself as CHARACTER6 *(should NOT appear 
+in any other stories unless maybe in a very minor role)*. After a bit of
+smalltalk that was so brief it could as well be nonexistent, he steers
+the discussion towards politics.
+
+It seems that he's still bitter about your decision to send CHARACTER2
+to the University - apparently, she was just what the city needed and
+now she'll just waste her talent on trying to answer the impossible
+question until she grows old, bitter and insane enough to become
+a professor. He then claims that it ultimately doesn't matter because
+the ability to adapt is a necessary for everyone involved in politics.
+He claims that most people are either too morally inflexible, unwilling
+to use violence or deception, or too reckless with their power, using
+them indiscriminately and unable to play the long game. A great
+politician, he says, needs to be ruthless to stay in power but also
+subtle enough to avoid antagonizing the public.
+
+After a long discussion, he describes a hypothetical situation in which
+you're supposed to fight against a physically stronger enemy. He asks
+whether you'd try to become stronger to be able to engage him in
+direct combat, outsmart him with a dirty trick or find allies who would
+fight alongside you. He disappears before you can answer.
+
+### 1. Try to find him
+
+Once again, you try to filter out all the noise and look for what's
+important. Unfortunately, it seems that nothing is. You walk around
+the factory hall, trying to find the strange man with a lot to say about
+politics and religion but it looks like he simply vanished. After
+an hour, you get visibly frustrated. After two, your behavior starts
+bothering the guild members and you get asked to leave.
+
+*(decreases prestige slightly)*
+
+### 2. Try to forget about the encounter
+
+You're not sure why but you find the whole situation unsettling. It's
+clear that the man has his own agenda, and as is always the case with
+the guilds, his agenda is different from your own. Suddenly, the whole
+factory appears more hostile than it used to be and the unclear
+circumstances under which you ended up here are making it much worse.
+You decide that the only cure for this is alcohol.
+
+In the morning, you wake up with a terrible hangover. The memories are
+hazy but you're pretty sure you were talked into agreeing to some
+horrible business proposal by an owner of one of the factories.
+
+*(takes away some money)*
+
+### 3. Leave
+
+You're not sure why but you find the whole situation unsettling. It's
+clear that the man has his own agenda, and as is always the case with
+the guilds, his agenda is different from your own. Suddenly, the whole
+factory appears more hostile than it used to be and the unclear
+circumstances under which you ended up here are making it much worse.
+You decide it's better to just leave this place.
+
+Event 23 Epilogue
+-----------------
+
+*(1 turn after part 2, regardless of choice)*
+
+You keep thinking about the guilds' secret ball and your discussion
+with CHARACTER6. It's obvious that he's planning something, and that
+it will not end well for you.
+
+When you think of the conversations you had with the man, one thing
+clearly stands out: his thoughts on political strategy. It seems that
+his approach to gaining power includes the use of force and manipulation
+while simultaneously maintaining a good public image. Maybe
+a well-executed counterattack will be able to prevent disaster. Maybe
+it isn't too late.
+
+### 1. Focus on safety
+
+CHARACTER6 may be a good enough liar to both get public support and
+attack you from the shadows but when it comes to pure force, he won't
+be able to stand against the city's police. You ask CHARACTER5 to hire
+more men and increase the patrols around workshops and factories, maybe
+arresting some prominent guild members if he can find a good enough
+reason. This will be fairly expensive and won't make you popular but
+it may help you stay in power.
+
+*(slightly increases safety, decreases money and prestige)*
+
+### 2. Infiltrate the guilds
+
+If the guilds want to play dirty, you will play dirty. But first, you
+must find out what is it that they're actually trying to achieve. To do
+so, you'll get some of your trusted men to become apprentices and then
+move upwards through the guild hierarchy.
+
+Unfortunately, your plan ends as soon as it started. A few days after
+you send your agents, CHARACTER4 comes to your office to complain about
+your obvious attempts at infiltration. Apparently, some of the factory
+workers decided to go on strike to protest your behavior and the general
+public is now thinking that you're so paranoid that you'll try to spy
+even on those who work hard and help those in need.
+
+*(decreases technology and prestige)*
+
+### 3. Become more popular
+
+In recent years, the guilds have done a lot of charity work. Was it all
+just a plan to get people to support them? Even if it wasn't, it
+definitely made them popular. You're going to do the same thing: just
+give people money and maybe if you give them enough, they'll like you
+more than they like CHARACTER6 and others like him.
+
+*(decreases money, slightly increases prestige)*
+
+### 4. Stay calm
+
+CHARACTER6 wouldn't tell you about his strategy if he thought you'll be
+able to beat him. Either he's trying to make you act irrationally or
+he already won and nothing you're going to do can change it. Either way,
+there's no use trying to obsessively analyze his words in search of
+the solution. The best thing you can do now is to continue what you were
+doing before and hope it's good enough.
 
 //todo more branch 2
