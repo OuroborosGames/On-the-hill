@@ -1549,7 +1549,7 @@ to lock him up.
 You try to protests - that man is not a criminal, he's a member of
 the city council. They can't just take him to prison like a common thief.
 
-CHARACTER6 assures you that yes, they are allowed to arrest council
+CHARACTER5 assures you that yes, they are allowed to arrest council
 members if they commit crimes. CHARACTER1 might not be a common thief
 but he's a thief nonetheles. There's really nothing you can do right now
 other than looking for a new, preferably more honest, advisor.
@@ -1559,7 +1559,8 @@ other than looking for a new, preferably more honest, advisor.
 You congratulate the police on doing their job and express hopes that
 in the future, dishonest people will be caught before they can do so
 much damage. Now, the council will need a new member to represent
-the interests of merchants but hopefully they will find someone who
+the interests of merchants but hopefully they will find someone who's
+less of a criminal.
 
 Event 25
 --------
@@ -1583,4 +1584,50 @@ that they're working on the case and that they even have
 a likely suspect. The one responsible for the murder will
 soon end up in prison.
 
-//todo more branch 2
+*(events involving CHARACTER5 become unavailable)*
+
+ENDING 4
+--------
+
+*(2 years after event 25)*
+
+Police officers who used to be factory workers escort you out
+of the city hall and put you in a cell. You are arrested for
+the murder of CHARACTER5 - apprently, you killed him because you
+were afraid that after catching CHARACTER1, your partner in crime,
+he'll uncover your many illegal sources of income. You find out about
+some of your shady businesses from CHARACTER4's testimony (she says
+that you demanded bribes from her and other guild members, threatening
+to shut down the factories if they don't pay you.) Everybody believes
+her side of the story and doesn't want to listen to your
+explanations - after all, you spent many years fighting a political
+war against the guilds while the guilds were working hard to
+improve their public image and become known as the city's benefactors.
+You spend the rest of your life in prison.
+
+You're not alone here - as years go by, all the other members
+of your council end up in neighboring cells. CHARACTER4 is the only
+exception - apparently, she became the new mayor and is now turning
+the city into the nation's most important industrial centers.
+Other prisoners are whispering that she's not the actual leader
+and that the strings are being pulled by someone named CHARACTER6.
+You do not concern yourself with this - politics is what landed
+you in prison, getting yourself involved with it once again would
+probably get you killed.
+
+You do not meet CHARACTER2 again - she visits her home town after
+getting a University degree but she doesn't care about the politicians
+who used to run this place when she was a child. She meets with her
+parents, visits a few factories, talks to some of the guild members
+and leaves. She then tries to send someone to look for children
+unaffected by the plague, although her plans are stopped by CHARACTER4.
+Guilds need immune workers, spending their time with a bunch
+of sheltered academics would only waste their time and talent.
+
+The city becomes an oligarchy ruled by the guild elite. For most
+people, not much changes - but anyone who tries to become a politician,
+a craftsman or a businessman without CHARACTER6's apporval soon
+ends up dead or imprisoned.
+
+Machines in the factories keep going at their own pace, and it
+doesn't seem that they'll stop anytime soon.
