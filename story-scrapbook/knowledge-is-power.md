@@ -1525,4 +1525,62 @@ there's no use trying to obsessively analyze his words in search of
 the solution. The best thing you can do now is to continue what you were
 doing before and hope it's good enough.
 
+Event 24
+--------
+
+*(~1 year after 23, regardless of choice)*
+
+A relatively uneventful city council meeting gets suddenly interrupted
+by someone breaking through the door. After you recover from the initial
+shock, you notice that the attacker is wearing a police uniform. Before
+you have time to say anything, a few more police offers run into the room,
+grab CHARACTER1 and escort him out of the door.
+
+Confused, you look towards CHARACTER5. Before you even ask him a question,
+he admits that yes, CHARACTER1 is getting arrested. He migtht be a member
+of the council but even city officials cannot be allowed to commit fraud
+and after a recent anonymous tip, the police finally has enough evidence
+to lock him up.
+
+*(events involving CHARACTER1 become unavailable regardless of choice)*
+
+### 1. Is this a joke?
+
+You try to protests - that man is not a criminal, he's a member of
+the city council. They can't just take him to prison like a common thief.
+
+CHARACTER6 assures you that yes, they are allowed to arrest council
+members if they commit crimes. CHARACTER1 might not be a common thief
+but he's a thief nonetheles. There's really nothing you can do right now
+other than looking for a new, preferably more honest, advisor.
+
+### 2. What took you so long?
+
+You congratulate the police on doing their job and express hopes that
+in the future, dishonest people will be caught before they can do so
+much damage. Now, the council will need a new member to represent
+the interests of merchants but hopefully they will find someone who
+
+Event 25
+--------
+
+*(next autumn after event 24)*
+
+At this time of the year, the weather is usually horrible. It's either
+rain, wind, cold or all of the above at the same time. All in all,
+a perfect weather for a funeral.
+
+You can't believe that CHARACTER5 is dead. He's been a member of
+the council since the very beginning and he was one of the most
+trustworthy people in the whole city (although this isn't a big
+accompilshment - it would be far more difficult to become one of
+the least trustworthy people here). This migbt be what got him
+killed - apparently, some of the CHARACTER1's shadier friends have
+sworn revenge on him after the recent arrest.
+
+After the burial, you talk to some of the policemen. They assure you
+that they're working on the case and that they even have
+a likely suspect. The one responsible for the murder will
+soon end up in prison.
+
 //todo more branch 2
