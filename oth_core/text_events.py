@@ -103,6 +103,14 @@ def unlock_action(state, action):
     state.special_actions.append(action)
 
 
+def set_flag(state, flag):
+    state.flags.set(flag)
+
+
+def unset_flag(state, flag):
+    state.flags.unset(flag)
+
+
 # horrible predicates (use for lock/unlock conditions)
 def counter_equal(state, key, value):
     return _counter_predicate(state, key, value, lambda x, y: x == y)
@@ -126,6 +134,14 @@ def attr_greater(state, key, value):
 
 def attr_lower(state, key, value):
     return _attribute_predicate(state, key, value, lambda x, y: x < y)
+
+
+def flag_isset(state, flag):
+    return state.flags.isset(flag)
+
+
+def flag_isunset(state, flag):
+    return not flag_isset(state, flag)
 
 
 def _counter_predicate(state, counter_key, value, func):

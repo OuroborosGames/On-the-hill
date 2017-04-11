@@ -61,3 +61,18 @@ class Counter:
         if self._counter[key] <= 0:
             return
         self._counter[key] -= 1
+
+
+class Flags(Counter):
+    """Binary flags for game state. Technically inherits from Counter but you shouldn't use Counter's methods,
+    just set/unset/isset"""
+
+    def set(self, flag):
+        self.increment(flag)
+
+    def unset(self, flag):
+        self.reset(flag)
+
+    def isset(self, flag):
+        if self.get_count(flag): return True
+        return False

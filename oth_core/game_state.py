@@ -9,7 +9,7 @@ from . import special_actions
 from . import terrain
 from . import text_events
 from oth_core.game_errors import GameplayError, InternalError, GameOver
-from oth_core.timers_and_counters import Counter
+from oth_core.timers_and_counters import Counter, Flags
 
 
 class GameFacade:
@@ -121,6 +121,9 @@ class Game:
 
         # count in-game objects
         self.counter = Counter()
+
+        # binary flags
+        self.flags = Flags()
 
         # current branch in the main storyline
         self.branch = "The Founding of " + self.city_name
