@@ -1,7 +1,7 @@
 from oth_core.game_errors import InternalError
 
 
-class BasicTimer:
+class BasicTimer(object):
     """Basic timer: executes a function after a set number of turns"""
     def __init__(self, turns_to_wait, end):
         self.turns_to_wait = turns_to_wait
@@ -31,7 +31,7 @@ class BasicEventTimer(BasicTimer):
             state._event_queue.append(self.event_to_spawn)
 
 
-class Counter:
+class Counter(object):
     """A simple counter implementation, mostly meant for counting how many buildings of certain type have been built by
     the player. Text events 'know' how to communicate with the counter so it can also be used to indicate progress
     in event chains or just as a lock/unlock condition."""

@@ -5,14 +5,14 @@ from oth_core.perlin import SimplexNoise
 from functools import partial
 
 
-class TerrainType:
+class TerrainType(object):
     def __init__(self, name, cost_modifier):
         self.name = name
         self.cost_modifier = cost_modifier
         self.building = None
 
 
-class MapPrototype:
+class MapPrototype(object):
     """Map of the game area. Contains methods for adding (as long as the field is unoccupied) and removing buildings
     as well as getters for specific fields.
 
