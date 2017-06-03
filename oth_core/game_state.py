@@ -12,7 +12,7 @@ from oth_core.game_errors import GameplayError, InternalError, GameOver
 from oth_core.timers_and_counters import Counter, Flags
 
 
-class GameFacade:
+class GameFacade(object):
     """Facade class through which the GUI interfaces with the backend"""
     def __init__(self):
         self._game = None
@@ -61,7 +61,7 @@ class GameFacade:
         return getattr(self._game, item)
 
 
-class Game:
+class Game(object):
     """This used to be a facade but now it's game's global state"""
 
     def __init__(self, city_name, map_h, map_w):

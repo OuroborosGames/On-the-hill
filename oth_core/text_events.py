@@ -17,7 +17,7 @@ from . import timers_and_counters
                                        event cannot be spawned and it has no effect on any other events"""
 
 
-class TextEventPrototype:
+class TextEventPrototype(object):
     def __init__(self):
         self.title = "Test event"
         self.description = "Something happens"

@@ -8,7 +8,7 @@ has the same interface (minus the should_be_activated() and should_be_deactivate
 up in the active or inactive deck."""
 
 
-class SpecialAction:
+class SpecialAction(object):
     def __init__(self, name, description, event_to_spawn):
         self.name = name
         self.description = description
