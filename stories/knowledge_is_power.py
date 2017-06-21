@@ -21,12 +21,25 @@ def chain_unconditionally(event, function):
 def enter_branch(func, branch):
     def ret(state):
         func(state)
-        if (branch == 1):
+        if branch == 1:
             pass  # TODO: add events in this branch
-        if (branch == 2):
+        if branch == 2:
             pass  # TODO: also add events in this branch
 
     return ret
+
+
+# those should be self-explanatory: used for branch 1 when this variable is important
+def increase_loyalty(state):
+    state.counter.increment("Eliza's loyalty")
+
+
+def decrease_loyalty(state):
+    state.counter.decrement("Eliza's loyalty")
+
+
+def loyalty_check(state):
+    return True if counter_greater(state, "Eliza's loyalty", 3) else False
 
 
 story_main = BasicEvent(
@@ -107,7 +120,7 @@ ideas you've ever heard. It's too stupid too work, it's immoral and it
 just isn't how cities make money. If CHARACTER1 was the one in charge,
 our police would be participating in burglaries and robberies instead
 of stopping them.""",
-            actions={'OK': lambda game_state: None}
+            actions={'OK': lambda game_state: game_state.counter.increment("Eliza loyalty")}
         ))
     }
 )
@@ -165,7 +178,7 @@ stay here and you'll give her the best education you can. It won't
 be as good as what the University teaches (not even close) - but it
 will make both her and her parents happy. And the University will
 probably find some other healthy child anyway.""",
-                actions={'OK': lambda game_state: None} #TODO: increase counter
+                actions={'OK': increase_loyalty}
             )),
             1)
     }
