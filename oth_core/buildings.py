@@ -6,7 +6,7 @@
                                             in certain locations"""
 
 
-class BuildingPrototype:
+class BuildingPrototype(object):
     """Building with on_build, on_destroy and on_next_turn methods tweaked with key-value stores additional_effects
     and per_turn_effects (keys are state's attributes, values are integers that will be added to - or, in case of
     on_destroy, substracted from - them)"""
