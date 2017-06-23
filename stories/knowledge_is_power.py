@@ -1,22 +1,6 @@
 from oth_core.text_events import *
 from oth_core.buildings import *
 
-
-# helper function for chaining events regardless of player choice (might be moved to backend in the future)
-def chain_unconditionally(event, function):
-    new_actions = {}
-    for k in event.actions.keys():
-        v = event.actions.get(k)
-
-        def new_action(state):
-            v(state)
-            function(state)
-
-        new_actions[k] = new_action
-    event.actions = new_actions
-    return event
-
-
 # helper for chaining actions with entering different branches
 def enter_branch(func, branch):
     def ret(state):
@@ -215,7 +199,7 @@ too strongly.""",
     actions={'OK': lambda state: spawn_after_n_turns(state, branch_event, 20)}
 )
 
-initial_chain = chain_unconditionally(knowledge_merchant_event,
+initial_chain = knowledge_merchant_event.chain_unconditionally(
                                       lambda state: spawn_next_season(state, eliza_event, 1))
 
 knowledge_merchant_building = BasicBuilding(
