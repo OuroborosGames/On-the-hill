@@ -42,7 +42,7 @@ class BasicEvent(TextEventPrototype):
         self.description = description
         self.actions = actions
 
-    def chain_unconditionally(self, function):
+    def chain_unconditionally(self, *functions):
         """This method makes all the actions in this event perform an additional action; useful for chaining events
         together"""
         for k in self.actions.keys():
@@ -50,7 +50,8 @@ class BasicEvent(TextEventPrototype):
 
             def new_action(state):
                 v(state)
-                function(state)
+                for function in functions:
+                    function(state)
 
             self.actions[k] = new_action
         return self
