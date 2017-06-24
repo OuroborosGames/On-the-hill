@@ -43,6 +43,21 @@ class BasicEvent(TextEventPrototype):
         self.actions = actions
 
 
+    def chain_unconditionally(self, *functions):
+        """This method makes all the actions in this event perform an additional action; useful for chaining events
+        together"""
+        for k in self.actions.keys():
+            v = self.actions[k]
+
+            def new_action(state):
+                v(state)
+                for function in functions:
+                    function(state)
+
+            self.actions[k] = new_action
+        return self
+
+
 class UnlockableEvent(BasicEvent):
     def __init__(self, name, description, actions, unlock_predicate):
         super(UnlockableEvent, self).__init__(name, description, actions)
