@@ -42,7 +42,6 @@ class BasicEvent(TextEventPrototype):
         self.description = description
         self.actions = actions
 
-
     def chain_unconditionally(self, *functions):
         """This method makes all the actions in this event perform an additional action; useful for chaining events
         together"""
