@@ -1,26 +1,38 @@
 from oth_core.text_events import *
 from oth_core.buildings import *
 from oth_core.game_errors import InternalError
+from copy import deepcopy
+
+
+def get():
+    def set_branch(state):
+        state.branch = "Knowledge is Power"
+    return story_main.chain_unconditionally(lambda state: set_branch(state))
+    pass
 
 
 # helper for chaining actions with entering different branches
 def enter_branch(func, branch):
+    if branch == 1:
+        randoms = [tech_museum_event_branch1, occult_educator_event, eliza_museum_event, library_event,
+                   factory_event, riot_event, walk_event, dispute_event]
+        deterministic = [
+            (education_choice_event, 24),
+            (guild_ball_event_branch1, 168),
+            (graduation_event, 180)
+        ]
+    elif branch == 2:
+        randoms = [tech_museum_event_branch2, trade_school_event, ponzi_event, workers_event]
+        deterministic = [
+            (council_divided_event, 3),
+            (guild_ball_event_branch2, 125),
+            (martell_ending, 140)
+        ]
+    else:
+        raise InternalError("Unknown branch number")
+
     def ret(state):
         func(state)
-        if branch == 1:
-            randoms = [tech_museum_event, occult_educator_event, eliza_museum_event, library_event, factory_event,
-                       riot_event, walk_event, dispute_event]
-            deterministic = [
-                (education_choice_event, 24),
-                (guild_ball_event, 168),
-                (graduation_event, 180)
-            ]
-        elif branch == 2:
-            randoms = []
-            deterministic = []
-            pass  # TODO: also add events in this branch
-        else:
-            raise InternalError("Unknown branch number")
         for r in randoms:
             add_inactive_event(state, r)
         for d in deterministic:
@@ -41,6 +53,9 @@ def decrease_loyalty(state):
 def loyalty_check(state):
     return True if counter_greater(state, "Eliza's loyalty", 3) else False
 
+########################################################################################################################
+
+# data begins here
 
 story_main = BasicEvent(
     name="Knowledge is Power",
@@ -218,7 +233,7 @@ too strongly.""",
 initial_chain = knowledge_merchant_event.chain_unconditionally(
     lambda state: spawn_next_season(state, eliza_event, 1))
 
-tech_museum_event = BasicEvent(
+tech_museum_event_branch1 = BasicEvent(
     name="The Guild Museum",
     description=
     """A small group of factory workers comes to your office with a business
@@ -237,7 +252,7 @@ earn money elsewhere, without getting in the way of the actual work.
 Still, they do seem to be pretty good speakers so maybe they will manage
 to captivate the audience the same way some of the storytellers do with
 their fiction.""",
-    actions={'OK': lambda state: unlock_building(state, tech_museum_building)}
+    actions={'OK': lambda state: unlock_building(state, tech_museum_a)}
 )
 
 education_choice_event = BasicEvent(
@@ -421,7 +436,7 @@ than they really are.""",
             actions={'OK': lambda game_state: None}
         ))
     },
-    condition=lambda state: counter_greater(state, tech_museum_building.name, 0)
+    condition=lambda state: counter_greater(state, tech_museum_a.name, 0)
 )
 
 library_event = ConditionalEvent(
@@ -670,7 +685,7 @@ of artists than an office full of bureaucrats.""",
     condition=lambda state: counter_greater(state, trade_school_a.name, 0)
 )
 
-guild_ball_event = BasicEvent(
+guild_ball_event_branch1 = BasicEvent(
     name="Night in the Factory",
     description=
     """You find yourself inside a large factory hall. Everything seems wrong:
@@ -760,7 +775,7 @@ become a real threat to you.""",
 )
 
 charles_pope_event = BasicEvent(
-    name=guild_ball_event.title,
+    name=guild_ball_event_branch1.title,
     description=
     """As you approach the small gathering of guild members, it begins
 to disperse slowly until only the man in the center of it all remains.
@@ -792,7 +807,7 @@ before you can answer.""",
     actions={
 
         "Try to find him": lambda state: spawn_immediately(state, BasicEvent(
-            name=guild_ball_event.title,
+            name=guild_ball_event_branch1.title,
             description=
             """Once again, you try to filter out all the noise and look for what's
 important. Unfortunately, it seems that nothing is. You walk around
@@ -804,7 +819,7 @@ bothering the guild members and you get asked to leave.""",
         )),
 
         "Try to forget about the encounter": lambda state: spawn_immediately(state, BasicEvent(
-            name=guild_ball_event.title,
+            name=guild_ball_event_branch1.title,
             description=
             """You're not sure why but you find the whole situation unsettling. It's
 clear that the man has his own agenda, and as is always the case with
@@ -820,7 +835,7 @@ horrible business proposal by an owner of one of the factories.""",
         )),
 
         "Leave": lambda state: spawn_immediately(state, BasicEvent(
-            name=guild_ball_event.title,
+            name=guild_ball_event_branch1.title,
             description=
             """You're not sure why but you find the whole situation unsettling. It's
 clear that the man has his own agenda, and as is always the case with
@@ -1112,6 +1127,534 @@ as the University.""",
     ), 66)}
 )
 
+council_divided_event = BasicEvent(
+    name="The Council Divided",
+    description=
+    """Recently, the atmosphere during the city council meetings has grown
+hostile. Ponzi keeps arguing that the money received from
+the University needs to be 'invested' in one of his schemes. Connolly
+thinks that we should increase police funding instead - apparently, this
+is necessary to successfully investigate fraudulent investment
+opportunities which used to prey on naive citizens but are now
+threatening to steal money from the city. Selgorn opposes the idea,
+claiming that even now our hospitals have trouble dealing with sick
+and wounded and they won't be able to deal with even more criminals
+beaten up by the policemen or vice versa.
+
+Curiously, while everyone seems to have a strong opinion one way or
+the other, Martell is mostly silent. You'd expect her to be the first
+to participate, painting a bleak picture of the future that will come if
+you don't subsidize new workshops and factories but no, instead of
+trying to scare you with the vision of a next generation living in caves
+and failing to understand fire she's just sitting in a chair and doing
+nothing.
+
+When you ask her about her opinion, she says it doesn't matter.
+The guilds are not happy with your decision to send Eliza to
+the University and the production is suffering as a result. You ask
+how exactly does a little girl leaving the town affect the output of
+the factories. She mutters something about lost opportunities and goes
+back to staring out of the window.""",
+    actions={'OK': lambda state: modify_state(state, {'tech': -1})}
+).chain_unconditionally(lambda state: spawn_after_n_turns(state, BasicEvent(
+    name="Unexpected Change of Heart",
+    description=
+    """It appears that after throwing a completely pointless fit for two whole
+years, the leaders of the guilds have finally started to stop acting
+like children and actually do something for the good of the city.
+Unexpectedly, they have started taking in more apprentices and they even
+made the whole system more friendly towards the poorer citizens -
+the teacher now has to share profits with the apprentice instead of
+'paying' by allowing him the access to workshop and tools.
+
+While CHARACTER4 claims it's all done for the greater good, you have
+a feeling that there's something shady about the whole affair. Guilds
+are not charities - they want money and power for themselves, and if
+they're pretending to be altruist, it has to be because their plans
+require them to look good in the eyes of ordinary citizens. It's all
+politics, plain and simple.""",
+    actions={'OK': lambda state: modify_state(state, {'tech': 3, 'prestige': 4})}
+), 25))
+
+tech_museum_event_branch2 = BasicEvent(
+    name=tech_museum_event_branch1.title,
+    description=
+    """A small group of factory workers comes to your office with a business
+proposal: if you give them a sufficiently large building, they'll make
+a museum of technology and engineering to explain the inner workings of
+all those complex machines to the common man.
+
+The whole thing seems almost to good to be true: the guilds will supply
+the museum with machines and skilled, experience workers will volunteer
+to run it. When you try to find out where's the catch, they admit that
+they also want you to volunteer to spend some of the city's budget
+to maintain it. You see, this is not supposed to be a business, there's
+no direct monetary gain to be had. The real purpose is to educate
+the citizens, not to put money in someone's pocket.""",
+    actions={
+
+        "Agree": lambda state: spawn_immediately(state, BasicEvent(
+            name=tech_museum_event_branch1.title,
+            description=
+            """Since the white plague, the education has been a huge problem but
+because of its skilled workers, your city managed not to slip into
+the dark age of superstition and ignorance. You always thought that
+the guilds are trying to be a thread by which everything hangs over that
+abyss, sharing the knowledge with the select few and keeping everyone
+else in the dark to stay relevant and powerful. Maybe you were wrong
+though - maybe they genuinely want to use their skills and knowledge
+to benefit everyone else. Lending them a hand wouldn't hurt.""",
+            actions={'OK': lambda game_state: unlock_building(game_state, tech_museum_b)}
+        )),
+
+        "Refuse": lambda state: spawn_immediately(state, BasicEvent(
+            name=tech_museum_event_branch1.title,
+            description=
+            """When it comes to the guilds, you know there's always a catch - and
+they know that you know it. That's why they invented a fake catch in
+the form of minor upkeep costs while the real catch remains a secret.
+You don't know what the real catch is but you'd rather not find out.
+
+You make up some vague diplomatic excuse about budget. The workers
+express their regrets and leave, saying that they hope that maybe next
+year you'll find funds for such an important project. You know that you
+won't, and you suspect that they know that you know it.
+
+You stop thinking about who knows what. You're getting a headache.""",
+            actions={'OK': lambda game_state: None}
+        ))
+    }
+)
+
+trade_school_event = ConditionalEvent(
+    name="The Problem with Our Schools",
+    description=
+    """Meetings of the city council usually fall into one of the two
+categories: the soul-crushingly boring ones and the ones with a lot of
+pointless arguments that devolve into accusations and name-calling.
+A few hours ago you were sure that today it's going to be the former
+but now you're forced to listen to Isabel's angry monologue about
+Peter's 'Knowledge Merchants'.
+
+According to the Martell, the so-called knowledge people buy from
+them is useless at best and dangerously misleading at worst. She also
+claims that Ponzi's place is in prison, not in the city hall.
+Ponzi responds by saying that business is business and if she
+thinks that he's selling a low-quality product then she can feel free
+to sell them something better.
+
+Surprisingly, Martell agrees. If the city is willing to help with
+the funding, she'll oversee the creation of public trade school system
+and enlist members of the watchmakers' guild, engineers' guild
+and mechanics' guild to teach.""",
+    actions={
+
+        "Fund the schools": lambda state: spawn_immediately(state, BasicEvent(
+            name=trade_school_event.title,
+            description=
+            """You start to think that Knowledge Merchants were a mistake. Instead of
+using the false promise of education to take people's money, we should
+invest our money to provide people with real education. This may even
+be more profitable than Ponzi's scheme: after all, educated
+citizens are productive citizens.""",
+            actions={'OK': lambda game_state: unlock_building(game_state, trade_school_b)}
+        )),
+
+        "Fund the schools, refuse the guilds' help": lambda state: spawn_immediately(state, BasicEvent(
+            name=trade_school_event.title,
+            description=
+            """Giving the citizens proper education is the noble goal but you're not
+sure if you trust Isabel. Each day the guilds are getting more
+powerful and if you don't do something, the city will fall in their
+hands. You must be one step ahead of them, even if you don't really
+know what exactly is their plan. They aren't a charity, they are
+workers who became businessmen and are now trying to become politicians.
+The best course of action now will be to organize the trade school
+system without their help.""",
+            actions={'OK': lambda game_state: unlock_building(game_state, trade_school_a)}
+        )),
+
+        "Defende Knowledge Merchants": lambda state: spawn_immediately(state, BasicEvent(
+            name=trade_school_event.title,
+            description=
+            """You don't really see the problem with Knowledge Merchants. Sure, they do
+not offer real education  - but that's just how the world is now, you
+can't even be sure if you're teaching people the right thing if you
+aren't the University. Knowledge Merchants make people think that not
+all is lost, and while it's not as good as actually teaching them, it's
+better than having them think about humanity's inevitable return to
+painting simple shapes on the cave walls. Also, they make money which
+is always great.""",
+            actions={'OK': lambda game_state: None}
+        ))
+    },
+    condition=lambda state: counter_greater(state, knowledge_merchant_building.name, 0)
+)
+
+ponzi_event = BasicEvent(
+    name="Peter's Problems",
+    description=
+    """Just when you're about to go to sleep, you hear someone knocking loudly
+on your door. Annoyed at the uninvited guest, you open the door and get
+ready to say something rude. When you see your visitor, you get even
+more annoyed - it's Peter, probably with another 'great' idea
+to fix the budget while also getting rich at the same time.
+
+Surprisingly, the purpose of his visit is slightly different. He claims
+that someone tried to break in to his home. Apparently, there have also
+been people following him in the streets. He thinks that somebody is
+about to beat him up. You agree - probably someone who lost a bit too
+much money while doing business with him.
+
+Ponzi asks you to assign a few police officers to him so that
+nobody will be able to harm him. This, of course, will result in those
+officers not being available to help other, more honest citizens.""",
+    actions={
+
+        "Members of the city council must be kept safe": lambda state: spawn_immediately(state, BasicEvent(
+            name=ponzi_event.title,
+            description=
+            """While you wouldn't personally object to someone teaching Ponzi
+a hard, painful lesson in business ethics, you're also aware that he's
+a member of the city council. If you can't keep your own advisors safe,
+nobody will trust you to protect ordinary citizens. Reluctantly, you
+ask Connolly for help. He agrees, although he also admits that one day
+his men will lock Ponzi up instead of saving him from justifiable
+revenge.""",
+            actions={'OK': lambda game_state: modify_state(game_state, {'safety': -2})}
+        )),
+
+        "Police is not Ponzi's personal guard": lambda state: spawn_immediately(state, BasicEvent(
+            name=ponzi_event.title,
+            description=
+            """You refuse - Ponzi is a citizen like any other, he deserves no
+special treatment. Maybe next time he should try not conning other
+people out of their money - that would be a decent way to have less
+people angry with him.
+
+After a few days, Peter is still not in the hospital. You get the
+feeling that he's just getting paranoid (a clear sign of a dirty
+conscience). Still, this doesn't stop him from telling all his merchant
+friends that the city doesn't care if an honest businessman and council
+member is nearly getting murdered in broad daylight. Your reputation
+suffers a bit.""",
+            actions={'OK': lambda game_state: modify_state(game_state, {'prestige': -1})}
+        ))
+    }
+)
+
+workers_event = BasicEvent(
+    name="Unexpected Change of Profession",
+    description=
+    """When going over the city's budget, you notice that in the last few
+weeks, there's been a significant drop in the output of the factories.
+You decide to bring the problem up during the council meeting and ask
+Martell for explanation. She tells you that a group of workers
+quit their jobs to do something else.
+
+This seems very unusual: experienced factory workers possess skills and
+knowledge unavailable to common citizens which also means they can earn
+a lot of money in the factories - after all, this is why the guilds got
+so powerful in the first place. As always, you find it impossible to
+extract any more information from the council's resident guild member
+though - when asked for details, she only responds with a shrug.""",
+    actions={
+
+        "Invest in new factory workers": lambda state: BasicEvent(
+            name=workers_event.title,
+            description=
+            """You decide to spend money to train new workers to replace the ones that
+left their jobs. In an uncharacteristic display of generosity,
+the guilds agree to quickly accept them as apprentices and share some of
+the training costs. While the new workers still lack the experience of
+the old ones, in a few weeks the output of your factories is more or
+less back to normal.""",
+            actions={'OK': lambda game_state: modify_state(game_state, {'money': -500})}
+        ),
+
+        "Investigate the issue": lambda state: BasicEvent(
+            name=workers_event.title,
+            description=
+            """There must be something more to this. You spend the next few evenings
+finding out as much as you can about the factory workers. When you know
+their names and addresses, you pay each and every one of them a visit,
+expressing your concerns about the shortage of factory workers.
+
+Unfortunately, none of the workers want to go back to their old jobs.
+Some say they're afraid of workplace accidents, others claim they got
+bored of the tedious, repetitive work they keep doing, a few say that
+they managed to save enough money to be able to pursue the jobs they
+wanted, not the ones that give them the biggest payout.
+
+You find it strange that all of them quit at more or less the same time.
+Even stranger is the fact that while some became merchants or decided
+to volunteer at the hospital, most of them are eager to become a part
+of the city's police force, claiming that there's a problem with crime
+and corruption that needs to be solved.""",
+            actions={'OK': lambda game_state: modify_state(game_state, {'tech': -2})}
+        ),
+
+        "Ignore it": lambda state: BasicEvent(
+            name=workers_event.title,
+            description=
+            """Some of the factory workers got sick of all the noise and dirt of
+the factories? You can understand that. Maybe they don't want to have
+their arms crushed in the gears of a malfunctioning machine, maybe
+they just find the whole thing excruciatingly boring or maybe they want
+to do something more interesting or meaningful. You decide to let them
+do whatever they want - after all, they're free to choose. Plus, less
+people in the factories means less people under the influence of
+the guilds, which is always a good thing.""",
+            actions={'OK': lambda game_state: modify_state(game_state, {'tech': -2})}
+        )
+    }
+)
+
+guild_ball_event_branch2 = deepcopy(guild_ball_event_branch1)
+guild_ball_event_branch2.actions["Observe"] = lambda state: spawn_immediately(state, BasicEvent(
+    name=guild_ball_event_branch2.title,
+    description=
+    """As you approach the small gathering of guild members, it begins
+to disperse slowly until only the man in the center of it all remains.
+He smiles and introduces himself as Charles Pope. After a bit of
+smalltalk that was so brief it could as well be nonexistent, he steers
+the discussion towards politics.
+
+It seems that he's still bitter about your decision to send Eliza
+to the University - apparently, she was just what the city needed and
+now she'll just waste her talent on trying to answer the impossible
+question until she grows old, bitter and insane enough to become
+a professor. He then claims that it ultimately doesn't matter because
+the ability to adapt is a necessary for everyone involved in politics.
+He claims that most people are either too morally inflexible, unwilling
+to use violence or deception, or too reckless with their power, using
+them indiscriminately and unable to play the long game. A great
+politician, he says, needs to be ruthless to stay in power but also
+subtle enough to avoid antagonizing the public.
+
+After a long discussion, he describes a hypothetical situation in which
+you're supposed to fight against a physically stronger enemy. He asks
+whether you'd try to become stronger to be able to engage him in
+direct combat, outsmart him with a dirty trick or find allies who would
+fight alongside you. He disappears before you can answer.
+""",
+    actions={
+
+        "Try to find him": lambda state: spawn_immediately(state, BasicEvent(
+            name=guild_ball_event_branch1.title,
+            description=
+            """Once again, you try to filter out all the noise and look for what's
+important. Unfortunately, it seems that nothing is. You walk around
+the factory hall, trying to find the strange man with a lot to say about
+politics and religion but it looks like he simply vanished. After
+an hour, you get visibly frustrated. After two, your behavior starts
+bothering the guild members and you get asked to leave.""",
+            actions={'OK': lambda game_state: modify_state(game_state, {'prestige': -2})}
+        )),
+
+        "Try to forget about the encounter": lambda state: spawn_immediately(state, BasicEvent(
+            name=guild_ball_event_branch1.title,
+            description=
+            """You're not sure why but you find the whole situation unsettling. It's
+clear that the man has his own agenda, and as is always the case with
+the guilds, his agenda is different from your own. Suddenly, the whole
+factory appears more hostile than it used to be and the unclear
+circumstances under which you ended up here are making it much worse.
+You decide that the only cure for this is alcohol.
+
+In the morning, you wake up with a terrible hangover. The memories are
+hazy but you're pretty sure you were talked into agreeing to some
+horrible business proposal by an owner of one of the factories.""",
+            actions={'OK': lambda game_state: modify_state(game_state, {'money': -500})}
+        )),
+
+        "Leave": lambda state: spawn_immediately(state, BasicEvent(
+            name=guild_ball_event_branch1.title,
+            description=
+            """You're not sure why but you find the whole situation unsettling. It's
+clear that the man has his own agenda, and as is always the case with
+the guilds, his agenda is different from your own. Suddenly, the whole
+factory appears more hostile than it used to be and the unclear
+circumstances under which you ended up here are making it much worse.
+You decide it's better to just leave this place.""",
+            actions={'OK': lambda game_state: None}
+        ))
+    }
+).chain_unconditionally(lambda game_state: spawn_after_n_turns(game_state, BasicEvent(
+    name="The Aftermath",
+    description=
+    """You keep thinking about the guilds' secret ball and your discussion
+with Charles Pope. It's obvious that he's planning something, and that
+it will not end well for you.
+
+When you think of the conversations you had with the man, one thing
+clearly stands out: his thoughts on political strategy. It seems that
+his approach to gaining power includes the use of force and manipulation
+while simultaneously maintaining a good public image. Maybe
+a well-executed counterattack will be able to prevent disaster. Maybe
+it isn't too late.""",
+    actions={
+
+        "Focus on safety": lambda g_state: spawn_immediately(g_state, BasicEvent(
+            name="The Aftermath",
+            description=
+            """Pope may be a good enough liar to both get public support and
+attack you from the shadows but when it comes to pure force, he won't
+be able to stand against the city's police. You ask Connolly to hire
+more men and increase the patrols around workshops and factories, maybe
+arresting some prominent guild members if he can find a good enough
+reason. This will be fairly expensive and won't make you popular but
+it may help you stay in power.""",
+            actions={'OK': lambda gstate: modify_state(gstate, {'safety': 1, 'prestige': -3, 'money': -500})}
+        )),
+
+        "Infiltrate the guilds": lambda g_state: spawn_immediately(g_state, BasicEvent(
+            name="The Afetrmath",
+            description=
+            """If the guilds want to play dirty, you will play dirty. But first, you
+must find out what is it that they're actually trying to achieve. To do
+so, you'll get some of your trusted men to become apprentices and then
+move upwards through the guild hierarchy.
+
+Unfortunately, your plan ends as soon as it started. A few days after
+you send your agents, Isabel Martell comes to your office to complain about
+your obvious attempts at infiltration. Apparently, some of the factory
+workers decided to go on strike to protest your behavior and the general
+public is now thinking that you're so paranoid that you'll try to spy
+even on those who work hard and help those in need.""",
+            actions={'OK': lambda gstate: modify_state(gstate, {'presitge': -3, 'tech': -3})}
+        )),
+
+        "Become more popular": lambda g_state: spawn_immediately(g_state, BasicEvent(
+            name="The Aftermath",
+            description=
+            """In recent years, the guilds have done a lot of charity work. Was it all
+just a plan to get people to support them? Even if it wasn't, it
+definitely made them popular. You're going to do the same thing: just
+give people money and maybe if you give them enough, they'll like you
+more than they like Pope and others like him.""",
+            actions={'OK': lambda gstate: modify_state(gstate, {'money': -500, 'prestige': 1})}
+        )),
+
+        "Stay calm": lambda g_state: spawn_immediately(g_state, BasicEvent(
+            name="The Aftermath",
+            description=
+            """Pope wouldn't tell you about his strategy if he thought you'll be
+able to beat him. Either he's trying to make you act irrationally or
+he already won and nothing you're going to do can change it. Either way,
+there's no use trying to obsessively analyze his words in search of
+the solution. The best thing you can do now is to continue what you were
+doing before and hope it's good enough.""",
+            actions={'OK': lambda gstate: None}
+        ))
+    }
+), 1)))
+
+martell_ending = BasicEvent(
+    name="The Arrest",
+    description=
+    """A relatively uneventful city council meeting gets suddenly interrupted
+by someone breaking through the door. After you recover from the initial
+shock, you notice that the attacker is wearing a police uniform. Before
+you have time to say anything, a few more police offers run into the room,
+grab Peter Ponzi and escort him out of the door.
+
+Confused, you look towards Connolly. Before you even ask him a question,
+he admits that yes, Ponzi is getting arrested. He might be a member
+of the council but even city officials cannot be allowed to commit fraud
+and after a recent anonymous tip, the police finally has enough evidence
+to lock him up.""",
+    actions={
+
+        "Is this a joke?": lambda state: spawn_immediately(state, BasicEvent(
+            name=martell_ending.title,
+            description=
+            """You try to protest - that man is not a criminal, he's a member of
+the city council. They can't just take him to prison like a common thief.
+
+Connolly assures you that yes, they are allowed to arrest council
+members if they commit crimes. Peter might not be a common thief
+but he's a thief nonetheless. There's really nothing you can do right now
+other than looking for a new, preferably more honest, advisor.""",
+            actions={'OK': lambda game_state: None}
+        )),
+
+        "What took you so long?": lambda state: spawn_immediately(state, BasicEvent(
+            name=martell_ending.title,
+            description=
+            """You congratulate the police on doing their job and express hopes that
+in the future, dishonest people will be caught before they can do so
+much damage. Now, the council will need a new member to represent
+the interests of merchants but hopefully they will find someone who's
+less of a criminal.""",
+            actions={'OK': lambda game_state: None}
+        ))
+    }
+).chain_unconditionally(lambda state: spawn_next_season(state, BasicEvent(
+    name="Death in the Council",
+    description=
+    """At this time of the year, the weather is usually horrible. It's either
+rain, wind, cold or all of the above at the same time. All in all,
+a perfect weather for a funeral.
+
+You can't believe that Connolly is dead. He's been a member of
+the council since the very beginning and he was one of the most
+trustworthy people in the whole city (although this isn't a big
+accomplishment- it would be far more difficult to become one of
+the least trustworthy people here). This might be what got him
+killed - apparently, some of the Ponzi's shadier friends have
+sworn revenge on him after the recent arrest.
+
+After the burial, you talk to some of the policemen. They assure you
+that they're working on the case and that they even have
+a likely suspect. The one responsible for the murder will
+soon end up in prison.""",
+    actions={'OK': lambda game_state: spawn_after_n_turns(game_state, BasicEvent(
+        name="ENDING: Hostile Takeover",
+        description=
+        """Police officers who used to be factory workers escort you out
+of the city hall and put you in a cell. You are arrested for
+the murder of George John Connolly - apparently, you killed him because you
+were afraid that after catching Peter Ponzi, your partner in crime,
+he'll uncover your many illegal sources of income. You find out about
+some of your shady businesses from Isabel Martell's testimony (she says
+that you demanded bribes from her and other guild members, threatening
+to shut down the factories if they don't pay you). Everybody believes
+her side of the story and doesn't want to listen to your
+explanations - after all, you spent many years fighting a political
+war against the guilds while the guilds were working hard to
+improve their public image and become known as the city's benefactors.
+You spend the rest of your life in prison.
+
+You're not alone here - as years go by, all the other members
+of your council end up in neighboring cells. Isabel is the only
+exception - apparently, she became the new mayor and is now turning
+the city into the nation's most important industrial centers.
+Other prisoners are whispering that she's not the actual leader
+and that the strings are being pulled by someone named Charles Pope.
+You do not concern yourself with this - politics is what landed
+you in prison, getting yourself involved with it once again would
+probably get you killed.
+
+You do not meet Eliza again - she visits her home town after
+getting a University degree but she doesn't care about the politicians
+who used to run this place when she was a child. She meets with her
+parents, visits a few factories, talks to some of the guild members
+and leaves. She then tries to send someone to look for children
+unaffected by the plague, although her plans are stopped by Martell.
+Guilds need immune workers, spending their time with a bunch
+of sheltered academics would only waste their time and talent.
+
+The city becomes an oligarchy ruled by the guild elite. For most
+people, not much changes - but anyone who tries to become a politician,
+a craftsman or a businessman without Pope's approval soon
+ends up dead or imprisoned.
+
+Machines in the factories keep going at their own pace, and it
+doesn't seem that they'll stop anytime soon.""",
+        actions=eliza_ending.actions
+    ), 30)}
+), 3))
 
 knowledge_merchant_building = BasicBuilding(
     name="Knowledge Merchant",
@@ -1137,10 +1680,18 @@ trade_school_b = BasicBuilding(
     per_turn_effects={"money": -50}
 )
 
-tech_museum_building = BasicBuilding(
+tech_museum_a = BasicBuilding(
     name="Museum of Technology",
     description="Resting place for everything too broken to actually work but complex enough to impress the masses.",
     base_price=100,
     additional_effects={"technology": -1},
     per_turn_effects={"money": 10}
+)
+
+tech_museum_b = BasicBuilding(
+    name=tech_museum_a.name,
+    description="A city-funded educational establishment in which the citizens can learn the inner workings of complex machines.",
+    base_price=100,
+    additional_effects={"technology": 1, "prestige": 1},
+    per_turn_effects={"money": -50}
 )
