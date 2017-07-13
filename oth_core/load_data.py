@@ -20,4 +20,16 @@ def get_basic_special_actions():
 
 
 def get_nonrandom_events():
-    return []
+    from base_content.dispatcher_event import DispatcherEvent
+    return [DispatcherEvent(_get_stories())]
+
+
+def _get_stories():
+    import pkgutil
+    import stories
+    ret = []
+    for importer, module, ispackage in pkgutil.iter_modules(stories.__path__):
+        if not ispackage:
+            story = importer.find_module(module).load_module(module)
+            ret.append((story.get, story.should_enter_branch))
+    return ret
