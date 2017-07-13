@@ -5,9 +5,7 @@ from random import randint, shuffle
 
 from . import buildings
 from . import load_data
-from . import special_actions
 from . import terrain
-from . import text_events
 from oth_core.game_errors import GameplayError, InternalError, GameOver
 from oth_core.timers_and_counters import Counter, Flags
 
@@ -104,17 +102,16 @@ class Game(object):
         self._event_queue = deque()
 
         # available random events (each turn, there is a chance that one of them will be added to _event_queue)
-        self._event_active_deck = deque(text_events.get_basic_random_events())
+        self._event_active_deck = deque()
 
         # random events not yet unlocked
-        self._event_inactive_deck = []
+        self._event_inactive_deck = deque(load_data.get_basic_random_events())
 
         # special actions that the player can perform
-        self.special_actions = special_actions.get_basic_actions()
+        self.special_actions = load_data.get_basic_special_actions()
 
         # events that will be triggered deterministically when a condition is met
-        # self.nonrandom_events = load_data.get_nonrandom_events() #TODO: nonrandom.json
-        self.nonrandom_events = []
+        self.nonrandom_events = load_data.get_nonrandom_events()
 
         # list of timers
         self.timers = []
