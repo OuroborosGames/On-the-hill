@@ -11,7 +11,8 @@ def get():
 
 
 def should_enter_branch(state):
-    return True if attr_greater(state, "technology", 10) else False
+    # return True if attr_greater(state, "technology", 10) else False
+    return True
 
 
 # those should be self-explanatory: used for branch 1 when this variable is important
