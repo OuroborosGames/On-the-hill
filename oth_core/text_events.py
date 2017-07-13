@@ -21,18 +21,18 @@ class TextEventPrototype(object):
     def __init__(self):
         self.title = "Test event"
         self.description = "Something happens"
-        self._actions = {'OK': lambda state: None}
+        self.actions = {'OK': lambda state: None}
         self.should_be_activated = lambda state: True
         self.should_be_deactivated = lambda state: False
 
     def get_actions(self):
         ret = []
-        for action in self._actions:
+        for action in self.actions:
             ret.append(action)
         return ret
 
     def perform_action(self, action, state):
-        return self._actions[action](state)
+        return self.actions[action](state)
 
 
 class BasicEvent(TextEventPrototype):
