@@ -13,7 +13,7 @@ def dispatch(stories):
 
 class DispatcherEvent(text_events.TextEventPrototype):
     def __init__(self, stories):
-        super().__init__()
+        super(DispatcherEvent, self).__init__()
         self.title = "Prophetic Dreams?"
         self.description = """One morning, you wake up with the feeling that the dream you had that night was
         not merely a dream but a detailed and vivid vision of the future. Unfortunately, all those details vanish
