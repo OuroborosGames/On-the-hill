@@ -8,6 +8,7 @@ from . import load_data
 from . import terrain
 from oth_core.game_errors import GameplayError, InternalError, GameOver
 from oth_core.timers_and_counters import Counter, Flags
+from oth_core import cloudpickle
 
 
 class GameFacade(object):
@@ -27,14 +28,24 @@ class GameFacade(object):
     def close_game(self):
         self._game = None
 
-    # TODO: saving and loading
     def load_game(self, filename):
         self._only_if_not_started()
-        raise InternalError("Not implemented")
+
+        # I spent two fucking days getting angry and trying to beat pickle/cloudpickle into submission, without much
+        # success - but the real solution is that one single line below:
+        # a game object needs to be created to initialize all the dynamically resolved modules in stories package
+        # (and possibly some other things);
+        # if we don't do that, unpickler gets confused and throws errors
+        self._game = Game("",0,0)
+        # am I dumb for not finding out earlier? probably
+
+        with open(filename, 'rb') as f:
+            self._game = cloudpickle.load(f)
 
     def save_game(self, filename):
         self._only_if_game_started()
-        raise InternalError("Not implemented")
+        with open(filename, 'wb') as f:
+            cloudpickle.dump(self._game, f)
 
     # check game mode - useful for loading savefile if GUI supports multiple modes
     def get_game_mode(self):
