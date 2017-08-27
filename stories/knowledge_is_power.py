@@ -108,7 +108,7 @@ who doesn't suffer from the white plague is a dream come true for them.
 But they know you have no other choice and they are ready to use that
 knowledge to their advantage.
 
-After many more days of frustration, you reach an agreement: CHARACTER3
+After many more days of frustration, you reach an agreement: Gutenberg
 will learn from the best workers in each profession, but only after
 the city donates a generous amount of money to the guilds.""",
         actions={'OK': decrease_loyalty}
@@ -176,12 +176,12 @@ to care for the ill and take part in council meetings.""",
             name="The Occult Educator",
             description=
             """You try to think of a convincing excuse and end up arguing that right
-now CHARACTER3 must focus on understanding the intricacies of mechanical
+now Eliza must focus on understanding the intricacies of mechanical
 engineering and learn how to repair trains. This, of course, isn't true,
 but if it was possible to reason with him then he'd stop trying to
 uncover the hidden truth (or whatever it is he's looking for) when it
 became apparent that he's confusing knowledge with the legends he heard
-on some remote desert. And what CHARACTER3 needs is real knowledge,
+on some remote desert. And what Eliza needs is real knowledge,
 not legends and fairy tales.""",
             actions={'OK': lambda game_state: None}
         ))
@@ -208,7 +208,7 @@ free.""",
         'Agree': lambda state: spawn_immediately(state, BasicEvent(
             name="Girl in the Museum",
             description=
-            """You send CHARACTER3 to Museum of Technology. After one visit, she keeps
+            """You send Eliza to Museum of Technology. After one visit, she keeps
 going there a few times a month. Unfortunately, she doesn't seem to
 learn anything about the machines there - the only thing she talks about
 after going there is some strange, rambling philosophy. After a while,
@@ -224,7 +224,7 @@ the machines are alive, powerful and terrifying.""",
             name="Girl in the Museum",
             description=
             """If they want to preach their insane philosophy and pretend they're
-teaching something useful, they're free to do that - but CHARACTER3
+teaching something useful, they're free to do that - but Eliza
 needs something better than this. You tell them that if the guilds want
 her to learn, they'd better offer her some real knowledge instead of
 cheap tricks designed to fool people into thinking that they're wiser
@@ -244,7 +244,7 @@ nobody: the library. Just what the hell where you thinking when you
 decided to build this thing?
 
 You're about to order some workers to demolish it until you realize
-that maybe it isn't so useless after all. Maybe CHARACTER3 can dig
+that maybe it isn't so useless after all. Maybe Eliza can dig
 through the books that gather dust there, maybe she can understand
 the words on their pages and maybe, just maybe, among the piles
 of boring diaries, useless government records from previous centuries
@@ -368,15 +368,15 @@ situation.""",
             """You decide to let someone else take care of the girl while you prevent
 the city from descending into chaos. Because everyone else is also
 preoccupied with preventing the city from descending into chaos,
-the only person who has time to be a teacher right now is CHARACTER4
+the only person who has time to be a teacher right now is Isabel
 (she doesn't seem to care that much about rioting and disease as long
 as workshops and factories are not suffering), always eager to impart
-carefully selected, guild-approved knowledge upon CHARACTER3.
+carefully selected, guild-approved knowledge upon Eliza.
 
-This division of responsibilities seems to work well: CHARACTER4 stops
-complaining about your policies for a while, CHARACTER3 gets to learn
+This division of responsibilities seems to work well: Martell stops
+complaining about your policies for a while, Gutenberg gets to learn
 something and you manage to use all your diplomatic skills to a great
-effect - in the end, the merchants are happy, CHARACTER1 is only
+effect - in the end, the merchants are happy, Ponzi is only
 slightly more broke than he usually is and the doctors do their job
 without killing any patients.""",
             actions={'OK': riot_prevent}
@@ -815,11 +815,11 @@ workers. The city prospers.""",
 pope_ending = BasicEvent(
     name=eliza_ending.title,
     description=
-    """A small crowd has gathered in the city hall. It is CHARACTER3's
+    """A small crowd has gathered in the city hall. It is Eliza's
 graduation ceremony, and it might not look like what they have at
 the University but it sure feels this way to everyone in the room.
 The young woman's parents make a big speech, thanking everyone who ever
-taught the girl. CHARACTER3 also makes a speech, praising the city's
+taught the girl. Gutenberg also makes a speech, praising the city's
 efforts to educate her without separating her from her family. She ends
 the monologue by announcing that she is going to join the engineers'
 guild to work on the machines that will improve our lives.""",
@@ -837,7 +837,7 @@ as he thinks that work and worship are deeply connected.
 Despite her protests, the machine cult starts worshipping Eliza Gutenberg
 as The Enlightener. This causes a small sect to break off from the group
 under Isabel Martell's leadership. After a mysterious explosion in one of
-the factories kills CHARACTER2, the cult is blamed for her death.
+the factories kills Eliza Gutenberg, the cult is blamed for her death.
 The cult's orthodox branch reacts violently, with Martell being
 the only survivor as she managed to run away from the city before
 the purge. Some say this was all planned beforehand, and that
@@ -869,14 +869,14 @@ enlightener_ending = BasicEvent(
     """Once again, you find yourself inside a large factory hall. It is
 different this time: the crowd of well-dressed guild members is not
 having a party, they're listening to someone giving a speech. You move
-to the front and notice that the speaker is CHARACTER3. She's standing
+to the front and notice that the speaker is Eliza. She's standing
 on a raised platform and she's dressed in what at first appears to be
 factory workers' protective clothing but is in fact purely decorative:
 the fabric is too light to protect her from anything and she has a lot
 of jewelry that is against every safety code you've ever heard of.
 You realize that this is a ceremonial costume.
 
-CHARACTER3 speaks loudly, almost shouting - maybe for dramatic effect,
+Gutenberg speaks loudly, almost shouting - maybe for dramatic effect,
 maybe to be heard over the noise of the machines. She criticizes you
 and the city council while praising the guilds, claiming they saved
 her from the ignorance and darkness. But the dark days will be over
@@ -963,7 +963,7 @@ made the whole system more friendly towards the poorer citizens -
 the teacher now has to share profits with the apprentice instead of
 'paying' by allowing him the access to workshop and tools.
 
-While CHARACTER4 claims it's all done for the greater good, you have
+While Martell claims it's all done for the greater good, you have
 a feeling that there's something shady about the whole affair. Guilds
 are not charities - they want money and power for themselves, and if
 they're pretending to be altruist, it has to be because their plans
@@ -1557,7 +1557,7 @@ workshops and factories from time to time, but we can live with that.""",
             description=
             """A city making money from false schools? This has to be one of the worst
 ideas you've ever heard. It's too stupid too work, it's immoral and it
-just isn't how cities make money. If CHARACTER1 was the one in charge,
+just isn't how cities make money. If Ponzi was the one in charge,
 our police would be participating in burglaries and robberies instead
 of stopping them.""",
             actions={'OK': lambda game_state: game_state.counter.increment("Eliza loyalty")}
@@ -1586,7 +1586,7 @@ the family.""",
                 description=
                 """They raised the child, fed her, bought her clothes, spent what little
 money the had on her well-being. Their efforts will be rewarded as now
-they'll give CHARACTER3 something that few other children can dream of:
+they'll give Eliza something that few other children can dream of:
 a future. They'll also receive half of the University donation because
 while virtue might be its own reward, sometimes people need a more
 concrete incentive to do the right thing.""",
@@ -1612,7 +1612,7 @@ before you lock them up with all the other thieves!""",
             lambda state: spawn_immediately(state, BasicEvent(
                 name="No place like home",
                 description=
-                """What CHARACTER3 needs is a family, and her family is here. A bunch of
+                """What Eliza needs is a family, and her family is here. A bunch of
 pretentious academics will never be able to replace that. The child will
 stay here and you'll give her the best education you can. It won't
 be as good as what the University teaches (not even close) - but it
