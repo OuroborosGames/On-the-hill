@@ -70,10 +70,6 @@ class ConditionalEvent(BasicEvent):
         self.should_be_deactivated = lambda state: not condition(state)
 
 
-def get_basic_random_events():
-    return [TextEventPrototype(), TextEventPrototype(), TextEventPrototype()]
-
-
 # a bunch of horrible functions (should have been lambdas) that will be useful for data-driven object creation
 
 # horrible mutators (use for actions)
