@@ -20,8 +20,7 @@ class BuildingPrototype(object):
         self.additional_effects = {'health': 0, 'technology': 0, 'prestige': 0, 'food': 0, 'safety': 0}
         self.per_turn_effects = {'money': - 10}  # upkeep cost moved to per_turn_effects
 
-    @staticmethod
-    def can_be_built(map_tile, neighbors):
+    def can_be_built(self, map_tile, neighbors):
         return True
 
     def on_build(self, state):
@@ -55,8 +54,7 @@ class BasicBuilding(BuildingPrototype):
         self.additional_effects = additional_effects
         self.per_turn_effects = per_turn_effects
 
-    @staticmethod
-    def can_be_built(map_tile, neighbors):
+    def can_be_built(self, map_tile, neighbors):
         return has_neighboring_buildings(neighbors) and not is_on_water_tile(map_tile)
 
 
@@ -81,7 +79,10 @@ class CustomBuilding(BasicBuilding):
     """Fuck it, just write your own damn predicate"""
     def __init__(self, name, description, base_price, additional_effects, per_turn_effects, build_predicate):
         super(CustomBuilding, self).__init__(name, description, base_price, additional_effects, per_turn_effects)
-        self.can_be_built = build_predicate
+        self.predicate = build_predicate
+
+    def can_be_built(self, map_tile, neighbors):
+        self.predicate(map_tile, neighbors)
 
 
 def has_neighboring_buildings(neighbors):
