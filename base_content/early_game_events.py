@@ -4,7 +4,7 @@ import base_content.buildings
 
 
 def get_random_events():
-    return [speakers_hall_event, political_unrest_event, cold_winter_event]
+    return [speakers_hall_event, political_unrest_event, cold_winter_event, the_artist_leaves]
 
 
 def get_nonrandom_events():
@@ -113,4 +113,21 @@ cold_winter_event = BasicEvent(
     ),
                                               1)),
                                                    0)}
+)
+
+the_artist_leaves = EarlyGameEvent(
+    name="The artist leaves",
+    description=
+    """A painter, unknown to the general public but popular in the city's art community,
+    decides to leave the town and move elsewhere. When asked why, he claims that it's
+    because it's the most boeing, backwards place he's ever seen, that nobody here appreciates
+    real talent and that the only way to succeed here is to repair watches, sell cheap
+    beer or just become a thief.
+
+    After a few weeks, nobody remembers the painter - either as an artist or as a person.
+    Unfortunately, the one thing that does remain in public consciousness is his opinion about
+    the town. Hating the city and planning to move out becomes the fashionable thing to do as
+    everyone tries to distance themselves from the 'watchmakers, beer merchants and thieves'
+    stereotype.""",
+    actions={'OK': lambda state: modify_state(state, {'prestige': -2})}
 )
