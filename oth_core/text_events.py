@@ -67,7 +67,7 @@ class ConditionalEvent(BasicEvent):
     def __init__(self, name, description, actions, condition):
         super(ConditionalEvent, self).__init__(name, description, actions)
         self.should_be_activated = condition
-        self.should_be_deactivated = lambda state: not condition(state)
+        self.should_be_deactivated = lambda state: not self.should_be_activated(state)
 
 
 # a bunch of horrible functions (should have been lambdas) that will be useful for data-driven object creation
