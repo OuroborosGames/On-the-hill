@@ -3,7 +3,7 @@ import base_content.buildings
 
 
 def get_random_events():
-    return [speakers_hall_event]
+    return [speakers_hall_event, political_unrest_event]
 
 
 def get_nonrandom_events():
@@ -60,4 +60,23 @@ speakers_hall_event = EarlyGameEvent(
     You say that you'll consider his proposition.""",
     actions={'OK': lambda state: unlock_building(state, speakers_hall)},
     condition=lambda state: counter_greater(state, "Cafe", 0)
+)
+
+political_unrest_event = EarlyGameEvent(
+    name="Political unrest",
+    description=
+    """A group of political radicals consisting of two artists nobody has heard of,
+    one shopkeeper and one bored young man decides to stage a protest in the town square.
+    After a while, their spirited (even if copied wholesale from Enlightenment Radio)
+    tirades against the University's influence on the central government get interrupted
+    by a slightly larger group of physical laborers who don't share their controversial
+    worldview.
+
+    Before the police arrives on the scene, everyone is gone. Despite the whole affair
+    having no actual impact on anyone's life, both sides of the conflict are now certain
+    that a violent revolution is coming and that they need to be prepared to fight for
+    their cause. Of course, they both see you as the cause of their suffering: supporters
+    of the government think that you don't do enough to keep everyone safe while its opponents
+    claim that by not opposing the University, you're implicitly supporting it.""",
+    actions={'OK': lambda state: modify_state(state, {'safety': -2, 'prestige': -1})}
 )
