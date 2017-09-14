@@ -82,7 +82,7 @@ class CustomBuilding(BasicBuilding):
         self.predicate = build_predicate
 
     def can_be_built(self, map_tile, neighbors):
-        self.predicate(map_tile, neighbors)
+        return self.predicate(map_tile, neighbors)
 
 
 def has_neighboring_buildings(neighbors):
