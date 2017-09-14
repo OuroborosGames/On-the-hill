@@ -4,7 +4,7 @@ import base_content.buildings
 
 
 def get_random_events():
-    return [speakers_hall_event, political_unrest_event, cold_winter_event, the_artist_leaves]
+    return [speakers_hall_event, political_unrest_event, cold_winter_event, the_artist_leaves, bridge_builders]
 
 
 def get_nonrandom_events():
@@ -17,13 +17,15 @@ def is_early_game(state):
 
 class EarlyGameEvent(ConditionalEvent):
     """A class for random events that can only happen during the early game"""
+
     def __init__(self, name, description, actions, condition=None):
         super().__init__(name, description, actions, condition)
         if condition is not None:
-            self.should_be_activated = lambda state:\
+            self.should_be_activated = lambda state: \
                 (self.should_be_activated(state)) and (is_early_game(state))
         else:
             self.should_be_activated = is_early_game
+
 
 speakers_hall = base_content.buildings.BasicBuilding(
     name="Speaker's Hall",
@@ -130,4 +132,35 @@ the_artist_leaves = EarlyGameEvent(
     everyone tries to distance themselves from the 'watchmakers, beer merchants and thieves'
     stereotype.""",
     actions={'OK': lambda state: modify_state(state, {'prestige': -2, 'population': -1})}
+)
+
+bridge = base_content.buildings.CustomBuilding(
+    name="Bridge",
+    description="More convenient than using a boat.",
+    base_price=400,
+    additional_effects={},
+    per_turn_effects={'money': -10},
+    build_predicate=lambda tile, neighbors:
+    base_content.buildings.has_neighboring_buildings(neighbors) and base_content.buildings.is_on_water_tile(tile)
+)
+
+
+def unlock_bridge(state):
+    modify_state(state, {'money': -1000, 'population': 4})
+    unlock_building(state, bridge)
+
+bridge_builders = BasicEvent(
+    name="The bridge builders",
+    description=
+    """A group of travellers arrive in your town. Like more or less all travellers,
+    they are poor and dirty. Unlike most travellers, they don't ask nicely to be allowed
+    to stay. No, they claim that they will leave unless you pay them a fairly large
+    sum of money.
+
+    Before you laugh them out of the room, one of them explains that they're bridge builders
+    and that this may be your only chance to find someone who knows how to build bridges
+    that don't fall apart at the worst possible moment. This might be necessary if you
+    can't expand the city without crossing some kind of water.""",
+    actions={'Accept the offer': unlock_bridge,
+             'Turn them away': None}
 )
