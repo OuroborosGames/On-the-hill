@@ -129,5 +129,5 @@ the_artist_leaves = EarlyGameEvent(
     the town. Hating the city and planning to move out becomes the fashionable thing to do as
     everyone tries to distance themselves from the 'watchmakers, beer merchants and thieves'
     stereotype.""",
-    actions={'OK': lambda state: modify_state(state, {'prestige': -2})}
+    actions={'OK': lambda state: modify_state(state, {'prestige': -2, 'population': -1})}
 )
