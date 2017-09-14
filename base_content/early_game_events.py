@@ -1,9 +1,10 @@
 from oth_core.text_events import *
+from random import randint
 import base_content.buildings
 
 
 def get_random_events():
-    return [speakers_hall_event, political_unrest_event]
+    return [speakers_hall_event, political_unrest_event, cold_winter_event]
 
 
 def get_nonrandom_events():
@@ -79,4 +80,37 @@ political_unrest_event = EarlyGameEvent(
     of the government think that you don't do enough to keep everyone safe while its opponents
     claim that by not opposing the University, you're implicitly supporting it.""",
     actions={'OK': lambda state: modify_state(state, {'safety': -2, 'prestige': -1})}
+)
+
+cold_winter_event = BasicEvent(
+    name="Rumors of cold winter",
+    description=
+    """There's a rumor that the next winter is going to be extraordinarily harsh. When
+    you try to find out why do people believe it, they usually point to something about clouds,
+    animals or tree leaves. Some say that they just know it. While you're not entirely convinced,
+    it won't hurt to be prepared.""",
+    actions={'OK': lambda state: spawn_next_season(state, BasicEvent(
+        name="Cold days",
+        description=
+        """The cold winter arrived, just like the people predicted. The roads and buildings are covered
+        with a thick layer of snow. When you have to go outside, the wind makes you wish you stayed home
+        - but when you go inside, it's still so cold that you begin to seriously consider burning the whole
+        city down for warmth.
+
+        Parts of the town are paralyzed by the weather. Many of the people are sick. Some even froze
+        to their deaths during a particularly cold night.
+
+        You can't wait for spring.""",
+        actions={'OK': lambda game_state: modify_state(game_state, {'health': (-2 if game_state.health < 5 else -1),
+                                                                    'population': randint(-2, -20),
+                                                                    'money': -500})}
+    ).chain_unconditionally(spawn_next_season(state, BasicEvent(
+        name="The winter's gone",
+        description=
+        """Finally, the spring has come. You have survived the terrible winter. Once again, there's sun
+        and rain and hope. At least for the next few months.""",
+        actions={'OK': lambda game_state: modify_state(game_state, {'health': 1})}
+    ),
+                                              1)),
+                                                   0)}
 )
