@@ -143,7 +143,7 @@ class Game(object):
         if self.founded:
             raise InternalError("Already founded")
         town_square = buildings.CustomBuilding("Town square", "Central part from which the rest of the city grows.",
-                                               0, {}, {}, lambda tile: not buildings.is_on_water_tile(tile))
+                                               0, {}, {}, lambda tile, neighbors: not buildings.is_on_water_tile(tile))
         if not town_square.can_be_built(self.map.get_field_by_coordinates(x, y), self.map.get_neighbors(x,y)):
             raise GameplayError("Town square can't be built on water")
         self.map.add_building(town_square, x, y)
