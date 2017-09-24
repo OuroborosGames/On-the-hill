@@ -5,7 +5,7 @@ import oth_core.buildings
 
 def get_random_events():
     return [speakers_hall_event, political_unrest_event, cold_winter_event, the_artist_leaves, bridge_builders,
-            pollution_event]
+            pollution_event, park_event]
 
 
 def get_nonrandom_events():
@@ -203,5 +203,26 @@ pollution_event = EarlyGameEvent(
             deaths and more deaths?""",
             actions={'OK': lambda game_state: modify_state(game_state, {'technology': 2, 'health': -1, 'prestige': -1})}
         ))
-    }
+    },
+    condition=lambda state: counter_greater(state, 'Factory', 0)
 ).chain_unconditionally(lambda state: modify_state(state, {'population': randint(-3,-6)}))
+
+park = oth_core.buildings.BasicBuilding(
+    name="City park",
+    description="A piece of forest inside the city. Hopefully without dangerous animals.",
+    base_price=50,
+    additional_effects={'health': 1},
+    per_turn_effects={}
+)
+
+park_event = ConditionalEvent(
+    name="The lack of trees",
+    description=
+    """Farmers responsible for the city's supply of food are complaining that it's too much
+    like a city with just streets and buildings but no trees or any other kind of plants.
+    You feel tempted to dismiss those complaints as coming from people who don't understand
+    the purpose of a city but they actually might have a point. Maybe some trees would make
+    the city more pleasant.""",
+    actions={'OK': lambda state: unlock_building(state, park)},
+    condition=lambda state: counter_greater(state, 'Farm', 0)
+).chain_unconditionally(lambda state: modify_state(state, {'prestige': -1}))
