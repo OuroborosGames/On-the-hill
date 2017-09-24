@@ -5,7 +5,7 @@ import oth_core.buildings
 
 def get_random_events():
     return [speakers_hall_event, political_unrest_event, cold_winter_event, the_artist_leaves, bridge_builders,
-            pollution_event, park_event, thieves_event]
+            pollution_event, park_event, thieves_event, no_plague]
 
 
 def get_nonrandom_events():
@@ -239,4 +239,24 @@ thieves_event = EarlyGameEvent(
     to be careful. Then again, the same rumors claim that the thieves are bribing
     someone from your police force to help them avoid detection.""",
     actions={'OK': lambda state: modify_state(state, {'population': 4, 'safety': -2})}
+)
+
+no_plague = BasicEvent(
+    name="A new age?",
+    description=
+    """Generally speaking, doctors aren't happy when their patient dies - but today,
+    it seems they were relieved when they brought you what usually would be bad news
+    (and also what usually wouldn't be something they bother the city's mayor with).
+    You can't blame them.
+
+    If what they told you is true, the patient who died today was the last known person
+    in the city to be infected with what they refer to as 'acute form of the white plague'.
+    While everyone else is still infected and will still suffer from the consequences,
+    it looks like the days of mass graves and quarantines are over.
+
+    You have a feeling of entering a new age - but you also know that it will not be
+    the same as the time before the plague. We won't know everything we would like
+    to know or build the monuments to the greatness of humanity, but maybe we won't forget
+    everything and maybe our creations won't crumble to dust.""",
+    actions={'OK': lambda state: modify_state(state, {'health': 4})}
 )
