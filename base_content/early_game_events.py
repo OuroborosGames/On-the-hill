@@ -5,7 +5,7 @@ import oth_core.buildings
 
 def get_random_events():
     return [speakers_hall_event, political_unrest_event, cold_winter_event, the_artist_leaves, bridge_builders,
-            pollution_event, park_event]
+            pollution_event, park_event, thieves_event]
 
 
 def get_nonrandom_events():
@@ -226,3 +226,17 @@ park_event = ConditionalEvent(
     actions={'OK': lambda state: unlock_building(state, park)},
     condition=lambda state: counter_greater(state, 'Farm', 0)
 ).chain_unconditionally(lambda state: modify_state(state, {'prestige': -1}))
+
+thieves_event = EarlyGameEvent(
+    name="The city of thieves",
+    description=
+    """According to rumors, some of the people who recently migrated to your city
+    are professional thieves who wish to set up a base for their illegal operations
+    and to secretly educate young people about theory, practice and ethics of
+    criminal life.
+
+    You're not sure if there's truth to this rumors but you instruct the police
+    to be careful. Then again, the same rumors claim that the thieves are bribing
+    someone from your police force to help them avoid detection.""",
+    actions={'OK': lambda state: modify_state(state, {'population': 4, 'safety': -2})}
+)
