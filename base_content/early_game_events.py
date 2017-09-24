@@ -4,7 +4,8 @@ import base_content.buildings
 
 
 def get_random_events():
-    return [speakers_hall_event, political_unrest_event, cold_winter_event, the_artist_leaves, bridge_builders]
+    return [speakers_hall_event, political_unrest_event, cold_winter_event, the_artist_leaves, bridge_builders,
+            pollution_event]
 
 
 def get_nonrandom_events():
@@ -164,3 +165,43 @@ bridge_builders = BasicEvent(
     actions={'Accept the offer': unlock_bridge,
              'Turn them away': None}
 )
+
+pollution_event = EarlyGameEvent(
+    name="Poisonous air",
+    description=
+    """Recently, a few people in your town suddenly died despite not suffering from
+    any known previous illness (outside of the white plague, obviously). After the doctors
+    examine their bodies, they come to the unsettling conclusion: those people have been
+    poisoned.
+
+    The policemen assigned to the case are unable to find any suspect. However, one of them
+    notices that all of those people have been leaving close to one of the factories.
+    After the doctors study smoke coming from their chimneys, they conclude that it is, in
+    fact, potentially poisonous.
+
+    The factory's chief engineer admits that their revolutionary new method of production
+    might be the cause of the problem - but he urges you not to take action against
+    the factory. He claims that the factory's increased output is necessary to produce
+    hospital equipment, medicine, farming tools and many other necessities, and that more
+    lives will be saved than lost if it continues running.""",
+    actions={
+        'Force the factory to abandon their new method.': lambda state: spawn_immediately(state, BasicEvent(
+            name=pollution_event.title,
+            description=
+            """The engineer is obviously lying. He cares only about making profits and doesn't care
+            about the people whose lives he puts in danger. Fortunately, he is able to make a cost-benefit
+            analysis and decides that he'll make more profit if he uses conventional production methods
+            than if you shut down his factory because he was too stubborn.""",
+            actions={'OK': lambda game_state: modify_state(game_state, {'technology': -2, 'health': 1})}
+        )),
+        'Allow them to continue': lambda state: spawn_immediately(state, BasicEvent(
+            name=pollution_event.title,
+            description=
+            """The engineer is right. We need the factories. Deaths due to poisonous air might be horrible,
+            but if we can't produce all the necessities, there will be even more deaths. It sounds wrong
+            to apply a cost-benefit analysis to human lives, but what else you can do when choosing between
+            deaths and more deaths?""",
+            actions={'OK': lambda game_state: modify_state(game_state, {'technology': 2, 'health': -1, 'prestige': -1})}
+        ))
+    }
+).chain_unconditionally(lambda state: modify_state(state, {'population': randint(-3,-6)}))
