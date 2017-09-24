@@ -239,7 +239,18 @@ thieves_event = EarlyGameEvent(
     to be careful. Then again, the same rumors claim that the thieves are bribing
     someone from your police force to help them avoid detection.""",
     actions={'OK': lambda state: modify_state(state, {'population': 4, 'safety': -2})}
-)
+).chain_unconditionally(lambda state: add_inactive_event(state,ConditionalEvent(
+    name="The not-so-great heist",
+    description=
+    """It seems that nothing is sacred and no place is safe! The thieves have stolen
+    the city's money. It wasn't much - they could have easily taken more. You feel
+    that it was less about profit and more about sending you a message. They are not
+    afraid of you.""",
+    actions={'Make them afraid. Hire more police.': lambda game_state: modify_state(game_state,
+                                                                                    {'money': -500, 'safety': 2}),
+             'Do nothing': lambda game_state: None},
+    condition=lambda game_state: attr_lower(game_state, 'safety', 3)
+).chain_unconditionally(lambda game_state: modify_state(game_state, {'money': -500, 'prestige': -1}))))
 
 no_plague = BasicEvent(
     name="A new age?",
