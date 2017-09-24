@@ -1,6 +1,6 @@
 from oth_core.text_events import *
 from random import randint
-import base_content.buildings
+import oth_core.buildings
 
 
 def get_random_events():
@@ -28,7 +28,7 @@ class EarlyGameEvent(ConditionalEvent):
             self.should_be_activated = is_early_game
 
 
-speakers_hall = base_content.buildings.BasicBuilding(
+speakers_hall = oth_core.buildings.BasicBuilding(
     name="Speaker's Hall",
     description="This is a place in which people pay to hear the so-called speakers talk about boring political issues you don't care about from the perspective you don't agree with. Others pay to hear the so-called storytellers talk about interesting things which unfortunately are only products of their imagination.",
     base_price=800,
@@ -135,14 +135,14 @@ the_artist_leaves = EarlyGameEvent(
     actions={'OK': lambda state: modify_state(state, {'prestige': -2, 'population': -1})}
 )
 
-bridge = base_content.buildings.CustomBuilding(
+bridge = oth_core.buildings.CustomBuilding(
     name="Bridge",
     description="More convenient than using a boat.",
     base_price=400,
     additional_effects={'technology': -1},
     per_turn_effects={'money': -10},
     build_predicate=lambda tile, neighbors:
-    base_content.buildings.has_neighboring_buildings(neighbors) and base_content.buildings.is_on_water_tile(tile)
+    oth_core.buildings.has_neighboring_buildings(neighbors) and oth_core.buildings.is_on_water_tile(tile)
 )
 
 
