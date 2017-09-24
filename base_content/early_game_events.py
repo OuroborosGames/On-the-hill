@@ -139,7 +139,7 @@ bridge = base_content.buildings.CustomBuilding(
     name="Bridge",
     description="More convenient than using a boat.",
     base_price=400,
-    additional_effects={},
+    additional_effects={'technology': -1},
     per_turn_effects={'money': -10},
     build_predicate=lambda tile, neighbors:
     base_content.buildings.has_neighboring_buildings(neighbors) and base_content.buildings.is_on_water_tile(tile)
