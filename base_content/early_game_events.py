@@ -5,7 +5,7 @@ import oth_core.buildings
 
 def get_random_events():
     return [speakers_hall_event, political_unrest_event, cold_winter_event, the_artist_leaves, bridge_builders,
-            pollution_event, park_event, thieves_event, no_plague]
+            pollution_event, park_event, thieves_event, no_plague, futility_event]
 
 
 def get_nonrandom_events():
@@ -270,4 +270,17 @@ no_plague = BasicEvent(
     to know or build the monuments to the greatness of humanity, but maybe we won't forget
     everything and maybe our creations won't crumble to dust.""",
     actions={'OK': lambda state: modify_state(state, {'health': 4})}
+)
+
+futility_event = BasicEvent(
+    name="Exercise in futility",
+    description=
+    """You come home after a long day at work, you get the overwhelming feeling that
+    everything you're doing is entirely pointless. Your future is going to be all about
+    listening to pointless arguments in which everyone is wrong, having to choose between
+    different wrong options, get blamed for every decision you make and also get blamed
+    for not making decisions.
+
+    It is not going to get any better.""",
+    actions={'OK': lambda state: None}
 )
