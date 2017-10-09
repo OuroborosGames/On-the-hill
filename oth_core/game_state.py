@@ -328,7 +328,7 @@ class MaplessGame(Game):
 
 
 def move_between_lists(source, dest, func):
-    temp = filter(func, source)
+    temp = filter(func, copy(source))
     for t in temp:
         source.remove(t)
         dest.append(t)

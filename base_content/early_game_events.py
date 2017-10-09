@@ -23,7 +23,7 @@ class EarlyGameEvent(ConditionalEvent):
         super().__init__(name, description, actions, condition)
         if condition is not None:
             self.should_be_activated = lambda state: \
-                (self.should_be_activated(state)) and (is_early_game(state))
+                (condition(state)) and (is_early_game(state))
         else:
             self.should_be_activated = is_early_game
 
