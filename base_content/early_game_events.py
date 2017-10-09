@@ -9,7 +9,7 @@ def get_random_events():
 
 
 def get_nonrandom_events():
-    return []
+    return [city_council_event]
 
 
 def is_early_game(state):
@@ -27,6 +27,36 @@ class EarlyGameEvent(ConditionalEvent):
         else:
             self.should_be_activated = is_early_game
 
+########################################################################################################################
+#                                             non-random events go here
+
+city_council_event = ConditionalEvent(
+    name="The city council",
+    description=
+    """You begin to realize that running even a small town is more difficult than it
+    first seems. There are just too many things to consider, and you don't really know
+    anything about most of those things. You're not even sure that you know the complete
+    list of things you should know about to successfully run the city but don't.
+
+    You decide that of all the things you know that you don't know about, three are quite
+    important: making your town the kind of place that people want to live in, preventing
+    the diseases from killing everyone and making sure that all the things achieved by
+    the modern civilization doesn't end up forgotten as the society slowly reverts back
+    to living in the caves. To help with your own lack of knowledge, you decide to form
+    a city council consisting of people who know those things.
+
+    You ask members of three social groups that are known to know those things - merchants
+    as experts on making things good to the buyers, doctors as experts on helping everyone
+    stay alive and skilled workers as experts on operating and repairing obscure pre-plague
+    machines - to select the most qualified representatives for a prestigious position
+    that would allow them to help the community and defend their own interests at the same
+    time.""",
+    actions={'OK': lambda state: None},
+    condition=lambda state: state.turn == 24
+)
+
+########################################################################################################################
+#                                               random events go here
 
 speakers_hall = oth_core.buildings.BasicBuilding(
     name="Speaker's Hall",
