@@ -9,7 +9,7 @@ def get_random_events():
 
 
 def get_nonrandom_events():
-    return [city_council_event]
+    return [city_council_event, peter_ponzi]
 
 
 def is_early_game(state):
@@ -53,6 +53,31 @@ city_council_event = ConditionalEvent(
     time.""",
     actions={'OK': lambda state: None},
     condition=lambda state: state.turn == 24
+)
+
+peter_ponzi = ConditionalEvent(
+    name="Peter Ponzi",
+    description=
+    """The merchants have assured you that they have picked just the right person for
+    the city council job. Unfortunately, it also seems that they have a fairly low opinion
+    of politics and politicians as their choice of a council member is the least trustworthy
+    person you've ever seen.
+
+    Peter Ponzi, your new advisor, is a shady salesman of used everything. He's got hundreds
+    of ideas for making money, and they all include various degrees of insincerity - but he
+    assures you that if you listen to him, the city will become rich and prosperous. You have
+    your doubts, although you're pretty sure that they will make Peter Ponzi rich and prosperous.
+    He talks about everything from art to farming equipment and from wristwatches to weapons,
+    but it always comes down to assessing monetary value and convincing people to buy for
+    twice as much.
+
+    Still, it seems that as far as untrustworthy liars go, Ponzi is at least fairly competent.
+    He speaks with charisma and he makes you want to believe all his exaggerated promises of
+    wealth and fame. Even the way he looks is all about walking the fine line between
+    high-class elegance and tacky excess. Ponzi knows how to appeal to rich people and how to
+    sell things that you wouldn't even want for free.""",
+    actions={'OK': lambda state: None},
+    condition=lambda state: state.turn == 32
 )
 
 ########################################################################################################################
