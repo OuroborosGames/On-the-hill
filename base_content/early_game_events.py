@@ -9,7 +9,7 @@ def get_random_events():
 
 
 def get_nonrandom_events():
-    return [city_council_event, peter_ponzi]
+    return [city_council_event, peter_ponzi, geber_selgorn]
 
 
 def is_early_game(state):
@@ -78,6 +78,39 @@ peter_ponzi = ConditionalEvent(
     sell things that you wouldn't even want for free.""",
     actions={'OK': lambda state: None},
     condition=lambda state: state.turn == 48
+)
+
+geber_selgorn = ConditionalEvent(
+    name="Geber Selgorn",
+    description=
+    """The doctors have picked a new city council member from among their ranks. They
+    assure you that he's just the right person for the job: both competent (he was educated
+    in a better time, in a school which doesn't exist now but apparently used to be
+    well-respected and prestigious) and dedicated to selflessly helping other people
+    (when the white plague decimated entire cities, he travelled to the most heavily
+    affected regions to save as many people as he could - from tundras in the north to
+    southern deserts). You can't help but be a bit excited to be able to work with someone
+    like that.
+
+    After you meet your new advisor, you realize that what his coworkers didn't tell you
+    about him is more important than what they told. Geber Selgorn is a man with a lot of knowledge
+    and dedication, but not a lot of sanity. When he comes into your office dressed in
+    a coat (made from a fur of an animal you didn't even know existed) and a turban (which he
+    may or may not have stolen from a desert nomad) and starts talking about your city
+    as a next step in the alchemical transmutation of the world which started when the plague
+    destroyed the old world, you seriously consider locking him in an asylum (before
+    remembering that there's no asylum in your city).
+
+    Despite his apparent insanity and his (strangely unscientific for a practitioner of
+    medicine) occult interests, Selgorn is a knowledgable and experienced doctor. While you
+    find yourself unable to decide if there's more to his weird philosophy than some
+    kind of brain damage caused by the white plague, he sure knows a thing or two about
+    keeping people from dying. His advice might help you keep everyone healthy, but you
+    have a feeling that trusting him unconditionally might result in the whole town
+    getting sacrificed to a forgotten deity in exchange for the elixir of life (or at least
+    the universal solvent).""",
+    actions={'OK': lambda state: None},
+    condition=lambda state: state.turn == 72
 )
 
 ########################################################################################################################
