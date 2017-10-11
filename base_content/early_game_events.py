@@ -52,7 +52,7 @@ city_council_event = ConditionalEvent(
     that would allow them to help the community and defend their own interests at the same
     time.""",
     actions={'OK': lambda state: None},
-    condition=lambda state: state.turn == 24
+    condition=lambda state: state.turn == 36
 )
 
 peter_ponzi = ConditionalEvent(
@@ -77,7 +77,7 @@ peter_ponzi = ConditionalEvent(
     high-class elegance and tacky excess. Ponzi knows how to appeal to rich people and how to
     sell things that you wouldn't even want for free.""",
     actions={'OK': lambda state: None},
-    condition=lambda state: state.turn == 32
+    condition=lambda state: state.turn == 48
 )
 
 ########################################################################################################################
