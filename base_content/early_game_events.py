@@ -167,10 +167,10 @@ george_connolly = ConditionalEvent(
 
 # TODO: write an event that transitions into mid-game
 def go_to_mid_game(state):
-    import base_content.mid_game_events as events
-    state.branch = ""  # TODO
-    state._event_inactive_deck.extend(events.get_random_events())
-    state.nonrandom_events    .extend(events.get_nonrandom_events())
+    import base_content.mid_game_events as mid_game
+    state.branch = mid_game.BRANCH_NAME
+    state._event_inactive_deck.extend(mid_game.get_random_events())
+    state.nonrandom_events    .extend(mid_game.get_nonrandom_events())
 
 transition_event = ConditionalEvent(
     name="",  # TODO
