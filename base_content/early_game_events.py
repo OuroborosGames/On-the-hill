@@ -9,7 +9,7 @@ def get_random_events():
 
 
 def get_nonrandom_events():
-    return [city_council_event, peter_ponzi, geber_selgorn]
+    return [city_council_event, peter_ponzi, geber_selgorn, isabel_martell]
 
 
 def is_early_game(state):
@@ -111,6 +111,32 @@ geber_selgorn = ConditionalEvent(
     the universal solvent).""",
     actions={'OK': lambda state: None},
     condition=lambda state: state.turn == 72
+)
+
+isabel_martell = ConditionalEvent(
+    name="Isabel Martell",
+    description=
+    """It took a long time before the members of worker guilds decided on their city council
+    representative. Unlike the merchants and the doctors, they don't go out of their way
+    to convince you that your new advisor will be good for the job - they just introduce
+    you to the person and go back to their own business.
+
+    Isabel Martell, the newest member of your council, appears to be determined and ambitious.
+    She wasn't chosen for the position - she decided that this is what she wants to do,
+    then she convinced the guilds that this is the thing that's worth doing. When telling
+    you about how she left watchmaking to participate in local politics, she claims that
+    from now on, the guilds will be politically active to keep the knowledge from being
+    forgotten, but also to keep it from becoming a secret known only to the University.
+    She tells you about her plans for the future: apprenticeship opportunities for young
+    people, great factories and the society that slowly grows back to what it was before
+    the white plague.
+
+    You're not sure if you believe in her plan. You're not even sure if she believes in it.
+    What you do know is that she's ambitious enough to help the city achieve something,
+    but you can't be sure what will it be. You hope that it will at least be better than
+    the slow decline that will inevitably happen if you don't do anything.""",
+    actions={'OK': lambda state: None},
+    condition=lambda state: state.turn == 84
 )
 
 ########################################################################################################################
