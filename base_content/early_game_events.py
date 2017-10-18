@@ -9,7 +9,7 @@ def get_random_events():
 
 
 def get_nonrandom_events():
-    return [city_council_event, peter_ponzi, geber_selgorn, isabel_martell]
+    return [city_council_event, peter_ponzi, geber_selgorn, isabel_martell, george_connolly]
 
 
 def is_early_game(state):
@@ -137,6 +137,31 @@ isabel_martell = ConditionalEvent(
     the slow decline that will inevitably happen if you don't do anything.""",
     actions={'OK': lambda state: None},
     condition=lambda state: state.turn == 84
+)
+
+george_connolly = ConditionalEvent(
+    name="George John Connolly",
+    description=
+    """Just when you thought that you're done with assembling the city council, the city's
+    police chief arrives in your office to tell you that the central government assigned him
+    to make sure that all the state-wide laws are respected, the citizens are safe and crime
+    is kept in check.
+
+    George John Connolly, your newest advisor, is a tired-looking man who's probably old
+    enough to retire. He's got many years of experience as a police officer under his belt,
+    he is respected by his subordinates and even some of the citizen think of him as a hero.
+    When talking to you, he makes sure to let you know that he's not a bureaucrat who wants to
+    ensure a pedantic adherence to procedures and that his goal is to keep the citizens safe
+    no matter the cost, not to create the appearance of safety by having policemen on every
+    corner and prisons full of small-time pickpockets.
+
+    You have a feeling that Connolly might be the right person for the job. In fact, you
+    begin to realize that he, the person you didn't even consider as a potential member of
+    the council, might be the only person who knows what he's doing. It seems that compared to
+    him, everyone else - especially you - is stumbling around in the darkness and desperately
+    trying not to break anything.""",
+    actions={'OK': lambda state: None},
+    condition=lambda state: state.turn == 99
 )
 
 ########################################################################################################################
