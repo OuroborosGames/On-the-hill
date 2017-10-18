@@ -9,7 +9,7 @@ def get_random_events():
 
 
 def get_nonrandom_events():
-    return [city_council_event, peter_ponzi, geber_selgorn, isabel_martell, george_connolly]
+    return [city_council_event, peter_ponzi, geber_selgorn, isabel_martell, george_connolly, transition_event]
 
 
 def is_early_game(state):
@@ -162,6 +162,16 @@ george_connolly = ConditionalEvent(
     trying not to break anything.""",
     actions={'OK': lambda state: None},
     condition=lambda state: state.turn == 99
+)
+
+# TODO: write an event that transitions into mid-game
+transition_event = ConditionalEvent(
+    name="",
+    description=
+    """ """,
+    actions={'OK': lambda state: None},
+    # condition=lambda state: state.turn == 120,
+    condition=lambda state: False
 )
 
 ########################################################################################################################
