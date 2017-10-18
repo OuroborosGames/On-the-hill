@@ -164,14 +164,21 @@ george_connolly = ConditionalEvent(
     condition=lambda state: state.turn == 99
 )
 
+
 # TODO: write an event that transitions into mid-game
+def go_to_mid_game(state):
+    import base_content.mid_game_events as events
+    state.branch = ""  # TODO
+    state._event_inactive_deck.extend(events.get_random_events())
+    state.nonrandom_events    .extend(events.get_nonrandom_events())
+
 transition_event = ConditionalEvent(
-    name="",
+    name="",  # TODO
     description=
-    """ """,
-    actions={'OK': lambda state: None},
-    # condition=lambda state: state.turn == 120,
-    condition=lambda state: False
+    """ """,  # TODO
+    actions={'OK': go_to_mid_game},
+    # condition=lambda state: state.turn == 120, # uncomment this when finished with everything else
+    condition=lambda state: False                # comment/delete this
 )
 
 ########################################################################################################################
