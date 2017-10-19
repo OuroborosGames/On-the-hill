@@ -1,4 +1,5 @@
 import base_content.early_game_events
+import base_content.disasters
 
 """This module gives us the most important parts of the game: events and buildings. Now it's really just a loader for
 data files contained in the base_content and stories packages but it used to contain a truly horrible JSON parser
@@ -24,7 +25,8 @@ def get_basic_special_actions():
 def get_nonrandom_events():
     from base_content.dispatcher_event import DispatcherEvent
     return [DispatcherEvent(_get_stories())]\
-        + base_content.early_game_events.get_nonrandom_events()
+        + base_content.early_game_events.get_nonrandom_events()\
+        + base_content.disasters.get_disasters()
 
 
 def _get_stories():
