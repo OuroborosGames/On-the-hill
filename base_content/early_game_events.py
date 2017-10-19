@@ -2,6 +2,10 @@ from oth_core.text_events import *
 from random import randint
 import oth_core.buildings
 
+"""This is the module for things that should happen in early game (first 10 years) and for random events that can happen
+from early game onwards. NPC introductions, a bit of worldbuilding here and there, random events with (potentially)
+bad outcome (but not bad enough to ruin your game), setting up a few bigger plots which will be resolved later."""
+
 
 def get_random_events():
     return [speakers_hall_event, political_unrest_event, cold_winter_event, the_artist_leaves, bridge_builders,

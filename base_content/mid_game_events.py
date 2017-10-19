@@ -1,5 +1,11 @@
 from oth_core.text_events import *
 
+"""This module is for events that can happen in the mid-game or from mid-game onwards. Events should have bigger
+possible disadvantages and bigger rewards, the advisors should unlock new buildings and special actions while also
+giving advice and we should have a few small event chain with more plot than before. Also, weird stuff (preferably
+subtly weird and never explained too much) should start happening."""
+
+
 # TODO everything
 BRANCH_NAME = "Uncertain but Hopeful"
 
