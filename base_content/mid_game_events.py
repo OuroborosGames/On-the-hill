@@ -1,7 +1,7 @@
 from oth_core.text_events import *
 
 # TODO everything
-BRANCH_NAME = ""
+BRANCH_NAME = "Uncertain but Hopeful"
 
 
 def get_random_events():

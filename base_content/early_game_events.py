@@ -173,12 +173,20 @@ def go_to_mid_game(state):
     state.nonrandom_events    .extend(mid_game.get_nonrandom_events())
 
 transition_event = ConditionalEvent(
-    name="",  # TODO
+    name="What now?",
     description=
-    """ """,  # TODO
+    """You have laid foundations for what you hope will one day become a great city. You have
+    assembled a city council that you hope will guide you toward your goals. You hope that
+    everything will end up just right.
+
+    You realize that you're doing an awful lot of hoping. This kind of optimism feels good,
+    but it may be harmful if you don't exercise moderation. It might be a good idea to offset this
+    enthusiasm by thinking about everything that could potentially go wrong, and maybe even
+    do something to prevent it. This might even work.
+
+    The future is uncertain and unpredictable. But it might not be hopeless.""",
     actions={'OK': go_to_mid_game},
-    # condition=lambda state: state.turn == 120, # uncomment this when finished with everything else
-    condition=lambda state: False                # comment/delete this
+    condition=lambda state: state.turn == 120
 )
 
 ########################################################################################################################
