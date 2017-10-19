@@ -165,7 +165,6 @@ george_connolly = ConditionalEvent(
 )
 
 
-# TODO: write an event that transitions into mid-game
 def go_to_mid_game(state):
     import base_content.mid_game_events as mid_game
     state.branch = mid_game.BRANCH_NAME
