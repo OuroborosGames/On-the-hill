@@ -252,6 +252,9 @@ class Game(object):
             except InternalError:
                 self.timers.remove(t)
 
+        # disasters
+        self._modify_disaster_counters()
+
     def _try_performing_action(self):
         # common functionality for all actions
         if self.game_over:
@@ -288,6 +291,19 @@ class Game(object):
             self.actions_max = 5
 
         self.population += floor(self.population*(modifier/100))
+
+    def _modify_disaster_counters(self):
+        # if stat is below threshold, the stat's disaster counter gets incremented
+        # if it's not, it's reset
+        # when the counter hits a certain value, a non-random event defined in ../base_content/disasters.py will happen
+        thresholds = {'health': 0, 'safety': 0, 'technology': -3, 'food': self.population,
+                      'population': self.population_max}  # TODO: pick good thresholds
+        for stat in thresholds:
+            disaster = "disaster_" + stat
+            if getattr(self, stat) < thresholds[stat]:
+                self.counter.increment(disaster)
+            else:
+                self.counter.reset(disaster)
 
 
 class MaplessGame(Game):
