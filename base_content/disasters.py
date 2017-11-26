@@ -1,6 +1,8 @@
 from oth_core.text_events import *
 
 """This is the module for all the bad stuff that happens when your stats get too low"""
+
+
 # TODO everything
 
 
@@ -18,8 +20,8 @@ class Disaster(ConditionalEvent):
         self.stat = stat
         counter_name = "disaster_" + stat
         # those events will fire when an associated counter reaches a certain value...
-        super().__init__(name, description, actions, lambda state: counter_greater(state, counter_name,
-                                                                                   consecutive_turns_to_trigger))
+        super().__init__(name, description, actions, lambda state: counter_equal(state, counter_name,
+                                                                                 consecutive_turns_to_trigger-1))
         # ...and they'll reset the counter afterwards, so you won't get the same events each turn
         self.chain_unconditionally(lambda state: state.counter.reset(counter_name))
         # this is for the game state to know what counters to use, what stat to check and how to do it
@@ -43,9 +45,11 @@ class LazyDisaster(Disaster):
     """This time, we make a function that evaluates threshold lazily. This is useful when the disaster happens if
     one stat is lower than other stat ('reference_stat') for a few turns - e.g. when there's less food than people
     to feed."""
+
     def __init__(self, name, description, actions, stat, reference_stat, consecutive_turns_to_trigger):
         super().__init__(name, description, actions, stat, lambda state: getattr(state, reference_stat, 0),
                          consecutive_turns_to_trigger)
+
 
 famine = LazyDisaster(
     name="Famine",
@@ -56,7 +60,7 @@ famine = LazyDisaster(
     of the city hall or just trying to steal something even remotely edible.""",
     actions={
         'Do nothing': lambda state: modify_state(state, {'safety': -5, 'health': -3, 'prestige': -2}),
-        'Implement food rationing': lambda state: modify_state(state, {'food': state.food/2, 'prestige': -3}),
+        'Implement food rationing': lambda state: modify_state(state, {'food': state.food / 2, 'prestige': -3}),
         'Buy as much as you can afford and give to the people': lambda state: modify_state(
             state, {'food': min(state.population, state.money), 'money': -state.money})
     },
