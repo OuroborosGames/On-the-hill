@@ -133,6 +133,9 @@ class Game(object):
         # binary flags
         self.flags = Flags()
 
+        # disaster thresholds
+        self.thresholds = load_data.get_disaster_thresholds()
+
         # current branch in the main storyline
         self.branch = "The Founding of " + self.city_name
 
@@ -293,17 +296,15 @@ class Game(object):
         self.population += floor(self.population*(modifier/100))
 
     def _modify_disaster_counters(self):
-        # if stat is below threshold, the stat's disaster counter gets incremented
-        # if it's not, it's reset
-        # when the counter hits a certain value, a non-random event defined in ../base_content/disasters.py will happen
-        thresholds = {'health': 0, 'safety': 0, 'technology': -3, 'food': self.population,
-                      'population': self.population_max}  # TODO: pick good thresholds
-        for stat in thresholds:
-            disaster = "disaster_" + stat
-            if getattr(self, stat) < thresholds[stat]:
-                self.counter.increment(disaster)
+        # this handles counters for disasters defined in base_content/disasters.py
+        # if a stat is below a threshold returned by the threshold_getter() function, a counter is incremented
+        # (disasters themselves are defined as non-random events that will fire when their associated counters reach
+        # a certain value, i.e. when the stat is below threshold for a long enough time)
+        for stat, threshold_getter, counter_name in self.thresholds:
+            if getattr(self, stat) < threshold_getter(self):
+                self.counter.increment(counter_name)
             else:
-                self.counter.reset(disaster)
+                self.counter.reset(counter_name)
 
 
 class MaplessGame(Game):

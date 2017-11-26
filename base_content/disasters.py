@@ -9,16 +9,45 @@ def get_disasters():
 
 
 class Disaster(ConditionalEvent):
+    """Do not use this directly, it's just for that threshold classvariable. Use either Basic or Lazy version depending
+    on what you need."""
 
-    def __init__(self, name, description, actions, stat, counterval):
+    thresholds = []
+
+    def __init__(self, name, description, actions, stat, threshold_getter, consecutive_turns_to_trigger):
         self.stat = stat
-        counterstat = "disaster_" + stat
+        counter_name = "disaster_" + stat
         # those events will fire when an associated counter reaches a certain value...
-        super().__init__(name, description, actions, lambda state: counter_greater(state, counterstat, counterval))
+        super().__init__(name, description, actions, lambda state: counter_greater(state, counter_name,
+                                                                                   consecutive_turns_to_trigger))
         # ...and they'll reset the counter afterwards, so you won't get the same events each turn
-        self.chain_unconditionally(lambda state: state.counter.reset(counterstat))
+        self.chain_unconditionally(lambda state: state.counter.reset(counter_name))
+        # this is for the game state to know what counters to use, what stat to check and how to do it
+        self.thresholds.append((stat, threshold_getter, counter_name))
 
-famine = Disaster(
+
+class BasicDisaster(Disaster):
+    """Those disaster evaluate the stat threshold eagerly, although in an roundabout and overengineered way (we actually
+    make a function that always return a provided value). If this sounds like overcomplicated bullshit then you're
+    right, and there's probably a better way to do it (although I can't think of one that also allows the lazy version
+    below).
+
+    TL;DR is: use this class if the disaster counter gets incremented when a stat falls below a certain constant
+    value (e.g. health is lower than 0)."""
+
+    def __init__(self, name, description, actions, stat, threshold, consecutive_turns_to_trigger):
+        super().__init__(name, description, actions, stat, lambda state: threshold, consecutive_turns_to_trigger)
+
+
+class LazyDisaster(Disaster):
+    """This time, we make a function that evaluates threshold lazily. This is useful when the disaster happens if
+    one stat is lower than other stat ('reference_stat') for a few turns - e.g. when there's less food than people
+    to feed."""
+    def __init__(self, name, description, actions, stat, reference_stat, consecutive_turns_to_trigger):
+        super().__init__(name, description, actions, stat, lambda state: getattr(state, reference_stat, 0),
+                         consecutive_turns_to_trigger)
+
+famine = LazyDisaster(
     name="Famine",
     description=
     """The food shortages your city was suffering from have now turned into a disastrous
@@ -32,5 +61,6 @@ famine = Disaster(
             state, {'food': min(state.population, state.money), 'money': -state.money})
     },
     stat='food',
-    counterval=3
+    reference_stat='population',
+    consecutive_turns_to_trigger=3
 )

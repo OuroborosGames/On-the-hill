@@ -29,6 +29,10 @@ def get_nonrandom_events():
         + base_content.disasters.get_disasters()
 
 
+def get_disaster_thresholds():
+    return base_content.disasters.Disaster.thresholds
+
+
 def _get_stories():
     import pkgutil
     import stories
