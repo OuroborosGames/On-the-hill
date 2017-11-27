@@ -4,11 +4,11 @@ from math import floor
 """This is the module for all the bad stuff that happens when your stats get too low"""
 
 
-# TODO disasters for low tech, money, safety
+# TODO disasters for low tech, low money and pop>maxpop
 
 
 def get_disasters():
-    return [famine, epidemic]
+    return [famine, epidemic, riot]
 
 
 class Disaster(ConditionalEvent):
@@ -84,4 +84,23 @@ epidemic = BasicDisaster(
     stat='money',
     threshold=-3,
     consecutive_turns_to_trigger=5
+)
+
+riot = BasicDisaster(
+    name="Riot",
+    description=
+    """Neither you nor anyone else has any idea what started it, but the violence in your
+    city is quickly spiralling out of control. Maybe someone insulted somebody else, then it
+    got physical and then friends and friends of friends got involved. Maybe political
+    extremists attempted a revolution but then forgot what they're angry about. Or maybe some
+    criminals were fighting other criminals and the bystanders were so bored of their normal
+    everyday life that they decided that they also want to punch someone in the face.""",
+    actions={'Do nothing': lambda state: modify_state(state, {'safety': -5, 'prestige': -5}),
+             'Arrest the worst troublemakers': lambda state: modify_state(state, {'safety': -2, 'prestige': -2,
+                                                                                  'money': -500}),
+             'Fight fire with fire': lambda state: modify_state(state, {'money': -1000, 'population': state.safety*10,
+                                                                        'safety': -state.safety, 'prestige': -5})},
+    stat='safety',
+    threshold=0,
+    consecutive_turns_to_trigger=10
 )
