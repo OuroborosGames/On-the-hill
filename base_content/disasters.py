@@ -1,5 +1,6 @@
 from oth_core.text_events import *
 from math import floor
+from oth_core.game_errors import *
 
 """This is the module for all the bad stuff that happens when your stats get too low"""
 
@@ -18,6 +19,8 @@ class Disaster(ConditionalEvent):
     thresholds = []
 
     def __init__(self, name, description, actions, stat, threshold_getter, consecutive_turns_to_trigger):
+        if consecutive_turns_to_trigger < 2:
+            raise InternalError("Stat should be below threshold for more than 1 turn to trigger a disaster")
         counter_name = "disaster_" + stat
         # those events will fire when an associated counter reaches a certain value...
         super().__init__(name, description, actions, lambda state: counter_equal(state, counter_name,
