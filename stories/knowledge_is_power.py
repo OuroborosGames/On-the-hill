@@ -2,6 +2,7 @@ from oth_core.text_events import *
 from oth_core.buildings import *
 from oth_core.game_errors import InternalError
 from copy import deepcopy
+from functools import wraps
 
 
 def get():
@@ -1452,6 +1453,7 @@ doesn't seem that they'll stop anytime soon.""",
     ), 30)}
 ), 3))
 
+
 # helper for chaining actions with entering different branches
 def enter_branch(func, branch):
     if branch == 1:
@@ -1472,6 +1474,7 @@ def enter_branch(func, branch):
     else:
         raise InternalError("Unknown branch number")
 
+    @wraps(func)
     def ret(state):
         func(state)
         for r in randoms:

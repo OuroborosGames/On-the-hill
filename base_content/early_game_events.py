@@ -1,5 +1,6 @@
 from oth_core.text_events import *
 from random import randint
+from functools import wraps
 import oth_core.buildings
 
 """This is the module for things that should happen in early game (first 10 years) and for random events that can happen
@@ -26,10 +27,11 @@ class EarlyGameEvent(ConditionalEvent):
     def __init__(self, name, description, actions, condition=None):
         super().__init__(name, description, actions, condition)
         if condition is not None:
-            self.should_be_activated = lambda state: \
-                (condition(state)) and (is_early_game(state))
+            self.should_be_activated = wraps(condition)(
+                lambda state: (condition(state)) and (is_early_game(state)))
         else:
             self.should_be_activated = is_early_game
+
 
 ########################################################################################################################
 #                                             non-random events go here
@@ -173,7 +175,8 @@ def go_to_mid_game(state):
     import base_content.mid_game_events as mid_game
     state.branch = mid_game.BRANCH_NAME
     state._event_inactive_deck.extend(mid_game.get_random_events())
-    state.nonrandom_events    .extend(mid_game.get_nonrandom_events())
+    state.nonrandom_events.extend(mid_game.get_nonrandom_events())
+
 
 transition_event = ConditionalEvent(
     name="What now?",
@@ -317,6 +320,7 @@ def unlock_bridge(state):
     modify_state(state, {'money': -1000, 'population': 4})
     unlock_building(state, bridge)
 
+
 bridge_builders = BasicEvent(
     name="The bridge builders",
     description=
@@ -372,7 +376,7 @@ pollution_event = EarlyGameEvent(
         ))
     },
     condition=lambda state: counter_greater(state, 'Factory', 0)
-).chain_unconditionally(lambda state: modify_state(state, {'population': randint(-3,-6)}))
+).chain_unconditionally(lambda state: modify_state(state, {'population': randint(-3, -6)}))
 
 park = oth_core.buildings.BasicBuilding(
     name="City park",
@@ -406,7 +410,7 @@ thieves_event = EarlyGameEvent(
     to be careful. Then again, the same rumors claim that the thieves are bribing
     someone from your police force to help them avoid detection.""",
     actions={'OK': lambda state: modify_state(state, {'population': 4, 'safety': -2})}
-).chain_unconditionally(lambda state: add_inactive_event(state,ConditionalEvent(
+).chain_unconditionally(lambda state: add_inactive_event(state, ConditionalEvent(
     name="The not-so-great heist",
     description=
     """It seems that nothing is sacred and no place is safe! The thieves have stolen

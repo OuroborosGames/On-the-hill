@@ -1,4 +1,5 @@
 from random import randint
+from functools import wraps
 
 from . import timers_and_counters
 
@@ -48,6 +49,7 @@ class BasicEvent(TextEventPrototype):
         for k in self.actions.keys():
             v = self.actions[k]
 
+            @wraps(v)
             def new_action(state):
                 v(state)
                 for function in functions:
