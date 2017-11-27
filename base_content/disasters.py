@@ -1,13 +1,14 @@
 from oth_core.text_events import *
+from math import floor
 
 """This is the module for all the bad stuff that happens when your stats get too low"""
 
 
-# TODO everything
+# TODO disasters for low tech, money, safety
 
 
 def get_disasters():
-    return [famine]
+    return [famine, epidemic]
 
 
 class Disaster(ConditionalEvent):
@@ -21,7 +22,7 @@ class Disaster(ConditionalEvent):
         counter_name = "disaster_" + stat
         # those events will fire when an associated counter reaches a certain value...
         super().__init__(name, description, actions, lambda state: counter_equal(state, counter_name,
-                                                                                 consecutive_turns_to_trigger-1))
+                                                                                 consecutive_turns_to_trigger - 1))
         # ...and they'll reset the counter afterwards, so you won't get the same events each turn
         self.chain_unconditionally(lambda state: state.counter.reset(counter_name))
         # this is for the game state to know what counters to use, what stat to check and how to do it
@@ -58,13 +59,29 @@ famine = LazyDisaster(
     famine. Many people have already died of starvation and many more are barely surviving
     without food. The ones who didn't lose all their strength are either protesting outside
     of the city hall or just trying to steal something even remotely edible.""",
-    actions={
-        'Do nothing': lambda state: modify_state(state, {'safety': -5, 'health': -3, 'prestige': -2}),
-        'Implement food rationing': lambda state: modify_state(state, {'food': state.food / 2, 'prestige': -3}),
-        'Buy as much as you can afford and give to the people': lambda state: modify_state(
-            state, {'food': min(state.population, state.money), 'money': -state.money})
-    },
+    actions={'Do nothing': lambda state: modify_state(state, {'safety': -5, 'health': -3, 'prestige': -2}),
+             'Implement food rationing': lambda state: modify_state(state, {'food': floor(state.food / 2),
+                                                                            'prestige': -3}),
+             'Buy as much as you can afford and give to the people': lambda state: modify_state(
+                 state, {'food': min(state.population, state.money), 'money': -state.money})},
     stat='food',
     reference_stat='population',
     consecutive_turns_to_trigger=3
+)
+
+epidemic = BasicDisaster(
+    name="Epidemic",
+    description=
+    """Whether due to all the dirt and filth that has accumulated in your city or because
+    of not enough hospitals and not enough doctors, your city has been struck by a disastrous
+    epidemic. Disease is spreading like wildfire and the air smells like death.""",
+    actions={'Do nothing': lambda state: modify_state(state, {'health': -5, 'prestige': -4, 'safety': -1}),
+             'Quarantine the sick': lambda state: modify_state(state, {'health': 1, 'prestige': -4, 'population': floor(
+                 state.population * (state.health / 100))}),
+             'Bring doctors from all over the country, regardless of cost': lambda state: modify_state(
+                 state, {'population': floor(state.money/500), 'health': min(floor(state.money/1000), -state.health),
+                         'money': -state.money})},
+    stat='money',
+    threshold=-3,
+    consecutive_turns_to_trigger=5
 )
