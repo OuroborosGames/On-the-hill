@@ -18,7 +18,6 @@ class Disaster(ConditionalEvent):
     thresholds = []
 
     def __init__(self, name, description, actions, stat, threshold_getter, consecutive_turns_to_trigger):
-        self.stat = stat
         counter_name = "disaster_" + stat
         # those events will fire when an associated counter reaches a certain value...
         super().__init__(name, description, actions, lambda state: counter_equal(state, counter_name,
