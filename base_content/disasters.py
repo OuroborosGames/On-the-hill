@@ -23,7 +23,7 @@ class Disaster(ConditionalEvent):
             raise InternalError("Stat should be below threshold for more than 1 turn to trigger a disaster")
         counter_name = "disaster_" + stat
         # those events will fire when an associated counter reaches a certain value...
-        super().__init__(name, description, actions, lambda state: counter_equal(state, counter_name,
+        super(Disaster, self).__init__(name, description, actions, lambda state: counter_equal(state, counter_name,
                                                                                  consecutive_turns_to_trigger - 1))
         # ...and they'll reset the counter afterwards, so you won't get the same events each turn
         self.chain_unconditionally(lambda state: state.counter.reset(counter_name))
@@ -41,7 +41,8 @@ class BasicDisaster(Disaster):
     value (e.g. health is lower than 0)."""
 
     def __init__(self, name, description, actions, stat, threshold, consecutive_turns_to_trigger):
-        super().__init__(name, description, actions, stat, lambda state: threshold, consecutive_turns_to_trigger)
+        super(BasicDisaster, self).__init__(name, description, actions, stat, lambda state: threshold,
+                                            consecutive_turns_to_trigger)
 
 
 class LazyDisaster(Disaster):
@@ -50,8 +51,8 @@ class LazyDisaster(Disaster):
     to feed."""
 
     def __init__(self, name, description, actions, stat, reference_stat, consecutive_turns_to_trigger):
-        super().__init__(name, description, actions, stat, lambda state: getattr(state, reference_stat, 0),
-                         consecutive_turns_to_trigger)
+        super(LazyDisaster, self).__init__(name, description, actions, stat,
+                                           lambda state: getattr(state,reference_stat, 0), consecutive_turns_to_trigger)
 
 
 famine = LazyDisaster(

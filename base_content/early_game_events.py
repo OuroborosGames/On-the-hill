@@ -25,7 +25,7 @@ class EarlyGameEvent(ConditionalEvent):
     """A class for random events that can only happen during the early game"""
 
     def __init__(self, name, description, actions, condition=None):
-        super().__init__(name, description, actions, condition)
+        super(EarlyGameEvent, self).__init__(name, description, actions, condition)
         if condition is not None:
             self.should_be_activated = wraps(condition)(
                 lambda state: (condition(state)) and (is_early_game(state)))

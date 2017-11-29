@@ -26,7 +26,7 @@ class MidGameEvent(ConditionalEvent):
     """A class for random events that can only happen in the mid game"""
 
     def __init__(self, name, description, actions, condition=None):
-        super().__init__(name, description, actions, condition)
+        super(MidGameEvent, self).__init__(name, description, actions, condition)
         if condition is not None:
             self.should_be_activated = lambda state: \
                 (condition(state)) and (is_mid_game(state))
