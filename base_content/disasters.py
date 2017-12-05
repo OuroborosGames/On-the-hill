@@ -1,15 +1,16 @@
 from oth_core.text_events import *
-from math import floor
 from oth_core.game_errors import *
+from math import floor
+from random import randint
 
 """This is the module for all the bad stuff that happens when your stats get too low"""
 
 
-# TODO disasters for low tech, low money and pop>maxpop
+# TODO disasters for low money and pop>maxpop
 
 
 def get_disasters():
-    return [famine, epidemic, riot]
+    return [famine, epidemic, riot, forgetting]
 
 
 class Disaster(ConditionalEvent):
@@ -106,4 +107,33 @@ riot = BasicDisaster(
     stat='safety',
     threshold=0,
     consecutive_turns_to_trigger=10
+)
+
+
+# removes buildings and/or special actions from player's hand
+def forget_random(state):
+    to_forget = randint(1, -state.technology)
+    buildings = state.buildings_deck
+    actions   = state.special_actions
+
+    for _ in to_forget:
+        try:
+            if randint(0, 1):
+                del buildings[randint(0, len(buildings)-1)]
+            else:
+                del actions[randint(0, len(actions)-1)]
+        except (ValueError, IndexError):
+            # IndexError is just a sanity check, ValueError = empty range (i.e. we try to del from empty list)
+            continue
+
+forgetting = BasicDisaster(
+    name="Forgetting",
+    description=
+    """It seems that due to your city's lack of care for preserving the knowledge, some things
+    have been forgotten. Unfortunately, you also forgot what you have forgotten - but you can't
+    shake the feeling that you are certainly going to regret it.""",
+    actions={'OK': forget_random},
+    stat='technology',
+    threshold=0,
+    consecutive_turns_to_trigger=12
 )
