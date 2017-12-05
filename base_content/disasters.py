@@ -154,7 +154,7 @@ ruins = BasicBuilding(
 
 # turns buildings on the map into ruins
 def ruin_random(state):
-    to_ruin = randint(1, min(2, floor(-state.money / 1000)))
+    to_ruin = randint(1, max(2, floor(-state.money / 1000)))
     buildings = state.buildings_on_map
 
     sanity = len(buildings)
