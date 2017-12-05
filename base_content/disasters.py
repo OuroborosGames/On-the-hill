@@ -1,7 +1,9 @@
 from oth_core.text_events import *
 from oth_core.game_errors import *
+from oth_core.buildings import BasicBuilding, CustomBuilding
 from math import floor
 from random import randint
+from copy import copy
 
 """This is the module for all the bad stuff that happens when your stats get too low"""
 
@@ -10,7 +12,7 @@ from random import randint
 
 
 def get_disasters():
-    return [famine, epidemic, riot, forgetting]
+    return [famine, epidemic, riot, forgetting, poverty]
 
 
 class Disaster(ConditionalEvent):
@@ -25,7 +27,7 @@ class Disaster(ConditionalEvent):
         counter_name = "disaster_" + stat
         # those events will fire when an associated counter reaches a certain value...
         super(Disaster, self).__init__(name, description, actions, lambda state: counter_equal(state, counter_name,
-                                                                                 consecutive_turns_to_trigger - 1))
+                                                                                               consecutive_turns_to_trigger - 1))
         # ...and they'll reset the counter afterwards, so you won't get the same events each turn
         self.chain_unconditionally(lambda state: state.counter.reset(counter_name))
         # this is for the game state to know what counters to use, what stat to check and how to do it
@@ -53,7 +55,8 @@ class LazyDisaster(Disaster):
 
     def __init__(self, name, description, actions, stat, reference_stat, consecutive_turns_to_trigger):
         super(LazyDisaster, self).__init__(name, description, actions, stat,
-                                           lambda state: getattr(state,reference_stat, 0), consecutive_turns_to_trigger)
+                                           lambda state: getattr(state, reference_stat, 0),
+                                           consecutive_turns_to_trigger)
 
 
 famine = LazyDisaster(
@@ -83,8 +86,9 @@ epidemic = BasicDisaster(
              'Quarantine the sick': lambda state: modify_state(state, {'health': 1, 'prestige': -4, 'population': floor(
                  state.population * (state.health / 100))}),
              'Bring doctors from all over the country, regardless of cost': lambda state: modify_state(
-                 state, {'population': floor(state.money/500), 'health': min(floor(state.money/1000), -state.health),
-                         'money': -state.money})},
+                 state,
+                 {'population': floor(state.money / 500), 'health': min(floor(state.money / 1000), -state.health),
+                  'money': -state.money})},
     stat='money',
     threshold=-3,
     consecutive_turns_to_trigger=5
@@ -102,7 +106,7 @@ riot = BasicDisaster(
     actions={'Do nothing': lambda state: modify_state(state, {'safety': -5, 'prestige': -5}),
              'Arrest the worst troublemakers': lambda state: modify_state(state, {'safety': -2, 'prestige': -2,
                                                                                   'money': -500}),
-             'Fight fire with fire': lambda state: modify_state(state, {'money': -1000, 'population': state.safety*10,
+             'Fight fire with fire': lambda state: modify_state(state, {'money': -1000, 'population': state.safety * 10,
                                                                         'safety': -state.safety, 'prestige': -5})},
     stat='safety',
     threshold=0,
@@ -114,17 +118,18 @@ riot = BasicDisaster(
 def forget_random(state):
     to_forget = randint(1, -state.technology)
     buildings = state.buildings_deck
-    actions   = state.special_actions
+    actions = state.special_actions
 
     for _ in to_forget:
         try:
             if randint(0, 1):
-                del buildings[randint(0, len(buildings)-1)]
+                del buildings[randint(0, len(buildings) - 1)]
             else:
-                del actions[randint(0, len(actions)-1)]
+                del actions[randint(0, len(actions) - 1)]
         except (ValueError, IndexError):
             # IndexError is just a sanity check, ValueError = empty range (i.e. we try to del from empty list)
             continue
+
 
 forgetting = BasicDisaster(
     name="Forgetting",
@@ -137,3 +142,55 @@ forgetting = BasicDisaster(
     threshold=0,
     consecutive_turns_to_trigger=12
 )
+
+ruins = BasicBuilding(
+    name="Abandoned building",
+    description="It might be hard to believe but this ugly, dirty, decaying ruin was once something useful - people may have lived or worked or just spent time in there. Unfortunately, now it's just an eyesore which only provides shelter to local drunks and criminals while everyone else just hopes it collapses and gets erased from their memories.",
+    base_price=0,
+    additional_effects={'health': -1, 'prestige': -2, 'safety': -4},
+    per_turn_effects={}
+)
+
+
+# turns buildings on the map into ruins
+def ruin_random(state):
+    to_ruin = randint(1, min(2, floor(-state.money / 1000)))
+    buildings = state.buildings_on_map
+
+    sanity = len(buildings)
+    while to_ruin:
+
+        # without this, the loop would run infinitely if there's nothing but CustomBuildings on the map
+        # (e.g. there's only town square), or if everything was already ruined
+        if not sanity:
+            break
+        sanity -= 1
+
+        try:
+            i = randint(0, len(buildings) - 1)
+            b = buildings[randint(0, len(buildings) - 1)]
+            # we don't want to ruin town squares, bridges and buildings that are already ruined
+            if (type(b) == CustomBuilding) or (b.name == ruins.name):
+                continue
+            b.on_destroy(state)
+            buildings[i] = copy(ruins)
+            buildings[i].base_price = b.base_price
+        except (ValueError, IndexError):
+            continue
+        to_ruin -= 1
+
+
+poverty = BasicDisaster(
+    name="Poverty",
+    description=
+    """You used to have financial problems. Now you have a financial disaster. The city is out
+    of money and with each day, the debt grows. Due to your inability to pay the upkeep costs,
+    some of the buildings have begun to fall into disrepair and have been abandoned. If you can't
+    stop this, in a few years it will be a ghost town.""",
+    actions={'Do nothing': lambda state: modify_state(state, {'prestige': -3}),
+             'Fill the budget hole with draconian taxes': lambda state: modify_state(
+                 state, {'money': state.population*100, 'prestige': -5, 'safety': -3})},
+    stat='money',
+    threshold=-1000,
+    consecutive_turns_to_trigger=6
+).chain_unconditionally(ruin_random)
