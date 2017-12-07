@@ -175,6 +175,7 @@ def ruin_random(state):
             b.on_destroy(state)
             buildings[i] = copy(ruins)
             buildings[i].base_price = b.base_price
+            buildings[i].on_build()
         except (ValueError, IndexError):
             continue
         to_ruin -= 1
