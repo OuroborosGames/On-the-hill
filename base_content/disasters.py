@@ -8,11 +8,8 @@ from copy import copy
 """This is the module for all the bad stuff that happens when your stats get too low"""
 
 
-# TODO disasters for low money and pop>maxpop
-
-
 def get_disasters():
-    return [famine, epidemic, riot, forgetting, poverty]
+    return [famine, epidemic, riot, forgetting, poverty, overpopulation]
 
 
 class Disaster(ConditionalEvent):
@@ -215,10 +212,25 @@ def build_slums(state):
                            for y in range(state.map.heigth)}   # so now I must work around my own stupidity
                        if slums.can_be_built(z, state.map.get_neighbors(x, y))}  # (this syntax is pretty fun though)
 
-    to_build = min(len(available_tiles), floor((state.population-state.population_max)/500))
+    to_build = min(len(available_tiles), max(floor((state.population-state.population_max)/500), 1))
 
     for x, y in sample(available_tiles, to_build):
         s = copy(slums)
         state.map.add_building(s, x, y)
         state.buildings_on_map.append(s)
         s.on_build(state)
+
+overpopulation = LazyDisaster(
+    name="Overpopulation",
+    description=
+    """You always wanted people to settle down in your city - and so it happened. Unfortunately,
+    because of your lack of foresight, bad luck or a cruel trick played by whatever power controls
+    your fate, your wish was granted in an ironic way that makes everything worse: there's just too
+    many people here, and not enough places for them to live. The homeless are now building shelter
+    for themselves, but given the quality of materials and workmanship, this is probably not a good
+    thing.""",
+    actions={'OK': build_slums},
+    stat='population_max',
+    reference_stat='population',
+    consecutive_turns_to_trigger=6
+)
