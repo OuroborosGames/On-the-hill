@@ -206,11 +206,11 @@ slums = BasicBuilding(
 
 
 def build_slums(state):
-    available_tiles = {(x,y) for z, x, y  # this weird set-comp gives us a list of tiles on which we can build slums
+    available_tiles = {(x,y) for tile, x, y  # this weird set-comp gives us a list of tiles on which we can build slums
                        in {(state.map.get_field_by_coordinates(x, y), x, y)  # I really should've made a better map API
                            for x in range(state.map.width)  # but I was stupid and inexperienced when I started
                            for y in range(state.map.heigth)}   # so now I must work around my own stupidity
-                       if slums.can_be_built(z, state.map.get_neighbors(x, y))}  # (this syntax is pretty fun though)
+                       if slums.can_be_built(tile, state.map.get_neighbors(x, y))}  # (this syntax is pretty fun though)
 
     to_build = min(len(available_tiles), max(floor((state.population-state.population_max)/500), 1))
 
