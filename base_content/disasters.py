@@ -2,7 +2,7 @@ from oth_core.text_events import *
 from oth_core.game_errors import *
 from oth_core.buildings import BasicBuilding, CustomBuilding
 from math import floor
-from random import randint
+from random import randint, sample
 from copy import copy
 
 """This is the module for all the bad stuff that happens when your stats get too low"""
@@ -190,8 +190,32 @@ poverty = BasicDisaster(
     stop this, in a few years it will be a ghost town.""",
     actions={'Do nothing': lambda state: modify_state(state, {'prestige': -3}),
              'Fill the budget hole with draconian taxes': lambda state: modify_state(
-                 state, {'money': state.population*100, 'prestige': -5, 'safety': -3})},
+                 state, {'money': state.population * 100, 'prestige': -5, 'safety': -3})},
     stat='money',
     threshold=-1000,
     consecutive_turns_to_trigger=6
 ).chain_unconditionally(ruin_random)
+
+slums = BasicBuilding(
+    name="Shanty town",
+    description="Homeless people built those small houses out of things they could find or steal in the nearby areas. With time, those improvised settlements became home not only to the less fortunate citizens but also to crime and disease. As more time passed, the new buildings were added until the streets turned into unstable, occasionally vertical mazes. You really don't want to be there.",
+    base_price=0,
+    additional_effects={'safety': -1, 'health': -3, 'prestige': -3, 'population': 500},
+    per_turn_effects={}
+)
+
+
+def build_slums(state):
+    available_tiles = {(x,y) for z, x, y  # this weird set-comp gives us a list of tiles on which we can build slums
+                       in {(state.map.get_field_by_coordinates(x, y), x, y)  # I really should've made a better map API
+                           for x in range(state.map.width)  # but I was stupid and inexperienced when I started
+                           for y in range(state.map.heigth)}   # so now I must work around my own stupidity
+                       if slums.can_be_built(z, state.map.get_neighbors(x, y))}  # (this syntax is pretty fun though)
+
+    to_build = min(len(available_tiles), floor((state.population-state.population_max)/500))
+
+    for x, y in sample(available_tiles, to_build):
+        s = copy(slums)
+        state.map.add_building(s, x, y)
+        state.buildings_on_map.append(s)
+        s.on_build(state)
