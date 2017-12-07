@@ -168,14 +168,17 @@ def ruin_random(state):
 
         try:
             i = randint(0, len(buildings) - 1)
-            b = buildings[randint(0, len(buildings) - 1)]
+            b = buildings[i]
             # we don't want to ruin town squares, bridges and buildings that are already ruined
             if (type(b) == CustomBuilding) or (b.name == ruins.name):
                 continue
             b.on_destroy(state)
-            buildings[i] = copy(ruins)
-            buildings[i].base_price = b.base_price
-            buildings[i].on_build()
+            b.name = ruins.name
+            b.description = ruins.description
+            b.additional_effects = copy(ruins.additional_effects)
+            b.per_turn_effect = copy(ruins.per_turn_effects)
+            b.on_build(state)
+
         except (ValueError, IndexError):
             continue
         to_ruin -= 1
