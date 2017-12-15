@@ -1,5 +1,6 @@
 #ide stuff
 .idea/*
+venv/*
 #testing/prototyping
 game.py
 oth_core/test.json
