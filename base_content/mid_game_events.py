@@ -52,5 +52,5 @@ mansion_event = UnlockableEvent(
     and impractical houses conveniently designed by an architect who just happens to be his cousin.
     Apparently, rich people love them.""",
     actions={'OK': lambda state: unlock_building(state, mansion)},
-    unlock_predicate=lambda state:attr_greater(state, 'money', 2000)
+    unlock_predicate=lambda state: attr_greater(state, 'money', 2000)
 )
