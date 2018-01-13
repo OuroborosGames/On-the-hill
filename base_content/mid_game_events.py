@@ -11,7 +11,7 @@ BRANCH_NAME = "Uncertain but Hopeful"
 
 
 def get_random_events():
-    return [mansion_event, going_underground]
+    return [mansion_event, going_underground, contradiction_society]
 
 
 def get_nonrandom_events():
@@ -33,6 +33,13 @@ class MidGameEvent(ConditionalEvent):
         else:
             self.should_be_activated = is_mid_game
 
+
+########################################################################################################################
+# 'Going underground' event chain: you build mansion for rich people, then they build underground tunnels and create
+# a secret society
+# TODO: - war between factions of secret society (you can participate if you're a member, people just die if you aren't)
+# TODO: - (optional) events about going underground (before finding the secret society)
+# TODO: - (optional) events about being a member of the secret society
 
 mansion = BasicBuilding(
     name="Mansion",
@@ -103,6 +110,82 @@ going_underground = MidGameEvent(
                  the streets looking for a secret entrance, and the only person helping you is an old man obsessed with
                  alchemy, ghosts and gods.""",
                  actions={'OK': lambda game_state: set_flag(game_state, 'going_underground')}
-             ))},  # TODO: other events in this chain (controlled by the 'going_underground' flag)
+             ))},
     condition=lambda state: counter_greater(state, mansion.name, 0)
 ).chain_unconditionally(lambda state: modify_state(state, {'population': randint(1, 10)}))
+
+contradiction_society = ConditionalEvent(
+    name="The Contradiction Society",
+    description=
+    """You finally did it. You found the underground tunnels beneath the city. The maze
+    connects houses of some of the wealthiest citizens with a confusing system of impressively
+    large halls, small, oddly-shaped rooms and everything in between. Occasionally, you see
+    strange symbols painted on the walls, floors and ceilings. Sometimes, you find what looks
+    like an everyday object - it can be a chair, a spoon, a shoe - but it's always somehow
+    twisted into something wrong, strange and impractical. Rarely, you see a machine - not
+    as big as the ones they have in the factories but as incomprehensible to someone without
+    technical knowledge. After a few hours, you find the people ones built this place.
+    
+    There are neither monsters living here nor there's a hidden society of hardened criminals
+    and violent madmen - those stories were a lie. On the contrary, you know many of those
+    people from your everyday life: you pass them on the street, they come to your office,
+    they buy and sell things, they work in workshops and hospitals. Most of them are members
+    of high society, some of them are popular artists. They are your town's chapter of
+    The International Contradiction Society.
+    
+    There's no conspiracy here. No murder, no plotting against the government, not even theft
+    or smuggling. Just a group of people with similar interests, doing what they can
+    to explore the contradictory, the paradoxical, the impossible. The only goal here is to
+    find things that are despite the fact that theoretically they shouldn't be. And yes,
+    in the early days some people died here - but it's much safer now, and this will not
+    happen again.
+    
+    At least that's what they tell you. You're not sure if you believe them - especially
+    when they offer you quite a substantial sum of money should you allow them to carry on.""",
+    actions={'Leave them alone': lambda state: spawn_immediately(state, BasicEvent(
+                name=contradiction_society.title,
+                description=
+                """The International Contradiction Society continues to thrive underneath your city. You hope
+                that you didn't make the mistake and that no more people will disappear. Meanwhile, you're going
+                to enjoy the donation that was given to you in exchange for maintaining the secrecy.""",
+                actions={'OK': lambda game_state: modify_state(game_state, {'money': 5000})}
+    )),
+             'Expose them': lambda state: spawn_immediately(state, BasicEvent(
+                 name=contradiction_society.title,
+                 description=
+                 """This needs to end. There will be no secret societies in your city.
+                 
+                 The police arrests the conspirators and raids their underground tunnels. They try to publicly
+                 discredit you as either a madman or a malicious liar, but there is enough evidence to convince
+                 everyone that you haven't lost your mind. The whole affair quickly catches the eye of the central
+                 government and before you realize it, members of The International Contradiction Society are
+                 taken to a remote prison for traitors, revolutionaries and other political criminals. You become
+                 famous for your dedication to keeping your city safe.""",
+                 actions={'OK': lambda game: modify_state(game, {'prestige': 4, 'security': 1})}
+             ) if counter_greater(state, 'security', 7) else BasicEvent(
+                 name=contradiction_society.title,
+                 description=
+                 """You reject the offer. You fully expect to die because of that, but you walk out of the tunnels
+                 unscathed. Unfortunately, this does not mean you're successful.
+                 
+                 The police is reluctant to arrest anyone based on your 'crazy' story. When after Connolly's urging
+                 a few of the officers go to question the conspirators and look for entrance to the tunnels in their
+                 houses, they come back with nothing (maybe aside from a bribe or two). A few days later, conspirators
+                 publicly mock you, Selgorn and the whole affair. You become famous for your paranoia and absurd
+                 accusations - even though you always spoke the truth.""",
+                 actions={'OK': lambda game: modify_state(game, {'prestige': -5})}
+             )),
+             'Join them': lambda state: spawn_immediately(state, BasicEvent(
+                 name=contradiction_society.title,
+                 description=
+                 """Money? Police? You don't care about such things. What you care about is the great work that's
+                 being done by The International Contradiction Society. You will not stop them, but neither will
+                 you ignore them. You must become one of them.
+                 
+                 You join the best people your city has to offer. With them, you explore the contradictory,
+                 the paradoxical, the impossible. You search for things that are - and you're not foolish enough
+                 to claim that they shouldn't be.""",
+                 actions={'OK': lambda game: modify_state(state, {'prestige': 5})},
+             ))},
+    condition=lambda state: flag_isset(state, 'going_underground') and counter_greater(state, mansion.name, 0)
+).chain_unconditionally(lambda state: unset_flag(state, 'going_underground'))
