@@ -11,7 +11,7 @@ BRANCH_NAME = "Uncertain but Hopeful"
 
 
 def get_random_events():
-    return [mansion_event, going_underground, contradiction_society]
+    return [mansion_event, going_underground, contradiction_society, underground_war]
 
 
 def get_nonrandom_events():
@@ -222,10 +222,10 @@ underground_war = ConditionalEvent(
         """ """,
         actions={}
     ))},
-    condition=lambda state:
+    condition=lambda state: (
         flag_isset(state, 'contradictors_remain') or
         flag_isset(state, 'member_of_contradiction_society') or
         flag_isset(state, 'enemy_of_contradictors') or
-        flag_isset(state, 'bribed_by_contradictors')
+        flag_isset(state, 'bribed_by_contradictors'))
 ).chain_unconditionally(lambda state: modify_state(state, {'population': -randint(1, 20)}))
 ########################################################################################################################
