@@ -37,7 +37,6 @@ class MidGameEvent(ConditionalEvent):
 ########################################################################################################################
 # 'Going underground' event chain: you build mansion for rich people, then they build underground tunnels and create
 # a secret society
-# TODO: - war between factions of secret society (you can participate if you're a member, people just die if you aren't)
 # TODO: - (optional) events about going underground (before finding the secret society)
 # TODO: - (optional) events about being a member of the secret society
 
@@ -99,9 +98,13 @@ going_underground = MidGameEvent(
                                                                       to take bribes in exchange for covering up the truth.""",
                                                                       actions={'OK': lambda game_state: {'security': -2,
                                                                                                          'prestige': -1}
-                                                                               }),
+                                                                               }).chain_unconditionally(
+                                                                      lambda game_state: set_flag(game_state,
+                                                                                                  'contradictors_remain'
+                                                                                                  )),
                                                                   1),
-             'Do nothing': lambda state: modify_state(state, {'security': -2}),
+             'Do nothing': lambda state: [modify_state(state, {'security': -2}),
+                                          set_flag(state, 'contradictors_remain')],
              'Investigate the matter yourself': lambda state: spawn_immediately(state, BasicEvent(
                  name=going_underground.title,
                  description=
@@ -112,7 +115,7 @@ going_underground = MidGameEvent(
                  actions={'OK': lambda game_state: set_flag(game_state, 'going_underground')}
              ))},
     condition=lambda state: counter_greater(state, mansion.name, 0)
-).chain_unconditionally(lambda state: modify_state(state, {'population': randint(1, 10)}))
+).chain_unconditionally(lambda state: modify_state(state, {'population': -randint(1, 10)}))
 
 contradiction_society = ConditionalEvent(
     name="The Contradiction Society",
@@ -148,7 +151,8 @@ contradiction_society = ConditionalEvent(
                 """The International Contradiction Society continues to thrive underneath your city. You hope
                 that you didn't make the mistake and that no more people will disappear. Meanwhile, you're going
                 to enjoy the donation that was given to you in exchange for maintaining the secrecy.""",
-                actions={'OK': lambda game_state: modify_state(game_state, {'money': 5000})}
+                actions={'OK': lambda game_state: [modify_state(game_state, {'money': 5000}),
+                                                   set_flag(game_state, 'bribed_by_contradictors')]}
     )),
              'Expose them': lambda state: spawn_immediately(state, BasicEvent(
                  name=contradiction_society.title,
@@ -173,7 +177,8 @@ contradiction_society = ConditionalEvent(
                  houses, they come back with nothing (maybe aside from a bribe or two). A few days later, conspirators
                  publicly mock you, Selgorn and the whole affair. You become famous for your paranoia and absurd
                  accusations - even though you always spoke the truth.""",
-                 actions={'OK': lambda game: modify_state(game, {'prestige': -5})}
+                 actions={'OK': lambda game: [modify_state(game, {'prestige': -5}),
+                                              set_flag(game, 'enemy_of_contradictors')]}
              )),
              'Join them': lambda state: spawn_immediately(state, BasicEvent(
                  name=contradiction_society.title,
@@ -186,6 +191,41 @@ contradiction_society = ConditionalEvent(
                  the paradoxical, the impossible. You search for things that are - and you're not foolish enough
                  to claim that they shouldn't be.""",
                  actions={'OK': lambda game: modify_state(state, {'prestige': 5})},
-             ))},
+             ).chain_unconditionally(lambda game: set_flag(game, 'member_of_contradiction_society')))},
     condition=lambda state: flag_isset(state, 'going_underground') and counter_greater(state, mansion.name, 0)
 ).chain_unconditionally(lambda state: unset_flag(state, 'going_underground'))
+
+underground_war = ConditionalEvent(
+    name="Underground war",
+    description=
+    """It is happening again. People are disappearing, and the citizens are once again talking about
+    tunnels beneath the city and whatever happens inside them.""",
+    # TODO write specific events
+    actions={'OK': lambda state: spawn_immediately(state, BasicEvent(
+        name=underground_war.title,
+        description=
+        """ """,
+        actions={}
+    ) if flag_isset(state, 'member_of_contradiction_society') else BasicEvent(
+        name=underground_war.title,
+        description=
+        """ """,
+        actions={}
+    ) if flag_isset(state, 'bribed_by_contradictors') else BasicEvent(
+        name=underground_war.title,
+        description=
+        """ """,
+        actions={}
+    ) if flag_isset(state, 'enemy_of_contradictors') else BasicEvent(
+        name=underground_war.title,
+        description=
+        """ """,
+        actions={}
+    ))},
+    condition=lambda state:
+        flag_isset(state, 'contradictors_remain') or
+        flag_isset(state, 'member_of_contradiction_society') or
+        flag_isset(state, 'enemy_of_contradictors') or
+        flag_isset(state, 'bribed_by_contradictors')
+).chain_unconditionally(lambda state: modify_state(state, {'population': -randint(1, 20)}))
+########################################################################################################################
