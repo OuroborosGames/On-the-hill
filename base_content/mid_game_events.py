@@ -1,5 +1,8 @@
+from math import floor
+
 from oth_core.text_events import *
 from oth_core.buildings import BasicBuilding
+from oth_core.special_actions import LimitedSpecialAction
 
 """This module is for events that can happen in the mid-game or from mid-game onwards. Events should have bigger
 possible disadvantages and bigger rewards, the advisors should unlock new buildings and special actions while also
@@ -89,21 +92,21 @@ going_underground = MidGameEvent(
                                                                       that their organization caused the disappearances of several citiziens, although they refused to elaborate
                                                                       on the details. According to them you wouldn't be able to understand them even if they did tell you everything.""",
                                                                       actions={'OK': lambda game_state: None})
-                                                                  if attr_greater(state, 'security', 5)
+                                                                  if attr_greater(state, 'safety', 5)
                                                                   else BasicEvent(
                                                                       name=going_underground.title,
                                                                       description=
                                                                       """According to the police, there are absolutely no underground tunnels beneath the city. There are no
                                                                       conspiracies, all disappearances have a mundane explanation and there is absolutely nobody corrupt enough
                                                                       to take bribes in exchange for covering up the truth.""",
-                                                                      actions={'OK': lambda game_state: {'security': -2,
+                                                                      actions={'OK': lambda game_state: {'safety': -2,
                                                                                                          'prestige': -1}
                                                                                }).chain_unconditionally(
                                                                       lambda game_state: set_flag(game_state,
                                                                                                   'contradictors_remain'
                                                                                                   )),
                                                                   1),
-             'Do nothing': lambda state: [modify_state(state, {'security': -2}),
+             'Do nothing': lambda state: [modify_state(state, {'safety': -2}),
                                           set_flag(state, 'contradictors_remain')],
              'Investigate the matter yourself': lambda state: spawn_immediately(state, BasicEvent(
                  name=going_underground.title,
@@ -165,8 +168,8 @@ contradiction_society = ConditionalEvent(
                  government and before you realize it, members of The International Contradiction Society are
                  taken to a remote prison for traitors, revolutionaries and other political criminals. You become
                  famous for your dedication to keeping your city safe.""",
-                 actions={'OK': lambda game: modify_state(game, {'prestige': 4, 'security': 1})}
-             ) if counter_greater(state, 'security', 7) else BasicEvent(
+                 actions={'OK': lambda game: modify_state(game, {'prestige': 4, 'safety': 1})}
+             ) if counter_greater(state, 'safety', 7) else BasicEvent(
                  name=contradiction_society.title,
                  description=
                  """You reject the offer. You fully expect to die because of that, but you walk out of the tunnels
@@ -204,8 +207,92 @@ underground_war = ConditionalEvent(
     actions={'OK': lambda state: spawn_immediately(state, BasicEvent(
         name=underground_war.title,
         description=
-        """ """,
-        actions={}
+        """There's a war in the underground tunnels - but you may be able to stop it.
+        
+        A group known as Free Contradictors has separated itself from The International Contradiction Society.
+        They oppose what they see as the betrayal of the organization's original goal: it is not longer about
+        balancing the opposites and exploring all impossibilities, it focused too much on bureaucracy, internal
+        politics and pointless theorizing about what such impossibilities mean for society and humanity. In other
+        words, it became boring.
+        
+        A representative of contradictors loyal to The International Contradiction Society (chosen by a council
+        which is elected by the majority of organization's members once every 5 years, with an explicit approval
+        of The Paradoxical Court - as long as the High Contradictor doesn't use his right to veto) offers
+        an alternative vision: the institutions are there to draw the line between ethical impossibility
+        and behavior that can violate the law, make other contradictors feel uncomfortable and/or harm
+        the organization's image should someone find the tunnels and decides to expose them. Besides,
+        contradicting the original goals is a fitting evolution for groups that dedicate themselves to seeking
+        contradictions and paradoxes.""",
+        actions={'Side with Free Contradictors': lambda game: spawn_immediately(game, BasicEvent(
+            name=underground_war.title,
+            description=
+            """You decide to aid the Free Contradictors. To do so, you carefully study all the rules created by
+            The International Contradiction Society. Then, you arrange for a situation in which it's impossible to act
+            in any way without violating them. When the institutions are paralyzed, you deliver the killing blow: you
+            prove that inaction is also against the rules.
+            
+            As the bureaucratic paradox absorbs everyone still loyal to the local chapter of The International
+            Contradiction Society, an artist belonging to Free Contradictors redirects the pure absurd energies into
+            the nearest wall. He tells you that the paradoxified rocks and impossible soil he created will be a great
+            sculpture material - but it won't be cheap.""",
+            actions={'OK': lambda game_state: unlock_building(game_state, BasicBuilding(
+                name="The Monument To Non-Existence",
+                description=
+                """This impressive sculpture built from impossible materials is a sight you won't forget as long you live - then again, this might not be very long.""",
+                base_price=5000,
+                additional_effects={'prestige': 5},
+                per_turn_effects={'population': -100}
+            ))}
+        )),
+                 'Side with The International Contradiction Society': lambda game: BasicEvent(
+                     name=underground_war.title,
+                     description=
+                     """The world is a dangerous, chaotic place and if bureaucracies want to survive, they must stick together. You
+                     blame the recent disappearances on Free Contradictors and make sure that they get arrested. Then, you use your
+                     political experience to help The International Contradiction Society re-establish its underground authority by
+                     designing a new set of rules and regulations to complement the existing rules and regulations while also
+                     explicitly forbidding breaking of any past, present or future rules and regulations. For added contradictory
+                     flavor, you make sure that it's impossible to follow (or even remember) all those laws.
+                     
+                     For your contribution to his victory, High Contradictor (after consulting the matter with The Anti-Senate)
+                     grants you three wishes. The wishes must come from a predetermined list of achievable impossibilities
+                     and The International Contradiction Society bears no responsibility for any undesirable side-effects.""",
+                     actions={'OK': lambda game_state: unlock_action(game_state, LimitedSpecialAction(
+                         name="Make a wish",
+                         description=
+                         """The International Contradiction Society owes you a favor and it is allowed - even required! - to make them do something
+                         impossible for you. Unfortunately, it can't be just any impossible thing you can imagine: they'll only do impossible
+                         things that were proposed by the High Contradictor or five members of Anti-Senate and approved by the supermajority
+                         of the organization's members.""",
+                         event_to_spawn=BasicEvent(
+                             name="Doing the impossible",
+                             description=
+                             """Hidden from the eyes of unenlightened masses, you met with the most powerful members of your city's chapter of The International
+                             Contradiction Society. You stood in the center of the great underground hall and, as the laws demanded, gathered The Paradoxical
+                             Court. In their presence, you demanded that High Contradictor returns your favor. You wished to...""",
+                             actions={
+                                 '...turn space into time': lambda x: modify_state(
+                                     x, {'population_max': -x.population_max, 'actions': 10}),
+                                 '...turn policemen into gold': lambda x: modify_state(
+                                     x, {'population': -floor(state.safety / 10), 'money': x.safety * 1000,
+                                             'safety': -x.safety}),
+                                 '...try again': lambda x: add_active_event(x, going_underground),
+                                 '...suffer for your art': lambda x: modify_state(x, {'safety': -10, 'health': -10,
+                                                                                      'food': -x.food, 'prestige': 10}),
+                                 '...read a book': lambda x: modify_state(x, {'technology': 1})
+                             }
+                         ),
+                         limit=3
+                     ))}
+                 ),
+                 'Let them fight': lambda game: BasicEvent(
+                     name=underground_war.title,
+                     description=
+                     """You're not here to take sides. They want war, conflict and murder? Let them have it. You joined the secret
+                     society to take a break from ruthless and corrupt world of politics and you're not going to waste your time
+                     and energy on it if it can't even give you that.""",
+                     actions={'OK': lambda game: modify_state(game, {'safety': -1})}
+                 )}
     ) if flag_isset(state, 'member_of_contradiction_society') else BasicEvent(
         name=underground_war.title,
         description=
