@@ -340,8 +340,31 @@ underground_war = ConditionalEvent(
     ) if flag_isset(state, 'enemy_of_contradictors') else BasicEvent(
         name=underground_war.title,
         description=
-        """ """,
-        actions={}
+        """The fact that you even consider doing something based on such silly rumors makes you
+        doubt your own sanity. You're not sure if you should ignore all this madness, get the police
+        involved or seek medical attention.""",
+        actions={'Do nothing': lambda game: modify_state(game, {'safety': -2}),
+                 'Go to the police': lambda game: spawn_immediately(game, BasicEvent(
+                     name=underground_war.title,
+                     description=
+                     """Fortunately for you, it appears that even if you have gone mad, so did the world. The police
+                     managed to find the entry to the underground tunnels beneath the city. Inside them, people were
+                     fighting each other - apparently over either some strange philosophical issues or internal politics
+                     involving institutions, voting and other such nonsense.
+                     
+                     While several people were caught, many have escaped. If their crimes don't come to light,
+                     the experience they acquired can lead them to a successful political career.""",
+                     actions={'OK': lambda game_state: modify_state(game_state, {'safety': 1})}
+                 ) if attr_greater(game, 'safety', 5) else BasicEvent(
+                     name=underground_war.title,
+                     description=
+                     """Predictably, the police didn't find anything. There's probably nothing to find. You're becoming
+                     painfully aware of your poor judgement.""",
+                     actions={'OK': lambda game_state: modify_state(game_state, {'safety': -2,
+                                                                                 'prestige': -1,
+                                                                                 'health': -1})}
+                 )),
+                 'Go to the doctor': lambda game: modify_state(game, {'safety': -2, 'health': 1})}
     ))},
     condition=lambda state: (
         flag_isset(state, 'contradictors_remain') or
