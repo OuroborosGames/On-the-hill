@@ -371,5 +371,9 @@ underground_war = ConditionalEvent(
         flag_isset(state, 'member_of_contradiction_society') or
         flag_isset(state, 'enemy_of_contradictors') or
         flag_isset(state, 'bribed_by_contradictors'))
-).chain_unconditionally(lambda state: modify_state(state, {'population': -randint(1, 20)}))
+).chain_unconditionally(lambda state: modify_state(state, {'population': -randint(1, 20)}),
+                        lambda state: [unset_flag(state, x) for x in ('contradictors_remain',
+                                                                      'member_of_contradiction_society',
+                                                                      'enemy_of_contradictors',
+                                                                      'bribed_by_contradictors')])
 ########################################################################################################################
