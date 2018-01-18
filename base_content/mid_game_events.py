@@ -275,7 +275,7 @@ underground_war = ConditionalEvent(
                                      x, {'population_max': -x.population_max, 'actions': 10}),
                                  '...turn policemen into gold': lambda x: modify_state(
                                      x, {'population': -floor(state.safety / 10), 'money': x.safety * 1000,
-                                             'safety': -x.safety}),
+                                         'safety': -x.safety}),
                                  '...try again': lambda x: add_active_event(x, going_underground),
                                  '...suffer for your art': lambda x: modify_state(x, {'safety': -10, 'health': -10,
                                                                                       'food': -x.food, 'prestige': 10}),
