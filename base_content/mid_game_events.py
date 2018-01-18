@@ -244,7 +244,7 @@ underground_war = ConditionalEvent(
                 per_turn_effects={'population': -100}
             ))}
         )),
-                 'Side with The International Contradiction Society': lambda game: BasicEvent(
+                 'Side with The International Contradiction Society': lambda game: spawn_immediately(game, BasicEvent(
                      name=underground_war.title,
                      description=
                      """The world is a dangerous, chaotic place and if bureaucracies want to survive, they must stick together. You
@@ -284,25 +284,59 @@ underground_war = ConditionalEvent(
                          ),
                          limit=3
                      ))}
-                 ),
-                 'Let them fight': lambda game: BasicEvent(
+                 )),
+                 'Let them fight': lambda game: spawn_immediately(game, BasicEvent(
                      name=underground_war.title,
                      description=
                      """You're not here to take sides. They want war, conflict and murder? Let them have it. You joined the secret
                      society to take a break from ruthless and corrupt world of politics and you're not going to waste your time
                      and energy on it if it can't even give you that.""",
-                     actions={'OK': lambda game: modify_state(game, {'safety': -1})}
-                 )}
+                     actions={'OK': lambda x: modify_state(x, {'safety': -1})}
+                 ))}
     ) if flag_isset(state, 'member_of_contradiction_society') else BasicEvent(
         name=underground_war.title,
         description=
-        """ """,
-        actions={}
+        """The whole thing is, of course, not your problem. After all, there are no underground tunnels
+        or secret societies in your cities. Every disappearance can be explained without insane, overly
+        complicated theories. Let's focus on something different - like that large sum of money which
+        you have suddenly received from an unknown source.""",
+        actions={'OK': lambda game: modify_state(game, {'money': 6000, 'safety': -5, 'prestige': -3})}
     ) if flag_isset(state, 'bribed_by_contradictors') else BasicEvent(
         name=underground_war.title,
         description=
-        """ """,
-        actions={}
+        """This was bound to happen. You tried to fight The International Contradiction Society once
+        and you failed. This made them feel powerful so of course they are back to committing the same
+        crimes - after all, they don't fear punishment.
+        
+        You feel that you should try again - but you don't know if anyone will believe you.""",
+        actions={k: v for (k, v, p) in
+                 (('They will not believe you', lambda game: spawn_immediately(game, BasicEvent(
+                    name=underground_war.title,
+                    description=
+                    """Nobody will believe you. The police is too corrupt to do anything so there's no need to bother
+                    trying. In the end, the only thing you'll get will be public ridicule.""",
+                    actions={'OK': lambda game_state: modify_state(game_state, {'safety': -2})})),
+                  True),
+                  ('Maybe they will', lambda game: spawn_immediately(state, BasicEvent(
+                      name=underground_war.title,
+                      description=
+                      """You decide to make sure that everything goes according to your plan. The police might be
+                      corrupt, but even the least trustworthy of them does not dare take bribes or falsify evidence
+                      in Connolly's presence - and aside from that underground presence, the city is safe enough for him
+                      to be able to personally participate in the raid.
+                      
+                      With Connolly's help, you quickly dismantle The International Contradiction Society. Apparently,
+                      the organization went to war against itself - the bureaucrats entrenched themselves within what
+                      seemed to be a secret society inside a secret society, and other members of the group decided to
+                      oppose them. In the end, the contradictors have contradicted each other as well as themselves
+                      - and maintaining secrecy while killing one another proved to be the one impossibility they were
+                      not able to achieve.
+                      
+                      A fitting end.""",
+                      actions={'OK': lambda game: modify_state(game, {'safety': 2, 'prestige': 2})}
+                  )),
+                  attr_greater(state, 'safety', 5)))
+                 if p}
     ) if flag_isset(state, 'enemy_of_contradictors') else BasicEvent(
         name=underground_war.title,
         description=
