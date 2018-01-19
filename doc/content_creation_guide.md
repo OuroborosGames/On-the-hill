@@ -25,7 +25,7 @@ The API itself is not as good as I hoped it would be, for several reasons.
 The big one is that it relies on functions as first-class objects (e.g.
 event constructors take functions as their arguments), and Python's limited
 lambdas make in-line function definitions less useful than it should be
-- and that means that sometimes you'll need to use ```def```, which breaks
+\- and that means that sometimes you'll need to use ```def```, which breaks
 the natural flow of writing (and reading) event code that I wanted to
 achieve. I'm not sure that a typical object-oriented design with a lot of
 classes would have been better though, although it would surely make some
