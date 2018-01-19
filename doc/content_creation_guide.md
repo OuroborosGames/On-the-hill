@@ -11,15 +11,15 @@ about **programming** in-game buildings, special actions and text-based
 events, as well as whole branches of the game's storyline which lead
 to the game's endings. If you're interested in the non-technical
 perspective about the writing style, setting and other elements of our
-narrative, please read the [Writing Style and Worldbuilding]
-(writing_style_and_worldbuilding.md) document. It is recommended that
-you read that file, as given the game's quirky nature (both as a result
-of a dreamlike, intentionally 'undefined' setting and the fact that
-for a long time it was a one-man project; maybe it still is), it can be
-surprisingly hard to separate what's technical and what's non-technical.
-Programming is obviously technical and writing is obviously not but
-there's also a whole lot of game design which is sometimes like
-programming, sometimes like writing and often its own thing.
+narrative, please read the [Writing Style and Worldbuilding](writing_style_and_worldbuilding.md)
+document. It is recommended that you read that file, as given the game's
+quirky nature (both as a result of a dreamlike, intentionally 'undefined'
+setting and the fact that for a long time it was a one-man project;
+maybe it still is), it can be surprisingly hard to separate what's
+technical and what's non-technical. Programming is obviously technical
+and writing is obviously not but there's also a whole lot of game
+design which is sometimes like programming, sometimes like writing
+and often its own thing.
 
 The API itself is not as good as I hoped it would be, for several reasons.
 The big one is that it relies on functions as first-class objects (e.g.
