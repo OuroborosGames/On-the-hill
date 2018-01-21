@@ -203,7 +203,6 @@ underground_war = ConditionalEvent(
     description=
     """It is happening again. People are disappearing, and the citizens are once again talking about
     tunnels beneath the city and whatever happens inside them.""",
-    # TODO write specific events
     actions={'OK': lambda state: spawn_immediately(state, BasicEvent(
         name=underground_war.title,
         description=
