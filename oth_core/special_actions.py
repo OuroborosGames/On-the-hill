@@ -38,7 +38,3 @@ class LimitedSpecialAction(SpecialAction):
         if self.limit <= 0:
             return True
         return False
-
-
-def get_basic_actions():
-    return [SpecialAction("Test action", "You do something", None)]
