@@ -19,7 +19,8 @@ def get_basic_random_events():
 
 
 def get_basic_special_actions():
-    return []
+    import base_content.actions
+    return base_content.actions.get_initial_special_actions()
 
 
 def get_nonrandom_events():
