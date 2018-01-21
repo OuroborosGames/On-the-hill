@@ -90,4 +90,52 @@ of the game's plot which lead to different endings. Stories are mutually
 exclusive: at one point in the game, the appropriate story will be picked
 depending on specified conditions. All the other ones will be ignored.
 
+3. Project structure
+--------------------
+
+When creating content, the only directories you should be worried about are
+```On-the-hill/base-content/``` and ```On-the-hill/stories/```. The former
+consists of things that are universal to the whole game, the latter defines
+content specific for different stories (i.e. branches/paths).
+
+```On-the-hill/base-content/actions.py``` and ```On-the-hill/base-content/buildings.py```
+files are straightforward: they define special actions and buildings that
+will be available to the player from the start of the game. They do so in
+a fairly straight-forward manner: through ```get_initial_special_actions()```
+and ```get_initial_buildings()``` function. Those functions return lists, and
+you can alter what the player gets at the beginning of the game by modifying
+the lists' content. ```On-the-hill/base-content/disasters.py``` is similar:
+it returns a list with its ```get_disasters()``` function, and that list
+determines the non-random events that will fire when the player's stats get
+too low.
+
+```On-the-hill/base-content/dispatcher_event.py``` contains a definition of
+a special class which will be instantiated once during the game: the constructor
+receives a list of ```(get_story, predicate)``` tuples that define stories,
+and the object it creates is an event that will check ```predicate(state)``` and
+will spawn ```get_story()``` event if it's true (but **only once**). This is used
+for choosing the story branch to enter and you probably shouldn't modify it,
+unless you want to create some custom 'story precedence', or maybe create/change
+a default story for when no predicates are true.
+
+```On-the-hill/base-content/early_game_events.py``` and ```On-the-hill/base-content/mid_game_events.py```
+are a bit more complex, as they're more related to scripting the game's story.
+They both define ```get_random_events()``` and ```get_nonrandom_events()``` which
+return lists of events that will be added to appropriate decks (the first one at
+the beginning, the second one after 10 years), but due to the nature of the events
+as both a narrative mechanism and means of modifying the game, the events returned
+by those functions also refer to other events they activate as well as buildings
+and actions they unlock. For that reason, those files allow you not only to modify
+the events you can find during those portions of the game but also other pieces
+of content that gets unlocked as their result.
+
+Each file in ```On-the-hill/stories/``` is similar to those that define early
+and mid-game events in that it contains chains of events and gameplay objects related
+to them, although they do it in different ways: each of those file defines a separate
+branch (so branches can be added/deleted automatically just by creating and removing
+those files) through ```get()``` and ```should_enter_branch(state)``` functions it
+defines. Those functions are the ```get_story()``` and ```predicate(state)``` from
+dispatcher event: the first one returns the story's first event, the second one checks
+if conditions for entering the branch have been satisfied.
+
 //TODO: actual technical details
