@@ -138,4 +138,109 @@ defines. Those functions are the ```get_story()``` and ```predicate(state)``` fr
 dispatcher event: the first one returns the story's first event, the second one checks
 if conditions for entering the branch have been satisfied.
 
-//TODO: actual technical details
+4. Buildings and actions
+------------------------
+
+### 4.1. Buildings
+
+When working with buildings, make sure that this backend module is imported:
+```from oth_core.buildings import *```
+
+This module defines three classes of buildings: BasicBuilding, TerrainRestrictedBuilding
+and CustomBuilding. Those classes are instantiated through constructors that take at
+least this data:
+
+```python
+BasicBuilding(
+    name="This is a string",
+    description="This is also a string",
+    base_price=0  # this is an int,
+    additional_effects={'keys are strings': 0  # values are ints
+                       },                      # the whole thing is a dict
+    per_turn_effects={'this works just like the previous one': 0}
+)
+TerrainRestrictedBuilding(
+    name="This is a string",
+    description="This is also a string",
+    base_price=0  # this is an int
+    additional_effects={'keys are strings': 0  # values are ints
+                       },                      # the whole thing is a dict
+    per_turn_effects={'this works just like the previous one': 0},
+    required_neighbor='string again'
+)
+CustomBuilding(
+    name="This is a string",
+    description="This is also a string",
+    base_price=0  # this is an int
+    additional_effects={'keys are strings': 0  # values are ints
+                       },                      # the whole thing is a dict
+    per_turn_effects={'this works just like the previous one': 0},
+    predicate=lambda map_tile, neighbors: True  # this is a function
+)
+```
+The first two arguments should be self-explanatory. The third one is simple: it's
+the building's price before applying terrain modifiers (as some types of terrain make
+building on them more expensive). The fourth and fifth might require a bit mor explanation.
+
+Keys to the dictionaries are strings, and they represent attributes of the object that
+holds the game state. The values of those keys will be added (subtracted if negative)
+to the respective attributes when player creates the building and the alteration will be
+reversed when removing it, or they will be applied repeatedly with each turn, and
+the alterations will be stopped (but not reversed) when it is removed. Figuring out which
+dict does which is left as an exercise to the reader.
+
+'prestige', 'health', 'safety' and 'technology' are attributes which change things in the city
+with each turn, therefore they work better when modified once - and so does 'population_max',
+which determines the safe upper limit for 'population'. 'money' and 'food' can be modified
+per-turn, and so can be 'population' (but I'd personally avoid increasing it per-turn,
+as it can make the game too easy because it counteracts the negative effects of some of
+the stats being too low). Modifying 'actions' doesn't make much sense, and because of
+a backend quirk (resetting to default after turn ends), modifying 'actions_max' only
+makes sense if done per-turn (but it should be done sparingly as it's a very significant
+change). Modifying 'game_over' doesn't make much sense either, but it can be amusing.
+
+The 'required_neighbor' argument makes it possible to create a building that must be
+built on or next to a specified terrain feature. At the moment, those are 'Water',
+'Grass', 'Forest', 'Hills' and 'Mountain'.
+
+The 'predicate' argument allows specifying your own way of defining whether a building
+can be built on a specified tile, based on the tile itself as well as its neighbor.
+While BasicBuilding can be built anywhere as long as it's not on water and there are
+other buildings in its neighborhood and TerrainRestrictedBuilding has an additional
+restriction on neighboring terrain, this allows you to write your own condition.
+The function that you pass will take two arguments: map_tile (a TerrainType object
+that consists of 'name' which identifies terrain features, 'cost_modifier' which
+affects prices and 'building' which tells you what has been placed here by the player)
+and neighbors (a list of map_tiles next to your own), and it will return True or False.
+
+To help you with creating a CustomBuilding, two functions were created:
+```has_neighboring_buildings(neighbors)``` and ```is_on_water_tile(tile)```. They
+should be self-explanatory. Keep in mind that you don't need to check if map_tile is
+already taken: TerrainType enforces that you can't build on a non-empty tile, and this
+behavior can't be overridden with this predicate.
+
+### 4.2. Special actions
+
+Special actions are very simple, as they're really just thin wrappers on events.
+They work like this:
+
+```python
+from oth_core.special_actions import *
+
+SpecialAction(
+    name="This is a string",
+    description="This is also a string",
+    event_to_spawn=this_is_a_reference_to_an_event_object
+)
+SpecialAction(
+    name="This is a string",
+    description="This is also a string",
+    event_to_spawn=this_is_a_reference_to_an_event_object,
+    limit=1  # this is an int
+)
+```
+The only thing you need to know now is that limit determines how many times
+the player can use this action. Everything else is described in the section
+about events.
+
+//TODO: actual technical details about events and stories
