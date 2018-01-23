@@ -369,4 +369,51 @@ LazyDisaster(
 )  # LazyDisaster compares a stat (see: 4.1.) to another stat (values checked each turn)
 ```
 
-//TODO: actual technical details about events and stories
+### 5.4. Helper functions
+
+#### 5.4.1. State mutators
+
+Those functions can be useful for values in the 'actions' dict. They were designed for
+generating parameters to constructors in the scrapped JSON DSL and they're not strictly
+necessary, but some of them can still be useful (especially if you don't want to learn
+about the internals of the ```GameState``` objects):
+
+```python
+spawn_immediately(state, event)  # the event will get spawned after you handle this one
+spawn_after_n_turns(state, event, n)  # like the one above, but with a delay
+add_active_event(state, event)  # the event will be placed in the active deck
+add_inactive_event(state, event)  # you can figure this one out
+spawn_next_season(state, event, season)  # the event will be spawned on a random turn
+                                         # during the next winter (season==0), spring
+                                         # (1), summer (2) or autumn (3)
+modify_state(state, attributes)  # attributes are dict, not unlike additional_effects
+                                 # for buildings
+unlock_building(state, building)  # left as an exercise to the reader
+unlock_action(state, action)  # see above
+set_flag(state, flag)  # a binary flag with a name indicated by 'flag' string will now
+                       # be true (even if it didn't exist before)
+unset_flag(state, flag)  # really makes u think ....
+```
+
+#### 5.4.2. Predicates
+
+Those functions check things in the state object, so they'll be useful for 'condition'
+and 'unlock_predicate' parameters. They were also written for the JSON DSL so what I said
+in 5.4.1 applies here:
+
+```python
+counter_equal(state, key, value)  # key is the name (string) of a counter you want to check;
+                                  # usually, it will be a name of a building as those are
+                                  # used to keep track of how many buildings of each kind
+                                  # you have
+counter_greater(state, key, value)
+counter_lower(state, key, value)
+attr_equal(state, key, value)  # key is the name (string) of a stat, like the ones in
+                               # additional_effects dicts
+attr_greater(state, key, value)
+attr_lower(state, key, value)
+flag_isset(state, flag)  # see: 5.4.1
+flag_isunset(state, flag)
+```
+
+//TODO: technical details about stories
