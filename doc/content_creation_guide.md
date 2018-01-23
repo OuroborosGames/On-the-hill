@@ -296,4 +296,40 @@ suffer if you made those changes though.
 
 Random events are discarded after they're handled, and they will not happen again.
 
+### 5.2. Creating an event
+
+There are six types of event, most of them discussed in 5.1.2: BasicEvent, UnlockableEvent,
+ConditionalEvent, EarlyGameEvent, MidGameEvent and Disaster (the last one will be discussed
+later). Random events can be anything other than Disaster and non-random events can
+technically be anything (although a non-random BasicEvent would be getting triggered each
+turn) but generally should be created with the ConditionalEvent constructor to be less
+confusing, or with the Disaster constructor (again, those will be discussed in the later
+section). Making an event looks like this:
+
+```python
+ConditionalEvent(
+    name="This is a string",
+    description=
+    """This is also a string, and usually it's triple-quoted so that we can easily write
+    multi-line descriptions""",
+    actions={'This is a string, representing a choice given to the player':
+        lambda state: None  # this is a function that accepts state; return value is ignored
+    },  # the whole thing is a dict
+    condition=lambda state: True  # this is a function that accepts state and returns
+                                  # True or False
+)
+```
+```BasicEvent``` does not have a ```condition``` parameter. ```UnlockableEvent``` has one,
+but it's called ```unlock_predicate```.
+
+Each type of event has a ```*.chain_unconditionally()``` method. This method accepts a variable
+number of functions, each of them accepting state. Those functions will be executed regardless
+of player choice. This is useful for more complex event chains, but it can be useful even
+outside of them as it's sometimes more readable than nesting multiple levels of lambdas. This
+function returns the event object it's bound to (fluent API), so you can chain right after
+defining.
+
+Functions associated with ```actions``` dict can and should mutate state object. Functions
+associated with ```condition``` should not, they're just for verification if the event can
+be spawned/unlocked/locked.
 //TODO: actual technical details about events and stories
