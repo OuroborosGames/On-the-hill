@@ -343,7 +343,7 @@ required turn counter after they're triggered.
 Creating a disaster works like this:
 
 ```python
-epidemic = BasicDisaster(
+BasicDisaster(
     name="This is a string",
     description=
     """This is also a string, and usually it's triple-quoted so that we can easily write
@@ -355,7 +355,7 @@ epidemic = BasicDisaster(
     threshold=-3,  # this is an int
     consecutive_turns_to_trigger=5  # and so is this
 )  # BasicDisaster compares a stat (see: 4.1.) to a value
-epidemic = LazyDisaster(
+LazyDisaster(
     name="This is a string",
     description=
     """This is also a string, and usually it's triple-quoted so that we can easily write
