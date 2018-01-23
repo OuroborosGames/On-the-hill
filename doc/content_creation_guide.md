@@ -403,7 +403,7 @@ in 5.4.1 applies here:
 
 ```python
 counter_equal(state, key, value)  # key is the name (string) of a counter you want to check;
-                                  # usually, it will be a name of a building as those are
+                                  # usually, it will be a name of a building as counters are
                                   # used to keep track of how many buildings of each kind
                                   # you have
 counter_greater(state, key, value)
