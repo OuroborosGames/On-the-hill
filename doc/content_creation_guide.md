@@ -332,4 +332,41 @@ defining.
 Functions associated with ```actions``` dict can and should mutate state object. Functions
 associated with ```condition``` should not, they're just for verification if the event can
 be spawned/unlocked/locked.
+
+### 5.3. Creating a Disaster
+
+Disaster is a special class for non-random events. They happen when a specified stat gets
+too low (compared to either a constant or to another stat) for too long. The disasters also
+automatically prevent themselves from happening for a few turns in a row by resetting the
+required turn counter after they're triggered.
+
+Creating a disaster works like this:
+
+```python
+epidemic = BasicDisaster(
+    name="This is a string",
+    description=
+    """This is also a string, and usually it's triple-quoted so that we can easily write
+    multi-line descriptions""",
+    actions={'This is a string, representing a choice given to the player':
+        lambda state: None  # this is a function that accepts state; return value is ignored
+    },  # the whole thing is a dict
+    stat='this is a string',
+    threshold=-3,  # this is an int
+    consecutive_turns_to_trigger=5  # and so is this
+)  # BasicDisaster compares a stat (see: 4.1.) to a value
+epidemic = LazyDisaster(
+    name="This is a string",
+    description=
+    """This is also a string, and usually it's triple-quoted so that we can easily write
+    multi-line descriptions""",
+    actions={'This is a string, representing a choice given to the player':
+        lambda state: None  # this is a function that accepts state; return value is ignored
+    },  # the whole thing is a dict
+    stat='this is a string',
+    reference_stat='and so is this',
+    consecutive_turns_to_trigger=5  # this is an int
+)  # LazyDisaster compares a stat (see: 4.1.) to another stat (values checked each turn)
+```
+
 //TODO: actual technical details about events and stories
