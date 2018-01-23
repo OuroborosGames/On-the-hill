@@ -243,4 +243,57 @@ The only thing you need to know now is that limit determines how many times
 the player can use this action. Everything else is described in the section
 about events.
 
+5. Events
+---------
+
+The basics of events were described in section 3. but before we proceed, let's
+recap:
+
++ events are text-based sections of the game in which the player reads event's
+description and picks an appropriate action based on that
++ events can be random or non-random
++ random events can be active or inactive; only active events can be randomly picked
+when turns begin, and transitions between active and inactive state happen based on
+predicates
++ events can modify the game state by changing the player's stats, unlocking buildings
+and actions and spawning other events
+
+Now, let's start discussing details.
+
+### 5.1. Understanding event's lifecycle
+
+#### 5.1.1. Non-random events
+
+The lifecycle of a non-random event is simple: once it gets added into the game, it will
+**always** be spawned if its condition is satisfied after the turn ends (the event is
+not discarded after being triggered). This behavior is not always desired, so you should
+be aware of that when setting both conditions and effects (timers and flags are your
+friends). Many of the non-random events are designed to only occur on a one specific turn
+so this isn't really a big issue for them.
+
+#### 5.1.2. Random events
+
+Random events are a bit more complex because of a distinction between Basic, Unlockable
+abd Conditional types. Once added, Basic events will always be active, Unlockable ones
+will only become active after a condition is met and never become inactive, and Conditional
+ones will switch between active and inactive state depending on the condition.
+
+Events are added to the game by other events or at the beginning of a different stage of
+the game: early-game, mid-game and any of the stories. The first two of the stages define
+their own subtypes of ```ConditionalEvent```: ```EarlyGameEvent``` and ```MidGameEvent```,
+that will become inactive once that part of the game is over. Stories don't define such
+types because once you finish them, you get the ending and you're done with this game
+session.
+
+Now, the distinction between 'adding' an event and 'unlocking' it might seem academic,
+but there is a performance-related difference: once an event is added, its lock/unlock
+condition will be checked each turn, until discarded. This is probably not too important
+but if you add a lot of events and the game becomes slow between turn, maybe think
+about refactoring it so that event chains work by having one event add another instead
+of one event setting flags and another checking conditions. Don't go out of your way
+to make sure that it's always done this way if performance is good and readability would
+suffer if you made those changes though.
+
+Random events are discarded after they're handled, and they will not happen again.
+
 //TODO: actual technical details about events and stories
