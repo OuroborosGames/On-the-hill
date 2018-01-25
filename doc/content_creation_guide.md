@@ -416,4 +416,34 @@ flag_isset(state, flag)  # see: 5.4.1
 flag_isunset(state, flag)
 ```
 
-//TODO: technical details about stories
+6. Stories
+----------
+
+As was mentioned in section 3, you can create your own story by adding a module to
+the 'stories' directory. This module needs to define two functions: ```get()```
+and ```should_enter_branch(state)```. The first function should just return the story's
+first event. It's the event's responsibility to mutate the state object so that all
+the required events are added. The second one is a predicate that takes game state
+as an argument, not unlike those mentioned in 5.4.2, and it should return ```True```
+when the conditions are met and ```False``` otherwise.
+
+Generally speaking, there's not much difference between scripting a story and scripting
+the chain of events, other than scale. If you know your way around state mutators,
+predicates, unconditional chaining etc., you just need to apply that knowledge here.
+
+While there's no technical requirement to do this, the game's design implies that
+stories lead to an ending (or a few different endings, depending on what the player does
+during the story). Endings are simple: just make an event that unconditionally mutates
+the state so that the 'game_over' attribute becomes ```True```.
+
+7. Room for improvement
+-----------------------
+
+The API is pretty good for buildings and actions but it leaves a lot to be desired when
+it comes to the more complex scripting of the stories. Backend work isn't my priority now
+because it's fully functional and at the time of writing I'm pushing towards the playable
+demo so I'm focusing on GUI and content, but if content creation becomes too much of
+a pain in the ass (or if a new programmer/designer joins and decides that the way it's being
+done right now is far too stupid), I'll find some time to work on those issues.
+
+Right now though, we're stuck with this.
